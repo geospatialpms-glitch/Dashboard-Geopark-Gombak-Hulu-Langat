@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Dashboard Geopark Gombak - Hulu Langat | SUO Selangor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+:root{--ink:#173233;--muted:#6c7f7d;--teal:#0d8d7a;--mint:#58c9b9;--lime:#9bc85a;--deep:#0f4c4c;--sand:#f5f3ec;--card:#fff;--line:#dfe9e5;--gold:#d6a84b}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#eef4f1;color:var(--ink)}
+.shell{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.sidebar{background:linear-gradient(180deg,#0f4c4c,#0a393b);color:#fff;padding:24px 18px;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:12px;align-items:center;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.12)}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#58c9b9,#9bc85a);display:grid;place-items:center;font-weight:900;color:#0c3b3c}
+.brand h1{font-size:14px;line-height:1.25;margin:0}.brand p{font-size:10px;opacity:.72;margin:4px 0 0}.nav{margin-top:22px;display:grid;gap:7px}.nav button{all:unset;cursor:pointer;padding:11px 12px;border-radius:10px;font-size:12px;color:#d8eeee}
+.nav button.active,.nav button:hover{background:rgba(88,201,185,.16);color:#fff}.sidefoot{position:absolute;bottom:20px;left:18px;right:18px;font-size:10px;color:#a9c9c7;line-height:1.5}
+main{padding:22px 24px 32px;min-width:0}.hero{height:190px;border-radius:20px;overflow:hidden;position:relative;background:linear-gradient(135deg,#0f4c4c,#1f6b63 55%,#7aa75a);margin-bottom:18px;box-shadow:0 12px 30px rgba(26,73,66,.12)}
+.hero:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 35%,rgba(255,255,255,.12),transparent 22%),linear-gradient(90deg,rgba(5,44,43,.75),rgba(5,44,43,.2),rgba(5,44,43,.08))}
+.hero-copy{position:absolute;inset:0;z-index:2;padding:28px 30px;display:flex;flex-direction:column;justify-content:center;color:#fff}.kicker{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9fe5d9}
+.hero h2{font-size:28px;line-height:1.15;margin:8px 0 7px;max-width:700px}.hero p{margin:0;font-size:12px;opacity:.86;max-width:670px;line-height:1.6}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 14px}.filters select,.filters input{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;font-size:12px;outline:none;color:var(--ink)}.filters input{min-width:260px;flex:1}
+.cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 16px;box-shadow:0 4px 16px rgba(39,79,70,.05)}
+.metric .label{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}.metric .value{font-size:26px;font-weight:800;margin-top:8px}.metric .sub{font-size:10px;color:var(--muted);margin-top:3px}
+.grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(320px,.75fr);gap:14px}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 4px 18px rgba(39,79,70,.05);min-width:0}.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px}
+.panel h3{font-size:13px;margin:0}.small{font-size:10px;color:var(--muted)}#map{height:505px;border-radius:14px;overflow:hidden}.legend{display:grid;grid-template-columns:1fr 1fr;gap:7px;font-size:10px;color:var(--muted)}.dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:6px}
+.chartbox{height:210px}canvas{width:100%!important;height:100%!important}.list{display:grid;gap:8px;max-height:255px;overflow:auto;padding-right:3px}.site{display:grid;grid-template-columns:42px 1fr auto;gap:9px;align-items:center;padding:9px;border:1px solid #e8efec;border-radius:12px;cursor:pointer}
+.code{height:34px;border-radius:10px;background:#ecf7f4;display:grid;place-items:center;font-weight:800;font-size:11px;color:var(--teal)}.site b{font-size:11px;display:block;line-height:1.3}.site span{font-size:9px;color:var(--muted)}.badge{font-size:9px;padding:5px 7px;border-radius:99px;background:#f2f4ef;color:#587168;white-space:nowrap}
+.section-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.pillrow{display:flex;gap:7px;flex-wrap:wrap}.pill{font-size:10px;padding:6px 8px;border-radius:99px;background:#edf7f4;color:#255d58}.note{font-size:10px;color:var(--muted);line-height:1.55;margin-top:9px}
+@media(max-width:1100px){.cards{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:1fr}.shell{grid-template-columns:82px 1fr}.brand h1,.brand p,.nav button span,.sidefoot{display:none}.brand{justify-content:center}.nav button{text-align:center}}
+@media(max-width:720px){main{padding:12px}.cards{grid-template-columns:repeat(2,1fr)}.section-row{grid-template-columns:1fr}.hero h2{font-size:22px}.shell{grid-template-columns:1fr}.sidebar{display:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+<div class="brand"><div class="logo">SUO</div><div><h1>Selangor Urban Observatory</h1><p>Dashboard Geopark</p></div></div>
+<div class="nav"><button class="active">◉ <span>Ringkasan</span></button><button>⌖ <span>Geotapak</span></button><button>≋ <span>Geopelancongan</span></button><button>⌂ <span>Kemudahan</span></button><button>♧ <span>Pemuliharaan</span></button><button>◫ <span>Guna Tanah</span></button></div>
+<div class="sidefoot">Prototaip dashboard SUO berasaskan Pelan Pengurusan Geopark Gombak–Hulu Langat.</div>
+</aside>
+<main>
+<section class="hero"><div class="hero-copy"><div class="kicker">SUO Selangor • Alam Sekitar & Warisan</div><h2>Dashboard Geopark Gombak – Hulu Langat</h2><p>Pemantauan geotapak, warisan geologi, kemudahan interpretasi, geopelancongan, komuniti dan kawalan pembangunan dalam satu paparan spatial.</p></div></section>
+<div class="filters"><input id="search" placeholder="Cari geotapak, kod atau kategori..."><select id="cat"><option value="">Semua kategori geologi</option></select><select id="hier"><option value="">Semua hierarki kemudahan</option></select></div>
+<section class="cards">
+<div class="card metric"><div class="label">Geotapak Terpilih</div><div class="value" id="m-sites">20</div><div class="sub">G1 hingga G20</div></div>
+<div class="card metric"><div class="label">Pusat Eksplorasi</div><div class="value">1</div><div class="sub">G10 PKGS</div></div>
+<div class="card metric"><div class="label">Pusat Satelit</div><div class="value">3</div><div class="sub">G1, G9, G17</div></div>
+<div class="card metric"><div class="label">Kiosk Geotapak</div><div class="value">3</div><div class="sub">G3, G4, G14</div></div>
+<div class="card metric"><div class="label">Penanda & Panel</div><div class="value">13</div><div class="sub">Hierarki interpretasi</div></div>
+</section>
+<section class="grid">
+<div class="panel"><div class="panel-head"><div><h3>Peta Geotapak GHL Geopark</h3><div class="small">Klik penanda untuk maklumat ringkas geotapak</div></div><div class="legend"><span><i class="dot" style="background:#2f8f83"></i>Batuan/Fosil</span><span><i class="dot" style="background:#77a642"></i>Rupabumi</span><span><i class="dot" style="background:#d6a84b"></i>Proses</span><span><i class="dot" style="background:#8c6f56"></i>Antropogenik</span></div></div><div id="map"></div></div>
+<div style="display:grid;gap:14px"><div class="panel"><div class="panel-head"><div><h3>Komposisi Kepelbagaian Geologi</h3><div class="small">Berdasarkan 20 geotapak terpilih</div></div></div><div class="chartbox"><canvas id="chart"></canvas></div></div>
+<div class="panel"><div class="panel-head"><div><h3>Senarai Geotapak</h3><div class="small" id="countLabel">20 lokasi dipaparkan</div></div></div><div class="list" id="list"></div></div></div>
+</section>
+<section class="section-row">
+<div class="panel"><div class="panel-head"><div><h3>Modul SUO Dicadangkan</h3><div class="small">Bagi pemantauan pengurusan geopark</div></div></div><div class="pillrow"><span class="pill">Pemuliharaan Warisan Geologi</span><span class="pill">Prasarana Asas</span><span class="pill">Pendidikan & Interpretasi</span><span class="pill">Ekonomi Komuniti</span><span class="pill">Geopelancongan</span><span class="pill">Promosi & Komuniti</span><span class="pill">Guna Tanah & Kawalan</span><span class="pill">Governans & Pelaksanaan</span></div><div class="note">Reka bentuk ini memposisikan dashboard sebagai modul SUO yang bukan sekadar peta tarikan pelancongan, tetapi alat pemantauan spatial untuk pemuliharaan, kemudahan, akses, pembangunan dan pelaksanaan tindakan.</div></div>
+<div class="panel"><div class="panel-head"><div><h3>Jejak & Produk Geopelancongan</h3><div class="small">Komponen yang boleh diwujudkan sebagai layer interaktif</div></div></div><div class="pillrow"><span class="pill">Geo-trails</span><span class="pill">Heritage Trails</span><span class="pill">Food Trails</span><span class="pill">Geo-ride</span><span class="pill">Geofood</span><span class="pill">Geo-produk</span><span class="pill">Geostay</span><span class="pill">Kalendar Aktiviti</span></div><div class="note">Versi produksi boleh ditambah layer sempadan geopark, PBT/daerah, hutan, guna tanah, bas/hentian, geoschool, hub komuniti, CCTV dan zon kawalan pembangunan.</div></div>
+</section>
+</main></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+<script>
+const sites=[{"code":"G1","name":"Bekas Lombong Arang Batu, Batu Arang","cat":"Antropogenik","hier":"Pusat Satelit","lat":3.316,"lng":101.474},{"code":"G2","name":"Tasik Biru Seri Kundang","cat":"Antropogenik","hier":"Penanda & Panel","lat":3.275,"lng":101.519},{"code":"G3","name":"Air Terjun Komanwel","cat":"Rupabumi & Landskap","hier":"Kiosk Geotapak","lat":3.323,"lng":101.581},{"code":"G4","name":"Air Terjun Sungai Kanching","cat":"Rupabumi & Landskap","hier":"Kiosk Geotapak","lat":3.3,"lng":101.615},{"code":"G5","name":"Formasi Batu Kapur Kuala Lumpur Anak Takun","cat":"Batuan / Fosil","hier":"Penanda & Panel","lat":3.279,"lng":101.655},{"code":"G6","name":"Kompleks Volkanik Genting Sempah","cat":"Batuan / Fosil","hier":"Penanda & Panel","lat":3.35,"lng":101.79},{"code":"G7","name":"Mata Air Panas Selayang","cat":"Proses Geologi","hier":"Penanda & Panel","lat":3.267,"lng":101.659},{"code":"G8","name":"Rijang Laut Dalam Gombak","cat":"Batuan / Fosil","hier":"Penanda & Panel","lat":3.315,"lng":101.74},{"code":"G9","name":"Pliestosen Akhir Batu Caves","cat":"Batuan / Fosil","hier":"Pusat Satelit","lat":3.238,"lng":101.684},{"code":"G10","name":"Permatang Kuarza Gombak Selangor (PKGS)","cat":"Rupabumi & Landskap","hier":"Pusat Eksplorasi","lat":3.233,"lng":101.748},{"code":"G11","name":"Mikrogranit Sempah Gunung Nuang","cat":"Batuan / Fosil","hier":"Penanda & Panel","lat":3.259,"lng":101.914},{"code":"G12","name":"Syis Selut Ulu Gombak","cat":"Batuan / Fosil","hier":"Penanda & Panel","lat":3.315,"lng":101.77},{"code":"G13","name":"Air Terjun Sungai Gabai","cat":"Rupabumi & Landskap","hier":"Penanda & Panel","lat":3.195,"lng":101.897},{"code":"G14","name":"Kompleks Air Panas Dusun Tua","cat":"Proses Geologi","hier":"Kiosk Geotapak","lat":3.146,"lng":101.837},{"code":"G15","name":"Telaga Air Panas Artesian Kampung Jawa","cat":"Antropogenik","hier":"Penanda & Panel","lat":3.079,"lng":101.81},{"code":"G16","name":"Granit Semenyih","cat":"Batuan / Fosil","hier":"Penanda & Panel","lat":2.998,"lng":101.848},{"code":"G17","name":"Air Terjun Sungai Tekala","cat":"Rupabumi & Landskap","hier":"Pusat Satelit","lat":2.958,"lng":101.884},{"code":"G18","name":"Air Panas Sungai Lalang","cat":"Proses Geologi","hier":"Penanda & Panel","lat":2.938,"lng":101.872},{"code":"G19","name":"Olistotrom Genting Sempah","cat":"Batuan / Fosil","hier":"Penanda & Panel","lat":3.345,"lng":101.8},{"code":"G20","name":"Granit Gombak","cat":"Batuan / Fosil","hier":"Penanda & Panel","lat":3.29,"lng":101.745}];
+const color={"Batuan / Fosil":"#2f8f83","Rupabumi & Landskap":"#77a642","Proses Geologi":"#d6a84b","Antropogenik":"#8c6f56"};
+const map=L.map('map',{zoomControl:true}).setView([3.16,101.72],10);
+const streets=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'});
+const sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri World Imagery'});
+sat.addTo(map);L.control.layers({"Satelit":sat,"Jalan":streets},null,{position:'topleft'}).addTo(map);
+const boundary=[[3.36,101.45],[3.39,101.79],[3.27,101.94],[2.90,101.91],[2.92,101.77],[3.05,101.66],[3.22,101.48]];
+L.polygon(boundary,{color:'#58c9b9',weight:2,fillColor:'#58c9b9',fillOpacity:.07,dashArray:'6,5'}).addTo(map).bindTooltip('Sempadan indikatif GHL Geopark');
+let markers=[];
+function render(data){markers.forEach(m=>map.removeLayer(m));markers=[];const list=document.getElementById('list');list.innerHTML='';data.forEach(s=>{const m=L.circleMarker([s.lat,s.lng],{radius:7,color:'#fff',weight:2,fillColor:color[s.cat],fillOpacity:1}).addTo(map).bindPopup('<b>'+s.code+' — '+s.name+'</b><br><small>'+s.cat+' • '+s.hier+'</small>');markers.push(m);const el=document.createElement('div');el.className='site';el.innerHTML='<div class="code">'+s.code+'</div><div><b>'+s.name+'</b><span>'+s.cat+'</span></div><div class="badge">'+s.hier+'</div>';el.onclick=()=>{map.setView([s.lat,s.lng],13);m.openPopup()};list.appendChild(el)});document.getElementById('m-sites').textContent=data.length;document.getElementById('countLabel').textContent=data.length+' lokasi dipaparkan'}
+const catSel=document.getElementById('cat'),hierSel=document.getElementById('hier');[...new Set(sites.map(x=>x.cat))].forEach(v=>catSel.add(new Option(v,v)));[...new Set(sites.map(x=>x.hier))].forEach(v=>hierSel.add(new Option(v,v)));
+function apply(){const q=document.getElementById('search').value.toLowerCase(),c=catSel.value,h=hierSel.value;render(sites.filter(s=>(!q||((s.code+' '+s.name+' '+s.cat).toLowerCase().includes(q)))&&(!c||s.cat===c)&&(!h||s.hier===h)))}
+['search','cat','hier'].forEach(id=>document.getElementById(id).addEventListener(id==='search'?'input':'change',apply));render(sites);
+const counts=sites.reduce((a,s)=>((a[s.cat]=(a[s.cat]||0)+1),a),{});
+new Chart(document.getElementById('chart'),{type:'doughnut',data:{labels:Object.keys(counts),datasets:[{data:Object.values(counts),backgroundColor:Object.keys(counts).map(k=>color[k]),borderWidth:0}]},options:{maintainAspectRatio:false,cutout:'68%',plugins:{legend:{position:'bottom',labels:{boxWidth:9,usePointStyle:true,font:{size:9}}}}}});
+</script>
+</body></html>
