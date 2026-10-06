@@ -502,20 +502,9 @@ function openGeoTrail(){
 </script>
 
 
-document.addEventListener("DOMContentLoaded",function(){
-  var areaPanel=document.getElementById("areaPanel");
-  if(areaPanel){
-    areaPanel.addEventListener("click",function(){
-      areaPanel.classList.toggle("glow");
-    });
-  }
-});
 
 
-window.addEventListener("load",function(){
-  if(typeof map!=="undefined" && map && map.invalidateSize){
-    setTimeout(function(){map.invalidateSize()},250);
-  }
-});
+
+
 
 </body></html>
