@@ -102,11 +102,39 @@ function renderTable(data){let tb=document.getElementById("tableBody");tb.innerH
 function filtered(){return SITES.filter(s=>(!districtFilter.value||s.district===districtFilter.value)&&(!pbtFilter.value||s.pbt===pbtFilter.value)&&(!importanceFilter.value||s.importance===importanceFilter.value)&&(!catFilter.value||s.cat===catFilter.value))}
 function applyFilters(){let d=filtered();document.getElementById("kTotal").innerHTML=`${d.length} <small>tapak</small>`;drawMarkers(d);makeCharts(d);renderTable(d)}
 function focusSite(code){let s=SITES.find(x=>x.code===code);if(!s)return;let m=markerMap.get(code);if(!m){districtFilter.value="";pbtFilter.value="";importanceFilter.value="";catFilter.value="";
-const geoTrailBtn=document.getElementById("geoTrailBtn"),geoTrailModal=document.getElementById("geoTrailModal"),geoTrailClose=document.getElementById("geoTrailClose");
-if(geoTrailBtn){geoTrailBtn.onclick=()=>{document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));geoTrailBtn.classList.add("active");geoTrailModal.classList.add("open");geoTrailModal.setAttribute("aria-hidden","false")}}
-if(geoTrailClose){geoTrailClose.onclick=()=>{geoTrailModal.classList.remove("open");geoTrailModal.setAttribute("aria-hidden","true")}}
-if(geoTrailModal){geoTrailModal.addEventListener("click",e=>{if(e.target===geoTrailModal){geoTrailModal.classList.remove("open");geoTrailModal.setAttribute("aria-hidden","true")}})}
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&geoTrailModal){geoTrailModal.classList.remove("open");geoTrailModal.setAttribute("aria-hidden","true")}});
+document.addEventListener("DOMContentLoaded",()=>{
+ const geoTrailBtn=document.getElementById("geoTrailBtn");
+ const geoTrailModal=document.getElementById("geoTrailModal");
+ const geoTrailClose=document.getElementById("geoTrailClose");
+ if(geoTrailBtn&&geoTrailModal){
+  geoTrailBtn.addEventListener("click",()=>{
+   document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));
+   geoTrailBtn.classList.add("active");
+   geoTrailModal.classList.add("open");
+   geoTrailModal.setAttribute("aria-hidden","false");
+  });
+ }
+ if(geoTrailClose&&geoTrailModal){
+  geoTrailClose.addEventListener("click",()=>{
+   geoTrailModal.classList.remove("open");
+   geoTrailModal.setAttribute("aria-hidden","true");
+  });
+ }
+ if(geoTrailModal){
+  geoTrailModal.addEventListener("click",e=>{
+   if(e.target===geoTrailModal){
+    geoTrailModal.classList.remove("open");
+    geoTrailModal.setAttribute("aria-hidden","true");
+   }
+  });
+ }
+ document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&geoTrailModal){
+   geoTrailModal.classList.remove("open");
+   geoTrailModal.setAttribute("aria-hidden","true");
+  }
+ });
+});
 
 applyFilters();m=markerMap.get(code)}map.setView([s.lat,s.lng],13);setTimeout(()=>m&&m.openPopup(),120)}
 const districtFilter=document.getElementById("districtFilter"),pbtFilter=document.getElementById("pbtFilter"),importanceFilter=document.getElementById("importanceFilter"),catFilter=document.getElementById("catFilter");
