@@ -169,6 +169,19 @@ main{
   .below-map-grid{grid-template-columns:1fr}
 }
 
+
+.leaflet-control-layers-overlays .district-suboption{
+  padding-left:20px;
+  margin-top:2px;
+}
+.leaflet-control-layers-overlays .district-suboption span{
+  font-size:11px !important;
+}
+.leaflet-control-layers-overlays .district-suboption input{
+  margin-right:5px;
+  vertical-align:middle;
+}
+
 </style>
 </head>
 <body><div class="topline"></div>
@@ -298,7 +311,36 @@ sat.addTo(map);
 const districtColors={"Gombak":"#98bc40","Hulu Langat":"#e9532e"};
 const districtLayer=L.geoJSON(DIST,{style:f=>({color:districtColors[f.properties.Daerah]||"#fff",weight:2.2,fillColor:districtColors[f.properties.Daerah]||"#fff",fillOpacity:.12}),onEachFeature:(f,l)=>l.bindPopup(`<b>${f.properties.Daerah}</b><br>Keluasan: ${f.properties.Keluasan}<br>Geotapak: ${f.properties.GEOTAPAK}`)}).addTo(map);
 map.fitBounds(districtLayer.getBounds(),{padding:[18,18]});
-L.control.layers({"Satelit":sat,"Jalan":road},{"Sempadan Daerah":districtLayer},{position:"topleft"}).addTo(map);
+const layerControl=L.control.layers({"Satelit":sat,"Jalan":road},{"Sempadan Daerah":districtLayer},{position:"topleft"}).addTo(map);
+
+// Sub-option sempadan daerah: Gombak dan Hulu Langat
+const districtSubLayers={};
+districtLayer.eachLayer(l=>{
+  const name=l.feature?.properties?.Daerah;
+  if(name)districtSubLayers[name]=l;
+});
+setTimeout(()=>{
+  const overlays=document.querySelector(".leaflet-control-layers-overlays");
+  if(!overlays)return;
+  const makeDistrictOption=(name,label)=>{
+    const row=document.createElement("label");
+    row.className="district-suboption";
+    row.innerHTML=`<span><input type="checkbox" checked data-district="${name}"><span>${label}</span></span>`;
+    overlays.appendChild(row);
+    const cb=row.querySelector("input");
+    cb.addEventListener("change",()=>{
+      const lyr=districtSubLayers[name];
+      if(!lyr)return;
+      if(cb.checked){
+        if(!districtLayer.hasLayer(lyr))districtLayer.addLayer(lyr);
+      }else{
+        if(districtLayer.hasLayer(lyr))districtLayer.removeLayer(lyr);
+      }
+    });
+  };
+  makeDistrictOption("Gombak","Gombak");
+  makeDistrictOption("Hulu Langat","Hulu Langat");
+},0);
 let markerMap=new Map(),visibleMarkers=[];
 function popup(s){let agencies=AG[s.code]||[];return `<img class="popup-img" src="${IMG[s.code]||""}" alt="${s.code}"><div class="popup-title">${s.code} — ${s.name}</div><div class="popup-grid"><b>Era Geologi:</b> ${s.era}<br><b>Tahap Kepentingan Geologi:</b> ${s.importance}<br><b>Koordinat:</b><br>X: ${s.lat}<br>Y: ${s.lng}<br><b>Guna Tanah Semasa:</b> ${s.landuse}<br><b>Agensi Kawal Selia:</b>${agencies.length?`<ol class="popup-agency">${agencies.map(a=>`<li>${a}</li>`).join("")}</ol>`:"<br>Tiada maklumat dinyatakan dalam PDF"}<br><b>Kawasan Pentadbiran:</b> ${s.pbt}<br><b>Kepelbagaian:</b> ${s.cat}${s.updated?'<br><b style="color:#aa2423">Koordinat dikemas kini</b>':""}</div><span class="popup-tag">Geotapak GHLGp</span>`}
 function drawMarkers(data){visibleMarkers.forEach(m=>map.removeLayer(m));visibleMarkers=[];markerMap=new Map();data.forEach(s=>{let col=s.district==="Gombak"?C.lime:C.orange;let icon=L.divIcon({className:"geo-point-icon",html:`<div class="geo-point-inner" style="background:${col}">${s.code}</div>`,iconSize:[24,24],iconAnchor:[12,12]});let m=L.marker([s.lat,s.lng],{icon}).addTo(map).bindPopup(popup(s),{maxWidth:300});visibleMarkers.push(m);markerMap.set(s.code,m)})}
