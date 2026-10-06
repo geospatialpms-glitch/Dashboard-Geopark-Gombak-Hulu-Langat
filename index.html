@@ -56,9 +56,9 @@ main{padding:12px 14px 12px;min-width:0;height:calc(100vh - 109px);display:flex;
 <div class="shell">
 <aside class="sidebar">
  <button class="navbtn active" data-target="utama"><span class="navicon">⌂</span><span>Utama</span></button>
- <button class="navbtn" id="taburanBtn"><span class="navicon">⌖</span><span>Taburan Geotapak</span></button>
+ <button class="navbtn" id="taburanBtn" type="button" onclick="openTaburan()"><span class="navicon">⌖</span><span>Taburan Geotapak</span></button>
  <button class="navbtn" id="geologyInfoBtn"><span class="navicon">◫</span><span>Kepelbagaian Geologi</span></button>
- <button class="navbtn" id="geoTrailBtn"><span class="navicon">⌁</span><span>Geo Trail</span></button>
+ <button class="navbtn" id="geoTrailBtn" type="button" onclick="openGeoTrail()"><span class="navicon">⌁</span><span>Geo Trail</span></button>
  <button class="navbtn" id="siteListInfoBtn"><span class="navicon">☷</span><span>Senarai Geotapak</span></button>
  <button class="navbtn" id="downloadBtn"><span class="navicon">⇩</span><span>Muat Turun Data</span></button>
  <button class="navbtn" data-target="utama"><span class="navicon">●</span><span>Mengenai</span></button>
@@ -308,5 +308,49 @@ applyFilters();
     </div>
   </div>
 </div>
+
+
+<script>
+function setSidebarActive(btn){
+  document.querySelectorAll(".navbtn").forEach(function(x){x.classList.remove("active")});
+  if(btn) btn.classList.add("active");
+}
+function openTaburan(){
+  var btn=document.getElementById("taburanBtn");
+  setSidebarActive(btn);
+  var section=document.getElementById("taburan");
+  if(section) section.scrollIntoView({behavior:"smooth",block:"start"});
+  if(typeof map!=="undefined" && map && map.invalidateSize){
+    setTimeout(function(){map.invalidateSize()},350);
+  }
+}
+function openGeoTrail(){
+  var btn=document.getElementById("geoTrailBtn");
+  var modal=document.getElementById("geoTrailModal");
+  setSidebarActive(btn);
+  if(modal){
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden","false");
+  }
+}
+(function(){
+  var modal=document.getElementById("geoTrailModal");
+  var close=document.getElementById("geoTrailClose");
+  if(close && modal){
+    close.onclick=function(){
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden","true");
+    };
+  }
+  if(modal){
+    modal.addEventListener("click",function(e){
+      if(e.target===modal){
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden","true");
+      }
+    });
+  }
+})();
+</script>
 
 </body></html>
