@@ -56,7 +56,7 @@ main{padding:12px 14px 12px;min-width:0;height:calc(100vh - 109px);display:flex;
 <div class="shell">
 <aside class="sidebar">
  <button class="navbtn active" data-target="utama"><span class="navicon">⌂</span><span>Utama</span></button>
- <button class="navbtn" data-target="taburan"><span class="navicon">⌖</span><span>Taburan Geotapak</span></button>
+ <button class="navbtn" id="taburanBtn"><span class="navicon">⌖</span><span>Taburan Geotapak</span></button>
  <button class="navbtn" id="geologyInfoBtn"><span class="navicon">◫</span><span>Kepelbagaian Geologi</span></button>
  <button class="navbtn" id="geoTrailBtn"><span class="navicon">⌁</span><span>Geo Trail</span></button>
  <button class="navbtn" id="siteListInfoBtn"><span class="navicon">☷</span><span>Senarai Geotapak</span></button>
@@ -187,42 +187,7 @@ function makeCharts(data){
 function renderTable(data){let tb=document.getElementById("tableBody");tb.innerHTML=data.map((s,i)=>`<tr data-code="${s.code}"><td>${i+1}</td><td><b>${s.code}</b></td><td>${s.name}</td><td>${s.district}</td><td>${s.pbt}</td><td><span class="badge"><span class="status-dot"></span>Aktif</span></td></tr>`).join("");document.getElementById("tableCount").textContent=data.length+" rekod";tb.querySelectorAll("tr").forEach(tr=>tr.onclick=()=>focusSite(tr.dataset.code))}
 function filtered(){return SITES.filter(s=>(!districtFilter.value||s.district===districtFilter.value)&&(!pbtFilter.value||s.pbt===pbtFilter.value)&&(!importanceFilter.value||s.importance===importanceFilter.value)&&(!catFilter.value||s.cat===catFilter.value))}
 function applyFilters(){let d=filtered();document.getElementById("kTotal").innerHTML=`${d.length} <small>tapak</small>`;drawMarkers(d);makeCharts(d);renderTable(d)}
-function focusSite(code){let s=SITES.find(x=>x.code===code);if(!s)return;let m=markerMap.get(code);if(!m){districtFilter.value="";pbtFilter.value="";importanceFilter.value="";catFilter.value="";
-document.addEventListener("DOMContentLoaded",()=>{
- const geoTrailBtn=document.getElementById("geoTrailBtn");
- const geoTrailModal=document.getElementById("geoTrailModal");
- const geoTrailClose=document.getElementById("geoTrailClose");
- if(geoTrailBtn&&geoTrailModal){
-  geoTrailBtn.addEventListener("click",()=>{
-   document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));
-   geoTrailBtn.classList.add("active");
-   geoTrailModal.classList.add("open");
-   geoTrailModal.setAttribute("aria-hidden","false");
-  });
- }
- if(geoTrailClose&&geoTrailModal){
-  geoTrailClose.addEventListener("click",()=>{
-   geoTrailModal.classList.remove("open");
-   geoTrailModal.setAttribute("aria-hidden","true");
-  });
- }
- if(geoTrailModal){
-  geoTrailModal.addEventListener("click",e=>{
-   if(e.target===geoTrailModal){
-    geoTrailModal.classList.remove("open");
-    geoTrailModal.setAttribute("aria-hidden","true");
-   }
-  });
- }
- document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"&&geoTrailModal){
-   geoTrailModal.classList.remove("open");
-   geoTrailModal.setAttribute("aria-hidden","true");
-  }
- });
-});
-
-applyFilters();m=markerMap.get(code)}map.setView([s.lat,s.lng],13);setTimeout(()=>m&&m.openPopup(),120)}
+function focusSite(code){let s=SITES.find(x=>x.code===code);if(!s)return;let m=markerMap.get(code);if(!m){districtFilter.value="";pbtFilter.value="";importanceFilter.value="";catFilter.value="";applyFilters();m=markerMap.get(code)}map.setView([s.lat,s.lng],13);setTimeout(()=>m&&m.openPopup(),120)}
 const districtFilter=document.getElementById("districtFilter"),pbtFilter=document.getElementById("pbtFilter"),importanceFilter=document.getElementById("importanceFilter"),catFilter=document.getElementById("catFilter");
 [...new Set(SITES.map(s=>s.pbt))].forEach(v=>pbtFilter.add(new Option(v,v)));[...new Set(SITES.map(s=>s.importance))].forEach(v=>importanceFilter.add(new Option(v,v)));[...new Set(SITES.map(s=>s.cat))].forEach(v=>catFilter.add(new Option(v,v)));
 [districtFilter,pbtFilter,importanceFilter,catFilter].forEach(el=>el.addEventListener("change",applyFilters));
@@ -238,6 +203,50 @@ huluLangatCard.onclick=()=>toggleDistrictCard(huluLangatCard,gombakCard,"Hulu La
 districtFilter.addEventListener("change",()=>{gombakCard.classList.toggle("glow",districtFilter.value==="Gombak");huluLangatCard.classList.toggle("glow",districtFilter.value==="Hulu Langat")});
 document.querySelectorAll(".navbtn[data-target]").forEach(b=>b.onclick=()=>{document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.target)?.scrollIntoView({behavior:"smooth",block:"start"})});
 document.getElementById("downloadBtn").onclick=()=>{let rows=["Kod,Nama,Daerah,PBT,Era Geologi,Tahap Kepentingan,Guna Tanah,X,Y",...filtered().map(s=>[s.code,`"${s.name}"`,s.district,s.pbt,s.era,s.importance,`"${s.landuse}"`,s.lat,s.lng].join(","))];let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([rows.join("\n")],{type:"text/csv"}));a.download="geotapak-ghlgp.csv";a.click()};
+
+const taburanBtn=document.getElementById("taburanBtn");
+if(taburanBtn){
+ taburanBtn.addEventListener("click",()=>{
+  document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));
+  taburanBtn.classList.add("active");
+  const section=document.getElementById("taburan");
+  if(section)section.scrollIntoView({behavior:"smooth",block:"start"});
+  setTimeout(()=>map.invalidateSize(),350);
+ });
+}
+
+const geoTrailBtn=document.getElementById("geoTrailBtn");
+const geoTrailModal=document.getElementById("geoTrailModal");
+const geoTrailClose=document.getElementById("geoTrailClose");
+if(geoTrailBtn&&geoTrailModal){
+ geoTrailBtn.addEventListener("click",()=>{
+  document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));
+  geoTrailBtn.classList.add("active");
+  geoTrailModal.classList.add("open");
+  geoTrailModal.setAttribute("aria-hidden","false");
+ });
+}
+if(geoTrailClose&&geoTrailModal){
+ geoTrailClose.addEventListener("click",()=>{
+  geoTrailModal.classList.remove("open");
+  geoTrailModal.setAttribute("aria-hidden","true");
+ });
+}
+if(geoTrailModal){
+ geoTrailModal.addEventListener("click",e=>{
+  if(e.target===geoTrailModal){
+   geoTrailModal.classList.remove("open");
+   geoTrailModal.setAttribute("aria-hidden","true");
+  }
+ });
+}
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape"&&geoTrailModal){
+  geoTrailModal.classList.remove("open");
+  geoTrailModal.setAttribute("aria-hidden","true");
+ }
+});
+
 applyFilters();
 </script>
 <div class="geo-modal" id="geoTrailModal" aria-hidden="true">
