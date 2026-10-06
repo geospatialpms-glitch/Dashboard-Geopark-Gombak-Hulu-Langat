@@ -22,6 +22,16 @@ main{padding:12px 14px 12px;min-width:0;height:calc(100vh - 109px);display:flex;
 .dashboard-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(460px,1fr);gap:8px;flex:1;min-height:0}.panel{background:white;border:1px solid #e6ddd3;border-radius:9px;box-shadow:var(--shadow);overflow:hidden}.panel-title{height:34px;border-bottom:1px solid #eee4d9;display:flex;align-items:center;justify-content:space-between;padding:0 11px;font-size:11px;font-weight:800;color:#26324a}.panel-title .accent{display:flex;align-items:center;gap:7px}.panel-title .accent:before{content:"";width:4px;height:20px;border-radius:2px;background:linear-gradient(var(--red),var(--orange))}.panel-sub{font-size:8px;color:#7a7f88;font-weight:500}
 .map-panel{display:flex;flex-direction:column;min-height:0}.map-panel .panel-title{color:white;background:linear-gradient(90deg,#11713b 0%,#2f8b3c 28%,#6eab39 60%,#98bc40 100%)}.map-panel .panel-title .accent:before{background:white}.map-panel>div:last-child{flex:1;min-height:0}#map{height:100%;min-height:0}.map-search{position:absolute;z-index:1000;top:10px;right:50px;background:white;border:1px solid #d9dfe6;border-radius:7px;padding:8px 10px;width:250px;font-size:10px;box-shadow:0 3px 12px #0002}.leaflet-popup-content-wrapper{border-radius:12px}.leaflet-popup-content{margin:10px;width:280px!important}.popup-img{width:280px;height:158px;object-fit:cover;border-radius:9px;margin-bottom:8px;image-rendering:auto}.popup-title{font-size:12px;font-weight:800;color:#17233b;margin-bottom:5px}.popup-grid{font-size:9.5px;line-height:1.45;color:#44505f}.popup-grid b{color:#17233b}.popup-agency{margin:3px 0 0 16px;padding:0}.popup-agency li{margin:1px 0}.popup-tag{display:inline-block;margin-top:6px;padding:4px 7px;border-radius:999px;background:#eff7dc;color:#44681e;font-size:8px;font-weight:800}.geo-point-icon{background:transparent;border:0}.geo-point-inner{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:7.5px;font-weight:800;border:1.5px solid #fff;box-shadow:0 1px 5px #0004;line-height:1;text-align:center}
 .rightgrid{display:grid;grid-template-columns:1fr;grid-template-rows:1fr 1fr;gap:8px;min-height:0}.rightgrid>.panel{min-height:0;display:flex;flex-direction:column}.chartbox{height:auto;flex:1;min-height:0;padding:9px}.chartbox canvas{width:100%!important;height:100%!important}.wide{grid-column:1 / -1}.table-panel{margin-top:8px}.compact-table.table-panel{margin-top:0}.compact-table .table-wrap{height:auto;max-height:none;flex:1;min-height:0;overflow:auto}.table-wrap{max-height:270px;overflow:auto}.data-table{width:100%;border-collapse:collapse;font-size:9px}.data-table th{position:sticky;top:0;background:#f7f5f2;padding:7px;border-bottom:1px solid #dedbd6;text-align:left;font-size:8px}.data-table td{padding:6px 7px;border-bottom:1px solid #eeeae4}.data-table tr:hover td{background:#fff7ec;cursor:pointer}.badge{padding:3px 6px;border-radius:999px;font-size:8px;font-weight:700;background:#edf7e0;color:#4a6d26}.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);margin-right:4px}.footer-note{font-size:8px;color:#8a8d94;padding:5px 2px 0;text-align:right;flex:0 0 auto}
+.geo-modal{position:fixed;inset:0;background:rgba(6,38,24,.62);z-index:3000;display:none;align-items:center;justify-content:center;padding:24px}
+.geo-modal.open{display:flex}.geo-modal-card{width:min(980px,94vw);max-height:88vh;overflow:auto;background:#fff;border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.28);border:1px solid #dce8d8}
+.geo-modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;background:linear-gradient(90deg,#11713b,#98bc40);color:#fff;position:sticky;top:0;z-index:2}
+.geo-modal-head h2{margin:0;font-size:20px}.geo-modal-close{border:0;background:#ffffff22;color:#fff;width:34px;height:34px;border-radius:50%;font-size:20px;cursor:pointer}
+.geo-modal-body{padding:18px 20px 22px}.geo-intro{font-size:12px;line-height:1.65;color:#40534a;margin:0 0 14px}.geo-trail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.trail-card{border:1px solid #dfe9dc;border-radius:14px;padding:14px;background:#fbfff8}.trail-card h3{margin:0 0 8px;font-size:14px;color:#174b31}.trail-card .tag{display:inline-block;font-size:9px;font-weight:800;color:#fff;background:#e9532e;border-radius:999px;padding:4px 8px;margin-bottom:8px}
+.trail-card ul{margin:8px 0 0 18px;padding:0}.trail-card li{font-size:11px;line-height:1.55;margin:4px 0;color:#43534c}.geo-actions{margin-top:14px;border-top:1px solid #e7eee4;padding-top:14px}
+.geo-actions h3{font-size:13px;margin:0 0 8px;color:#174b31}.geo-actions .chiprow{display:flex;flex-wrap:wrap;gap:7px}.geo-actions .chip{font-size:10px;padding:6px 9px;border-radius:999px;background:#edf6df;color:#456624;font-weight:700}
+@media(max-width:760px){.geo-trail-grid{grid-template-columns:1fr}.geo-modal{padding:10px}.geo-modal-card{max-height:92vh}}
+
 @media(max-width:1200px){main{height:auto;overflow:visible}.dashboard-grid{flex:none}.shell{grid-template-columns:80px 1fr}.navbtn span:last-child{display:none}.navbtn{justify-content:center}.kpis{grid-template-columns:repeat(3,1fr)}.dashboard-grid{grid-template-columns:1fr}.sidebar{padding:12px 8px}.filterbar{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:760px){.header{height:auto;padding:12px}.logo{width:120px}.header h1{font-size:18px}.geo-ribbon{display:none}.shell{display:block}.sidebar{display:none}.kpis{grid-template-columns:1fr 1fr}.filterbar{grid-template-columns:1fr 1fr}.rightgrid{grid-template-columns:1fr}.wide{grid-column:auto}#map{height:430px}}
 </style>
@@ -35,7 +45,7 @@ main{padding:12px 14px 12px;min-width:0;height:calc(100vh - 109px);display:flex;
  <button class="navbtn active" data-target="utama"><span class="navicon">⌂</span><span>Utama</span></button>
  <button class="navbtn" data-target="taburan"><span class="navicon">⌖</span><span>Taburan Geotapak</span></button>
  <button class="navbtn" data-target="analisis"><span class="navicon">◫</span><span>Kepelbagaian Geologi</span></button>
- <button class="navbtn" data-target="analisis"><span class="navicon">◔</span><span>Analisis Daerah</span></button>
+ <button class="navbtn" id="geoTrailBtn"><span class="navicon">⌁</span><span>Geo Trail</span></button>
  <button class="navbtn" data-target="senarai"><span class="navicon">☷</span><span>Senarai Geotapak</span></button>
  <button class="navbtn" id="downloadBtn"><span class="navicon">⇩</span><span>Muat Turun Data</span></button>
  <button class="navbtn" data-target="utama"><span class="navicon">●</span><span>Mengenai</span></button>
@@ -91,7 +101,14 @@ function makeCharts(data){
 function renderTable(data){let tb=document.getElementById("tableBody");tb.innerHTML=data.map((s,i)=>`<tr data-code="${s.code}"><td>${i+1}</td><td><b>${s.code}</b></td><td>${s.name}</td><td>${s.district}</td><td>${s.pbt}</td><td><span class="badge"><span class="status-dot"></span>Aktif</span></td></tr>`).join("");document.getElementById("tableCount").textContent=data.length+" rekod";tb.querySelectorAll("tr").forEach(tr=>tr.onclick=()=>focusSite(tr.dataset.code))}
 function filtered(){return SITES.filter(s=>(!districtFilter.value||s.district===districtFilter.value)&&(!pbtFilter.value||s.pbt===pbtFilter.value)&&(!importanceFilter.value||s.importance===importanceFilter.value)&&(!catFilter.value||s.cat===catFilter.value))}
 function applyFilters(){let d=filtered();document.getElementById("kTotal").innerHTML=`${d.length} <small>tapak</small>`;drawMarkers(d);makeCharts(d);renderTable(d)}
-function focusSite(code){let s=SITES.find(x=>x.code===code);if(!s)return;let m=markerMap.get(code);if(!m){districtFilter.value="";pbtFilter.value="";importanceFilter.value="";catFilter.value="";applyFilters();m=markerMap.get(code)}map.setView([s.lat,s.lng],13);setTimeout(()=>m&&m.openPopup(),120)}
+function focusSite(code){let s=SITES.find(x=>x.code===code);if(!s)return;let m=markerMap.get(code);if(!m){districtFilter.value="";pbtFilter.value="";importanceFilter.value="";catFilter.value="";
+const geoTrailBtn=document.getElementById("geoTrailBtn"),geoTrailModal=document.getElementById("geoTrailModal"),geoTrailClose=document.getElementById("geoTrailClose");
+if(geoTrailBtn){geoTrailBtn.onclick=()=>{document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));geoTrailBtn.classList.add("active");geoTrailModal.classList.add("open");geoTrailModal.setAttribute("aria-hidden","false")}}
+if(geoTrailClose){geoTrailClose.onclick=()=>{geoTrailModal.classList.remove("open");geoTrailModal.setAttribute("aria-hidden","true")}}
+if(geoTrailModal){geoTrailModal.addEventListener("click",e=>{if(e.target===geoTrailModal){geoTrailModal.classList.remove("open");geoTrailModal.setAttribute("aria-hidden","true")}})}
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&geoTrailModal){geoTrailModal.classList.remove("open");geoTrailModal.setAttribute("aria-hidden","true")}});
+
+applyFilters();m=markerMap.get(code)}map.setView([s.lat,s.lng],13);setTimeout(()=>m&&m.openPopup(),120)}
 const districtFilter=document.getElementById("districtFilter"),pbtFilter=document.getElementById("pbtFilter"),importanceFilter=document.getElementById("importanceFilter"),catFilter=document.getElementById("catFilter");
 [...new Set(SITES.map(s=>s.pbt))].forEach(v=>pbtFilter.add(new Option(v,v)));[...new Set(SITES.map(s=>s.importance))].forEach(v=>importanceFilter.add(new Option(v,v)));[...new Set(SITES.map(s=>s.cat))].forEach(v=>catFilter.add(new Option(v,v)));
 [districtFilter,pbtFilter,importanceFilter,catFilter].forEach(el=>el.addEventListener("change",applyFilters));
@@ -108,4 +125,28 @@ districtFilter.addEventListener("change",()=>{gombakCard.classList.toggle("glow"
 document.querySelectorAll(".navbtn[data-target]").forEach(b=>b.onclick=()=>{document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.target)?.scrollIntoView({behavior:"smooth",block:"start"})});
 document.getElementById("downloadBtn").onclick=()=>{let rows=["Kod,Nama,Daerah,PBT,Era Geologi,Tahap Kepentingan,Guna Tanah,X,Y",...filtered().map(s=>[s.code,`"${s.name}"`,s.district,s.pbt,s.era,s.importance,`"${s.landuse}"`,s.lat,s.lng].join(","))];let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([rows.join("\n")],{type:"text/csv"}));a.download="geotapak-ghlgp.csv";a.click()};
 applyFilters();
-</script></body></html>
+</script>
+<div class="geo-modal" id="geoTrailModal" aria-hidden="true">
+  <div class="geo-modal-card">
+    <div class="geo-modal-head">
+      <div><div style="font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.85">Gombak - Hulu Langat Geopark</div><h2>Geo Trail GHL Geopark</h2></div>
+      <button class="geo-modal-close" id="geoTrailClose" aria-label="Tutup">×</button>
+    </div>
+    <div class="geo-modal-body">
+      <p class="geo-intro">Jejak Geologi (Geo Trail) menghubungkan geotapak, elemen warisan dan landskap sebagai rangkaian geopelancongan. Cadangan dibahagikan kepada dua jejak utama: <b>Trail 1: Gombak</b> dan <b>Trail 2: Hulu Langat</b>.</p>
+      <div class="geo-trail-grid">
+        <div class="trail-card"><span class="tag">Trail 1</span><h3>Geo Trail Gombak</h3><ul>
+          <li>Permatang Kuarza Gombak Selangor (PKGS)</li><li>Batu Caves dan warisan batu kapur</li><li>Air Terjun Sungai Kanching</li><li>Batu Arang dan kawasan bekas perlombongan</li><li>Tasik Biru Seri Kundang</li><li>Kompleks geologi Genting Sempah / Gombak</li>
+        </ul></div>
+        <div class="trail-card"><span class="tag">Trail 2</span><h3>Geo Trail Hulu Langat</h3><ul>
+          <li>Gunung Nuang dan kawasan granit</li><li>Air Terjun Sungai Gabai</li><li>Kompleks Air Panas Dusun Tua</li><li>Air Terjun Sungai Tekala</li><li>Granit Semenyih dan kawasan empangan</li><li>Telaga Air Panas Artesian Kampung Jawa</li>
+        </ul></div>
+      </div>
+      <div class="geo-actions"><h3>Komponen Sokongan Geo Trail</h3><div class="chiprow">
+        <span class="chip">Pakej Lawatan</span><span class="chip">Aplikasi / Pelan Lokasi</span><span class="chip">Geo-ride</span><span class="chip">Kalendar Aktiviti</span><span class="chip">Pusat Satelit</span><span class="chip">Kiosk Geotapak</span><span class="chip">Panel Informasi</span><span class="chip">Jejak Warisan</span><span class="chip">Jejak Makanan</span>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+</body></html>
