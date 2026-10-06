@@ -34,6 +34,19 @@ main{padding:12px 14px 12px;min-width:0;height:calc(100vh - 109px);display:flex;
 
 @media(max-width:1200px){main{height:auto;overflow:visible}.dashboard-grid{flex:none}.shell{grid-template-columns:80px 1fr}.navbtn span:last-child{display:none}.navbtn{justify-content:center}.kpis{grid-template-columns:repeat(3,1fr)}.dashboard-grid{grid-template-columns:1fr}.sidebar{padding:12px 8px}.filterbar{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:760px){.header{height:auto;padding:12px}.logo{width:120px}.header h1{font-size:18px}.geo-ribbon{display:none}.shell{display:block}.sidebar{display:none}.kpis{grid-template-columns:1fr 1fr}.filterbar{grid-template-columns:1fr 1fr}.rightgrid{grid-template-columns:1fr}.wide{grid-column:auto}#map{height:430px}}
+
+.info-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.info-stat{border:1px solid #dfe9dc;border-radius:12px;padding:12px;background:#fbfff8}
+.info-stat b{display:block;font-size:22px;color:#174b31}.info-stat span{font-size:10px;color:#617069;line-height:1.4}
+.info-section{margin-top:14px}.info-section h3{font-size:13px;color:#174b31;margin:0 0 8px}
+.info-list{display:grid;gap:8px}.info-row{border:1px solid #e4ece1;border-radius:10px;padding:10px;background:#fff;cursor:pointer}
+.info-row:hover{background:#f4faee}.info-row b{font-size:11px;color:#183230}.info-row small{display:block;margin-top:3px;font-size:9px;color:#6b7771}
+.site-modal-list{display:grid;gap:7px;max-height:58vh;overflow:auto;padding-right:4px}
+.site-modal-row{display:grid;grid-template-columns:48px 1.4fr .65fr .55fr .7fr;gap:8px;align-items:center;border:1px solid #e4ece1;border-radius:10px;padding:8px;background:#fff;cursor:pointer}
+.site-modal-row:hover{background:#f4faee}.site-code{font-weight:800;color:#11713b}.site-modal-row span,.site-modal-row small{font-size:9px}.site-modal-row b{font-size:10px}
+.info-note{font-size:10px;color:#66746d;line-height:1.6;background:#f5f9f2;border-radius:10px;padding:10px;margin-top:10px}
+@media(max-width:760px){.info-stat-grid{grid-template-columns:1fr 1fr}.site-modal-row{grid-template-columns:45px 1fr}.site-modal-row .hide-mobile{display:none}}
+
 </style>
 </head>
 <body><div class="topline"></div>
@@ -44,9 +57,9 @@ main{padding:12px 14px 12px;min-width:0;height:calc(100vh - 109px);display:flex;
 <aside class="sidebar">
  <button class="navbtn active" data-target="utama"><span class="navicon">⌂</span><span>Utama</span></button>
  <button class="navbtn" data-target="taburan"><span class="navicon">⌖</span><span>Taburan Geotapak</span></button>
- <button class="navbtn" data-target="analisis"><span class="navicon">◫</span><span>Kepelbagaian Geologi</span></button>
+ <button class="navbtn" id="geologyInfoBtn"><span class="navicon">◫</span><span>Kepelbagaian Geologi</span></button>
  <button class="navbtn" id="geoTrailBtn"><span class="navicon">⌁</span><span>Geo Trail</span></button>
- <button class="navbtn" data-target="senarai"><span class="navicon">☷</span><span>Senarai Geotapak</span></button>
+ <button class="navbtn" id="siteListInfoBtn"><span class="navicon">☷</span><span>Senarai Geotapak</span></button>
  <button class="navbtn" id="downloadBtn"><span class="navicon">⇩</span><span>Muat Turun Data</span></button>
  <button class="navbtn" data-target="utama"><span class="navicon">●</span><span>Mengenai</span></button>
 </aside>
@@ -74,7 +87,79 @@ main{padding:12px 14px 12px;min-width:0;height:calc(100vh - 109px);display:flex;
 </section>
 <div class="footer-note">Sumber: Coffee Table Gombak-Hulu Langat Geopark Edisi 2024, dokumen geotapak dan data spatial yang dibekalkan.</div>
 </main></div>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+document.addEventListener("DOMContentLoaded",()=>{
+ const geologyBtn=document.getElementById("geologyInfoBtn");
+ const geologyModal=document.getElementById("geologyInfoModal");
+ const geologyClose=document.getElementById("geologyInfoClose");
+ const siteBtn=document.getElementById("siteListInfoBtn");
+ const siteModal=document.getElementById("siteListInfoModal");
+ const siteClose=document.getElementById("siteListInfoClose");
+
+ function openInfo(btn,modal){
+  document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));
+  btn.classList.add("active");
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
+ }
+ function closeInfo(modal){
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden","true");
+ }
+
+ if(geologyBtn&&geologyModal){
+  const cats=[
+   ["Batuan / Fosil","Batuan / Fosil"],
+   ["Rupabumi Landskap","Rupabumi / Landskap"],
+   ["Rupabumi Antropogenik","Antropogenik"],
+   ["Proses Geologi","Proses Geologi"]
+  ];
+  document.getElementById("geologyStats").innerHTML=cats.map(([key,label])=>{
+    const n=SITES.filter(s=>s.cat===key).length;
+    return `<div class="info-stat"><b>${n}</b><span>${label}</span></div>`;
+  }).join("");
+  geologyBtn.addEventListener("click",()=>openInfo(geologyBtn,geologyModal));
+  geologyClose.addEventListener("click",()=>closeInfo(geologyModal));
+  geologyModal.addEventListener("click",e=>{if(e.target===geologyModal)closeInfo(geologyModal)});
+  geologyModal.querySelectorAll("[data-cat]").forEach(row=>{
+    row.addEventListener("click",()=>{
+      catFilter.value=row.dataset.cat;
+      applyFilters();
+      closeInfo(geologyModal);
+      document.getElementById("taburan")?.scrollIntoView({behavior:"smooth",block:"start"});
+    });
+  });
+ }
+
+ if(siteBtn&&siteModal){
+  const list=document.getElementById("siteModalList");
+  list.innerHTML=SITES.map(s=>`<div class="site-modal-row" data-code="${s.code}">
+    <div class="site-code">${s.code}</div>
+    <div><b>${s.name}</b><small>${s.cat}</small></div>
+    <span class="hide-mobile">${s.district}</span>
+    <span class="hide-mobile">${s.pbt}</span>
+    <span class="hide-mobile">${s.importance}</span>
+  </div>`).join("");
+  siteBtn.addEventListener("click",()=>openInfo(siteBtn,siteModal));
+  siteClose.addEventListener("click",()=>closeInfo(siteModal));
+  siteModal.addEventListener("click",e=>{if(e.target===siteModal)closeInfo(siteModal)});
+  list.querySelectorAll("[data-code]").forEach(row=>{
+    row.addEventListener("click",()=>{
+      closeInfo(siteModal);
+      focusSite(row.dataset.code);
+    });
+  });
+ }
+
+ document.addEventListener("keydown",e=>{
+   if(e.key==="Escape"){
+     if(geologyModal)closeInfo(geologyModal);
+     if(siteModal)closeInfo(siteModal);
+   }
+ });
+});
+
+</script><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
 <script>
 const SITES=[{"code":"G23","name":"Permatang Kuarza Gombak Selangor (PKGS)","cat":"Rupabumi Landskap","era":"Mesozoic","importance":"Rantau","pbt":"MPAJ","landuse":"Hutan","lng":101.73932,"lat":3.23680,"updated":false,"district":"Gombak"},{"code":"G4","name":"Formasi Batu Kapur Kuala Lumpur Anak Takun","cat":"Batuan / Fosil","era":"Paleozoic","importance":"Rantau","pbt":"MPS","landuse":"Hutan","lng":101.612469,"lat":3.295213,"updated":false,"district":"Gombak"},{"code":"G6","name":"Syis Selut Karak","cat":"Batuan / Fosil","era":"Paleozoic","importance":"Kebangsaan","pbt":"MPS","landuse":"Hutan","lng":101.7645,"lat":3.333012,"updated":false,"district":"Gombak"},{"code":"G9","name":"Fosil Pleistosen Akhir Batu Caves","cat":"Batuan / Fosil","era":"Late Proterozoic","importance":"Kebangsaan","pbt":"MPS","landuse":"Tanah Lapang / Rekreasi","lng":101.681328,"lat":3.236094,"updated":false,"district":"Gombak"},{"code":"G10","name":"Kompleks Volkano Sempah","cat":"Batuan / Fosil","era":"Paleozoic","importance":"Kebangsaan","pbt":"MPS","landuse":"Hutan","lng":101.7739,"lat":3.340195,"updated":false,"district":"Gombak"},{"code":"G11","name":"Olistostrom Tericih Genting Sempah","cat":"Batuan / Fosil","era":"Paleozoic","importance":"Kebangsaan","pbt":"MPS","landuse":"Hutan","lng":101.77204,"lat":3.33601,"updated":false,"district":"Gombak"},{"code":"G13","name":"Rijang Gombak Karak Highway","cat":"Batuan / Fosil","era":"Paleozoic","importance":"Kebangsaan","pbt":"MPS","landuse":"Hutan","lng":101.77439,"lat":3.344543,"updated":false,"district":"Gombak"},{"code":"G18","name":"Mata Air Panas Selayang","cat":"Rupabumi Antropogenik","era":"Paleozoic","importance":"Kebangsaan","pbt":"MPS","landuse":"Tanah Kosong","lng":101.64614,"lat":3.25894,"updated":true,"district":"Gombak"},{"code":"G19","name":"Granit Kuala Lumpur","cat":"Batuan / Fosil","era":"Mesozoic","importance":"Kebangsaan","pbt":"MPS","landuse":"Pengangkutan","lng":101.603323,"lat":3.296031,"updated":false,"district":"Gombak"},{"code":"G26","name":"Air Terjun Sungai Kanching","cat":"Rupabumi Landskap","era":"Cenozoic","importance":"Tempatan","pbt":"MPS","landuse":"Hutan","lng":101.619363,"lat":3.302604,"updated":false,"district":"Gombak"},{"code":"G28","name":"Gua Batu Caves","cat":"Batuan / Fosil","era":"Late Proterozoic","importance":"Kebangsaan","pbt":"MPS","landuse":"Lapang / Rekreasi","lng":101.68391,"lat":3.23807,"updated":false,"district":"Gombak"},{"code":"G29","name":"Bekas Lombong Tasik Biru Seri Kundang","cat":"Proses Geologi","era":"Cenozoic","importance":"Kebangsaan","pbt":"MPS","landuse":"Badan Air","lng":101.525492,"lat":3.250253,"updated":false,"district":"Gombak"},{"code":"G30","name":"Bekas Lombong Batu Arang","cat":"Proses Geologi","era":"Cenozoic","importance":"Kebangsaan","pbt":"MPS","landuse":"Badan Air","lng":101.47159537243853,"lat":3.3217443536756934,"updated":true,"district":"Gombak"},{"code":"G16","name":"Kompleks Mata Air Panas Dusun Tua","cat":"Rupabumi Antropogenik","era":"Cenozoic","importance":"Kebangsaan","pbt":"MPKj","landuse":"-","lng":101.834852,"lat":3.136061,"updated":false,"district":"Hulu Langat"},{"code":"G17","name":"Mata Air Panas Sungai Lalang","cat":"Rupabumi Antropogenik","era":"Cenozoic","importance":"Tempatan","pbt":"MPKj","landuse":"Tanah Lapang dan Rekreasi","lng":101.87235,"lat":3.042325,"updated":false,"district":"Hulu Langat"},{"code":"G21","name":"Granit Semenyih Jalan Empangan","cat":"Rupabumi Landskap","era":"Mesozoic","importance":"Kebangsaan","pbt":"MPKj","landuse":"Hutan","lng":101.880241,"lat":3.082303,"updated":false,"district":"Hulu Langat"},{"code":"G22","name":"Profirit Hulu Langat Sungai Gabai","cat":"Rupabumi Landskap","era":"Cenozoic","importance":"Kebangsaan","pbt":"MPKj","landuse":"Hutan","lng":101.908228,"lat":3.165994,"updated":false,"district":"Hulu Langat"},{"code":"G25","name":"Puncak Granit Gunung Nuang","cat":"Batuan / Fosil","era":"Mesozoic","importance":"Kebangsaan","pbt":"MPKj","landuse":"Hutan","lng":101.900121,"lat":3.266529,"updated":false,"district":"Hulu Langat"},{"code":"G27","name":"Air Terjun Sungai Tekala","cat":"Rupabumi Landskap","era":"Cenozoic","importance":"Tempatan","pbt":"MPKj","landuse":"Hutan","lng":101.870122,"lat":3.060405,"updated":false,"district":"Hulu Langat"},{"code":"G31","name":"Telaga Air Panas Artesian, Kampung Jawa","cat":"Proses Geologi","era":"Semasa","importance":"Kebangsaan","pbt":"MPKj","landuse":"Institut dan Kemudahan Masyarakat","lng":101.8835,"lat":3.167428,"updated":false,"district":"Hulu Langat"}];
 const AG={"G23":["Majlis Perbandaran Ampang Jaya (MPAJ)","Jabatan Perhutanan Negeri Selangor (JPNS)","Lembaga Urus Air Selangor (LUAS)","Air Selangor"],"G4":["Majlis Perbandaran Selayang (MPS)","Jabatan Perhutanan Negeri Selangor (JPNS)","Pejabat Hutan Daerah Selangor Tengah"],"G6":[],"G9":["Majlis Perbandaran Selayang (MPS)"],"G10":[],"G11":["Majlis Perbandaran Selayang (MPS)"],"G13":[],"G18":["Majlis Perbandaran Selayang (MPS)","Jabatan Pengairan dan Saliran (JPS)","Lembaga Urus Air Selangor (LUAS)","Air Selangor","Tourism Selangor Sdn. Bhd."],"G19":["Majlis Perbandaran Selayang (MPS)"],"G26":["Majlis Perbandaran Selayang (MPS)","Jabatan Perhutanan Negeri Selangor (JPNS)","Pejabat Hutan Daerah Selangor Tengah","Tourism Selangor Sdn. Bhd."],"G28":["Majlis Perbandaran Selayang (MPS)"],"G29":["Majlis Perbandaran Selayang (MPS)","Jabatan Pengairan dan Saliran (JPS)","Lembaga Urus Air Selangor (LUAS)","Tourism Selangor Sdn. Bhd."],"G30":["Majlis Perbandaran Selayang (MPS)"],"G16":["Majlis Perbandaran Kajang (MPKj)","Jabatan Pengairan dan Saliran (JPS)","Lembaga Urus Air Selangor (LUAS)","Tourism Selangor Sdn. Bhd.","IKTBN Dusun Tua"],"G17":["Majlis Perbandaran Kajang (MPKj)","Tourism Selangor Sdn. Bhd."],"G21":["Majlis Perbandaran Kajang (MPKj)"],"G22":["Majlis Perbandaran Kajang (MPKj)","Jabatan Perhutanan Negeri Selangor (JPNS)","Jabatan Pengairan dan Saliran (JPS)","Lembaga Urus Air Selangor (LUAS)","Tourism Selangor Sdn. Bhd.","Air Selangor","MPKK Batu 12, Sungai Lui"],"G25":["Majlis Perbandaran Kajang (MPKj)","Jabatan Perhutanan Negeri Selangor (JPNS)","Lembaga Urus Air Selangor (LUAS)","Pejabat Hutan Daerah Selangor Tengah","Tourism Selangor Sdn. Bhd."],"G27":["Majlis Perbandaran Kajang (MPKj)","Jabatan Perhutanan Negeri Selangor (JPNS)","Pejabat Hutan Daerah Selangor Tengah","Lembaga Urus Air Selangor (LUAS)","Tourism Selangor Sdn. Bhd."],"G31":["Majlis Perbandaran Kajang (MPKj)"]};
@@ -173,6 +258,43 @@ applyFilters();
       <div class="geo-actions"><h3>Komponen Sokongan Geo Trail</h3><div class="chiprow">
         <span class="chip">Pakej Lawatan</span><span class="chip">Aplikasi / Pelan Lokasi</span><span class="chip">Geo-ride</span><span class="chip">Kalendar Aktiviti</span><span class="chip">Pusat Satelit</span><span class="chip">Kiosk Geotapak</span><span class="chip">Panel Informasi</span><span class="chip">Jejak Warisan</span><span class="chip">Jejak Makanan</span>
       </div></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="geo-modal" id="geologyInfoModal" aria-hidden="true">
+  <div class="geo-modal-card">
+    <div class="geo-modal-head">
+      <div><div style="font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.85">GHL Geopark</div><h2>Kepelbagaian Geologi</h2></div>
+      <button class="geo-modal-close" id="geologyInfoClose" aria-label="Tutup">×</button>
+    </div>
+    <div class="geo-modal-body">
+      <p class="geo-intro">Geotapak Gombak - Hulu Langat Geopark dihimpunkan mengikut empat kepelbagaian geologi utama. Klik kategori di bawah untuk menapis geotapak pada dashboard.</p>
+      <div class="info-stat-grid" id="geologyStats"></div>
+      <div class="info-section">
+        <h3>Penerangan Kategori</h3>
+        <div class="info-list">
+          <div class="info-row" data-cat="Batuan / Fosil"><b>Batuan / Fosil</b><small>Geotapak yang menonjolkan jenis batuan, singkapan geologi dan rekod fosil.</small></div>
+          <div class="info-row" data-cat="Rupabumi Landskap"><b>Rupabumi / Landskap</b><small>Geotapak yang menonjolkan bentuk muka bumi, puncak, air terjun dan landskap geologi.</small></div>
+          <div class="info-row" data-cat="Rupabumi Antropogenik"><b>Antropogenik</b><small>Geotapak yang berkait dengan interaksi manusia dengan ciri geologi atau sumber geologi.</small></div>
+          <div class="info-row" data-cat="Proses Geologi"><b>Proses Geologi</b><small>Geotapak yang menunjukkan proses geologi aktif atau kesan proses geologi yang signifikan.</small></div>
+        </div>
+      </div>
+      <div class="info-note">Maklumat kategori ini disusun berdasarkan data geotapak yang digunakan dalam dashboard dan struktur kepelbagaian geologi dalam dokumen GHL Geopark.</div>
+    </div>
+  </div>
+</div>
+
+<div class="geo-modal" id="siteListInfoModal" aria-hidden="true">
+  <div class="geo-modal-card">
+    <div class="geo-modal-head">
+      <div><div style="font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.85">20 Geotapak</div><h2>Senarai Geotapak GHL Geopark</h2></div>
+      <button class="geo-modal-close" id="siteListInfoClose" aria-label="Tutup">×</button>
+    </div>
+    <div class="geo-modal-body">
+      <p class="geo-intro">Klik mana-mana geotapak untuk menutup paparan ini dan terus fokus ke lokasi tersebut pada peta.</p>
+      <div class="site-modal-list" id="siteModalList"></div>
     </div>
   </div>
 </div>
