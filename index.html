@@ -44,8 +44,8 @@ main{padding:12px 14px 12px;min-width:0;height:calc(100vh - 109px);display:flex;
 <section class="kpis">
  <div class="kpi"><div class="kpi-icon">◆</div><div><div class="kpi-label">Jumlah Geotapak</div><div class="kpi-value red" id="kTotal">20 <small>tapak</small></div></div></div>
  <div class="kpi green"><div class="kpi-icon">▱</div><div><div class="kpi-label">Jumlah Keluasan Geopark</div><div class="kpi-value">112,955 <small>hektar</small></div></div></div>
- <div class="kpi green"><div class="kpi-icon">●</div><div><div class="kpi-label">Daerah Gombak</div><div class="kpi-value">13 <small>geotapak</small></div></div></div>
- <div class="kpi orange"><div class="kpi-icon">●</div><div><div class="kpi-label">Daerah Hulu Langat</div><div class="kpi-value">7 <small>geotapak</small></div></div></div>
+ <div class="kpi green click" id="gombakCard"><div class="kpi-icon">●</div><div><div class="kpi-label">Daerah Gombak</div><div class="kpi-value">13 <small>geotapak</small></div></div></div>
+ <div class="kpi orange click" id="huluLangatCard"><div class="kpi-icon">●</div><div><div class="kpi-label">Daerah Hulu Langat</div><div class="kpi-value">7 <small>geotapak</small></div></div></div>
  <div class="kpi click" id="exploreCard"><div class="kpi-icon">★</div><div><div class="kpi-label">Pusat Eksplorasi</div><div class="kpi-value">1 <small>G23 PKGS</small></div></div></div>
 </section>
 <section class="filterbar">
@@ -95,10 +95,16 @@ function focusSite(code){let s=SITES.find(x=>x.code===code);if(!s)return;let m=m
 const districtFilter=document.getElementById("districtFilter"),pbtFilter=document.getElementById("pbtFilter"),importanceFilter=document.getElementById("importanceFilter"),catFilter=document.getElementById("catFilter");
 [...new Set(SITES.map(s=>s.pbt))].forEach(v=>pbtFilter.add(new Option(v,v)));[...new Set(SITES.map(s=>s.importance))].forEach(v=>importanceFilter.add(new Option(v,v)));[...new Set(SITES.map(s=>s.cat))].forEach(v=>catFilter.add(new Option(v,v)));
 [districtFilter,pbtFilter,importanceFilter,catFilter].forEach(el=>el.addEventListener("change",applyFilters));
-document.getElementById("resetBtn").onclick=()=>{districtFilter.value=pbtFilter.value=importanceFilter.value=catFilter.value="";document.getElementById("mapSearch").value="";applyFilters();map.fitBounds(districtLayer.getBounds(),{padding:[18,18]})};
+document.getElementById("resetBtn").onclick=()=>{districtFilter.value=pbtFilter.value=importanceFilter.value=catFilter.value="";gombakCard.classList.remove("glow");huluLangatCard.classList.remove("glow");document.getElementById("mapSearch").value="";applyFilters();map.fitBounds(districtLayer.getBounds(),{padding:[18,18]})};
 document.getElementById("searchBtn").onclick=()=>document.getElementById("mapSearch").focus();
 document.getElementById("mapSearch").addEventListener("keydown",e=>{if(e.key==="Enter"){let q=e.target.value.trim().toLowerCase();let s=SITES.find(x=>(x.code+" "+x.name).toLowerCase().includes(q));if(s)focusSite(s.code)}});
 const explore=document.getElementById("exploreCard");explore.onclick=()=>{explore.classList.toggle("glow");if(explore.classList.contains("glow"))focusSite("G23");else map.fitBounds(districtLayer.getBounds(),{padding:[18,18]})};
+const gombakCard=document.getElementById("gombakCard"),huluLangatCard=document.getElementById("huluLangatCard");
+function fitDistrict(name){let target=null;districtLayer.eachLayer(l=>{if(l.feature?.properties?.Daerah===name)target=l});if(target)map.fitBounds(target.getBounds(),{padding:[20,20]})}
+function toggleDistrictCard(card,other,name){const active=card.classList.contains("glow");gombakCard.classList.remove("glow");huluLangatCard.classList.remove("glow");if(active){districtFilter.value="";applyFilters();map.fitBounds(districtLayer.getBounds(),{padding:[18,18]})}else{card.classList.add("glow");districtFilter.value=name;applyFilters();fitDistrict(name)}}
+gombakCard.onclick=()=>toggleDistrictCard(gombakCard,huluLangatCard,"Gombak");
+huluLangatCard.onclick=()=>toggleDistrictCard(huluLangatCard,gombakCard,"Hulu Langat");
+districtFilter.addEventListener("change",()=>{gombakCard.classList.toggle("glow",districtFilter.value==="Gombak");huluLangatCard.classList.toggle("glow",districtFilter.value==="Hulu Langat")});
 document.querySelectorAll(".navbtn[data-target]").forEach(b=>b.onclick=()=>{document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.target)?.scrollIntoView({behavior:"smooth",block:"start"})});
 document.getElementById("downloadBtn").onclick=()=>{let rows=["Kod,Nama,Daerah,PBT,Era Geologi,Tahap Kepentingan,Guna Tanah,X,Y",...filtered().map(s=>[s.code,`"${s.name}"`,s.district,s.pbt,s.era,s.importance,`"${s.landuse}"`,s.lat,s.lng].join(","))];let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([rows.join("\n")],{type:"text/csv"}));a.download="geotapak-ghlgp.csv";a.click()};
 applyFilters();
