@@ -122,6 +122,53 @@ header h1{
   font-weight:700 !important;
 }
 
+
+/* Susun atur baharu: peta penuh lebar, analisis di bawah */
+main{
+  height:auto !important;
+  min-height:calc(100vh - 109px);
+  overflow:visible !important;
+}
+.dashboard-stack{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  min-height:0;
+}
+.dashboard-stack .map-panel{
+  width:100%;
+  min-height:0;
+}
+.dashboard-stack #map{
+  height:590px !important;
+  min-height:590px !important;
+}
+.below-map-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(360px,.85fr);
+  gap:10px;
+  align-items:stretch;
+}
+.below-map-grid>.panel{
+  min-height:300px;
+  display:flex;
+  flex-direction:column;
+}
+.below-map-grid .compact-table .table-wrap{
+  height:300px;
+  max-height:300px;
+  overflow:auto;
+}
+.below-map-grid .chartbox{
+  height:300px;
+  min-height:300px;
+  flex:none;
+}
+@media(max-width:1000px){
+  .dashboard-stack #map{height:500px !important;min-height:500px !important}
+  .below-map-grid{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body><div class="topline"></div>
@@ -150,9 +197,9 @@ header h1{
  <div><label>Kepelbagaian</label><select id="catFilter"><option value="">Semua</option></select></div>
  <button class="action" id="resetBtn">↻ Reset</button><button class="action search" id="searchBtn">⌕ Cari Geotapak</button>
 </section>
-<section class="dashboard-grid" id="taburan">
+<section class="dashboard-stack" id="taburan">
  <div class="panel map-panel"><div class="panel-title"><div class="accent">Taburan Geotapak Gombak - Hulu Langat Geopark</div><span class="panel-sub" style="color:#fff">Satelit • sempadan daerah • popup geotapak</span></div><div style="position:relative"><input id="mapSearch" class="map-search" placeholder="Cari nama atau kod geotapak..."><div id="map"></div></div></div>
- <div class="rightgrid" id="analisis">
+ <div class="below-map-grid" id="analisis">
    <div class="panel table-panel compact-table" id="senarai"><div class="panel-title"><div class="accent">Senarai Geotapak GHL Geopark</div><span class="panel-sub" id="tableCount">20 rekod</span></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Bil</th><th>Kod</th><th>Nama Geotapak</th><th>Daerah</th><th>PBT</th><th>Status</th></tr></thead><tbody id="tableBody"></tbody></table></div></div>
    <div class="panel area-panel-click" id="areaPanel"><div class="panel-title"><div class="accent">Keluasan Mengikut Daerah</div></div><div class="chartbox"><canvas id="areaChart"></canvas></div></div>
  </div>
@@ -419,6 +466,13 @@ document.addEventListener("DOMContentLoaded",function(){
     areaPanel.addEventListener("click",function(){
       areaPanel.classList.toggle("glow");
     });
+  }
+});
+
+
+window.addEventListener("load",function(){
+  if(typeof map!=="undefined" && map && map.invalidateSize){
+    setTimeout(function(){map.invalidateSize()},250);
   }
 });
 
