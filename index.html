@@ -193,7 +193,22 @@ main{
 .navicon-trailimg img{width:22px;height:18px;object-fit:contain;display:block}
 
 
-.popup-footer-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px}.popup-footer-row .popup-tag{margin-top:0}.popup-gallery-btn{border:0;background:#e9532e;color:#fff;font-size:8.5px;font-weight:800;padding:6px 10px;border-radius:7px;cursor:pointer;box-shadow:0 2px 6px #0002;white-space:nowrap}.popup-gallery-btn:hover{background:#c94022}.gallery-modal{position:fixed;inset:0;background:rgba(5,20,14,.82);z-index:5000;display:none;align-items:center;justify-content:center;padding:18px}.gallery-modal.open{display:flex}.gallery-card{width:min(980px,95vw);max-height:92vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:0 22px 70px rgba(0,0,0,.38)}.gallery-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:linear-gradient(90deg,#11713b,#98bc40);color:#fff;position:sticky;top:0;z-index:2}.gallery-head h3{margin:0;font-size:16px}.gallery-close{border:0;background:#ffffff25;color:#fff;width:34px;height:34px;border-radius:50%;font-size:20px;cursor:pointer}.gallery-body{padding:16px}.gallery-main{width:100%;height:min(70vh,720px);object-fit:contain;background:#eef2ec;border-radius:12px;display:block;image-rendering:auto}.gallery-thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.gallery-thumb{width:96px;height:68px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent;image-rendering:auto}.gallery-thumb.active{border-color:#e9532e}.gallery-empty{padding:28px;text-align:center;color:#68746d;font-size:12px}@media(max-width:760px){.gallery-modal{padding:8px}.gallery-body{padding:10px}.gallery-main{height:52vh}.gallery-thumb{width:72px;height:50px}}
+.popup-gallery-btn{border:0;background:#e9532e;color:#fff;font-size:8.5px;font-weight:800;padding:5px 9px;border-radius:7px;cursor:pointer;box-shadow:0 2px 6px #0002;white-space:nowrap}
+.popup-gallery-btn:hover{background:#c94022}
+.popup-footer-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
+.gallery-modal{position:fixed;inset:0;background:rgba(5,20,14,.78);z-index:5000;display:none;align-items:center;justify-content:center;padding:20px}
+.gallery-modal.open{display:flex}
+.gallery-card{width:min(980px,95vw);max-height:92vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:0 22px 70px rgba(0,0,0,.38)}
+.gallery-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:linear-gradient(90deg,#11713b,#98bc40);color:#fff;position:sticky;top:0;z-index:2}
+.gallery-head h3{margin:0;font-size:16px}
+.gallery-close{border:0;background:#ffffff25;color:#fff;width:34px;height:34px;border-radius:50%;font-size:20px;cursor:pointer}
+.gallery-body{padding:16px}
+.gallery-main{width:100%;height:min(62vh,560px);object-fit:contain;background:#eef2ec;border-radius:12px;display:block}
+.gallery-thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.gallery-thumb{width:88px;height:60px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent}
+.gallery-thumb.active{border-color:#e9532e}
+.gallery-empty{padding:28px;text-align:center;color:#68746d;font-size:12px}
+@media(max-width:760px){.gallery-modal{padding:8px}.gallery-body{padding:10px}.gallery-main{height:52vh}.gallery-thumb{width:72px;height:50px}}
 </style>
 </head>
 <body><div class="topline"></div>
@@ -354,7 +369,7 @@ setTimeout(()=>{
   makeDistrictOption("Hulu Langat","Hulu Langat");
 },0);
 let markerMap=new Map(),visibleMarkers=[];
-function popup(s){let agencies=AG[s.code]||[];return `<img class="popup-img" src="${IMG[s.code]||""}" alt="${s.code}"><div class="popup-title">${s.code} — ${s.name}</div><div class="popup-grid"><b>Era Geologi:</b> ${s.era}<br><b>Tahap Kepentingan Geologi:</b> ${s.importance}<br><b>Koordinat:</b><br>X: ${s.lat}<br>Y: ${s.lng}<br><b>Guna Tanah Semasa:</b> ${s.landuse}<br><b>Agensi Kawal Selia:</b>${agencies.length?`<ol class="popup-agency">${agencies.map(a=>`<li>${a}</li>`).join("")}</ol>`:"<br>Tiada maklumat dinyatakan dalam PDF"}<br><b>Kawasan Pentadbiran:</b> ${s.pbt}<br><b>Kepelbagaian:</b> ${s.cat}${s.updated?'<br><b style="color:#aa2423">Koordinat dikemas kini</b>':""}</div><div class="popup-footer-row"><span class="popup-tag">Geotapak GHLGp</span><button class="popup-gallery-btn" type="button" onclick="openSiteGallery('${s.code}')">▣ Galeri Gambar</button></div>`}
+function popup(s){let agencies=AG[s.code]||[];return `<img class="popup-img" src="${IMG[s.code]||""}" alt="${s.code}"><div class="popup-title">${s.code} — ${s.name}</div><div class="popup-grid"><b>Era Geologi:</b> ${s.era}<br><b>Tahap Kepentingan Geologi:</b> ${s.importance}<br><b>Koordinat:</b><br>X: ${s.lat}<br>Y: ${s.lng}<br><b>Guna Tanah Semasa:</b> ${s.landuse}<br><b>Agensi Kawal Selia:</b>${agencies.length?`<ol class="popup-agency">${agencies.map(a=>`<li>${a}</li>`).join("")}</ol>`:"<br>Tiada maklumat dinyatakan dalam PDF"}<br><b>Kawasan Pentadbiran:</b> ${s.pbt}<br><b>Kepelbagaian:</b> ${s.cat}${s.updated?'<br><b style="color:#aa2423">Koordinat dikemas kini</b>':""}</div><div class="popup-footer-row"><span class="popup-tag">Geotapak GHLGp</span><button class="popup-gallery-btn" type="button" data-code="${s.code}" onclick="openSiteGallery(this.dataset.code)">▣ Galeri Gambar</button></div>`}
 function drawMarkers(data){visibleMarkers.forEach(m=>map.removeLayer(m));visibleMarkers=[];markerMap=new Map();data.forEach(s=>{let col=s.district==="Gombak"?C.lime:C.orange;let icon=L.divIcon({className:"geo-point-icon",html:`<div class="geo-point-inner" style="background:${col}">${s.code}</div>`,iconSize:[24,24],iconAnchor:[12,12]});let m=L.marker([s.lat,s.lng],{icon}).addTo(map).bindPopup(popup(s),{maxWidth:300});visibleMarkers.push(m);markerMap.set(s.code,m)})}
 let areaChart;
 const baseOpts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{display:false},ticks:{font:{size:9}}}}};
@@ -460,34 +475,6 @@ ${sites.map((s,i)=>`<tr>
 </table>
 
 <p class="small" style="margin-top:22px">Sumber: Coffee Table Gombak-Hulu Langat Geopark Edisi 2024.</p>
-
-<script>
-const SITE_GALLERY = Object.fromEntries(SITES.map(s=>[s.code, (IMG[s.code] ? [IMG[s.code]] : [])]));
-function openSiteGallery(code){
-  const site=SITES.find(s=>s.code===code);
-  const imgs=SITE_GALLERY[code]||[];
-  const modal=document.getElementById('siteGalleryModal');
-  const title=document.getElementById('siteGalleryTitle');
-  const body=document.getElementById('siteGalleryBody');
-  title.textContent=site?`${site.code} — ${site.name}`:`Galeri ${code}`;
-  if(!imgs.length){body.innerHTML='<div class="gallery-empty">Belum ada gambar galeri untuk geotapak ini.</div>'}
-  else{body.innerHTML=`<img id="galleryMainImage" class="gallery-main" src="${imgs[0]}" alt="${code}"><div class="gallery-thumbs">${imgs.map((src,i)=>`<img class="gallery-thumb ${i===0?'active':''}" src="${src}" alt="${code} ${i+1}" onclick="selectGalleryImage(this,'${code}',${i})">`).join('')}</div>`;}
-  modal.classList.add('open');modal.setAttribute('aria-hidden','false');
-}
-function selectGalleryImage(el,code,index){
- const imgs=SITE_GALLERY[code]||[];const main=document.getElementById('galleryMainImage');
- if(main&&imgs[index])main.src=imgs[index];
- document.querySelectorAll('#siteGalleryModal .gallery-thumb').forEach(x=>x.classList.remove('active'));el.classList.add('active');
-}
-function closeSiteGallery(){const modal=document.getElementById('siteGalleryModal');modal.classList.remove('open');modal.setAttribute('aria-hidden','true');}
-window.addEventListener('keydown',e=>{if(e.key==='Escape')closeSiteGallery()});
-</script>
-<div class="gallery-modal" id="siteGalleryModal" aria-hidden="true" onclick="if(event.target===this)closeSiteGallery()">
- <div class="gallery-card" role="dialog" aria-modal="true" aria-labelledby="siteGalleryTitle">
-  <div class="gallery-head"><h3 id="siteGalleryTitle">Galeri Geotapak</h3><button class="gallery-close" type="button" onclick="closeSiteGallery()" aria-label="Tutup">×</button></div>
-  <div class="gallery-body" id="siteGalleryBody"></div>
- </div>
-</div>
 </body>
 </html>`;
   const a=document.createElement("a");
@@ -634,4 +621,45 @@ function openGeoTrail(){
 
 
 
+<div class="gallery-modal" id="siteGalleryModal" aria-hidden="true">
+  <div class="gallery-card" role="dialog" aria-modal="true" aria-labelledby="siteGalleryTitle">
+    <div class="gallery-head">
+      <h3 id="siteGalleryTitle">Galeri Geotapak</h3>
+      <button class="gallery-close" type="button" onclick="closeSiteGallery()" aria-label="Tutup">×</button>
+    </div>
+    <div class="gallery-body" id="siteGalleryBody"></div>
+  </div>
+</div>
+<script>
+const SITE_GALLERY = Object.fromEntries(SITES.map(function(s){return [s.code,(IMG[s.code]?[IMG[s.code]]:[])];}));
+function openSiteGallery(code){
+  var site=SITES.find(function(s){return s.code===code;});
+  var imgs=SITE_GALLERY[code]||[];
+  var modal=document.getElementById("siteGalleryModal");
+  var title=document.getElementById("siteGalleryTitle");
+  var body=document.getElementById("siteGalleryBody");
+  title.textContent=site?(site.code+" — "+site.name):("Galeri "+code);
+  if(!imgs.length){body.innerHTML="<div class=\"gallery-empty\">Belum ada gambar galeri untuk geotapak ini.</div>";}
+  else{
+    var thumbs=imgs.map(function(src,i){return "<img class=\"gallery-thumb "+(i===0?"active":"")+"\" src=\""+src+"\" alt=\""+code+" "+(i+1)+"\" data-code=\""+code+"\" data-index=\""+i+"\" onclick=\"selectGalleryImage(this,this.dataset.code,Number(this.dataset.index))\">";}).join("");
+    body.innerHTML="<img id=\"galleryMainImage\" class=\"gallery-main\" src=\""+imgs[0]+"\" alt=\""+code+"\"><div class=\"gallery-thumbs\">"+thumbs+"</div>";
+  }
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
+}
+function selectGalleryImage(el,code,index){
+  var imgs=SITE_GALLERY[code]||[];
+  var main=document.getElementById("galleryMainImage");
+  if(main&&imgs[index])main.src=imgs[index];
+  document.querySelectorAll("#siteGalleryModal .gallery-thumb").forEach(function(x){x.classList.remove("active");});
+  el.classList.add("active");
+}
+function closeSiteGallery(){
+  var modal=document.getElementById("siteGalleryModal");
+  if(!modal)return;
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden","true");
+}
+window.addEventListener("keydown",function(e){if(e.key==="Escape")closeSiteGallery();});
+<\/script>
 </body></html>
