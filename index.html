@@ -233,20 +233,20 @@ main{
 .navicon-geopark img{width:22px;height:22px;object-fit:contain;display:block}
 
 
-.geopark-about-body{padding:18px 18px 22px!important}
-.about-section{margin-bottom:20px}
-.about-section:last-child{margin-bottom:0}
-.about-section h3{margin:0 0 10px;font-size:15px;color:#123524}
-.geopark-components-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.geopark-component{position:relative;border:1px solid #dce8d7;background:#f8fbf5;border-radius:10px;padding:11px 11px 11px 46px;min-height:70px}
-.geopark-component span{position:absolute;left:10px;top:11px;width:27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#11713b,#98bc40);color:#fff;font-size:9px;font-weight:900}
-.geopark-component b{display:block;font-size:11.5px;color:#163a29;margin-bottom:3px}
-.geopark-component small{display:block;font-size:10px;line-height:1.35;color:#59665d}
-.geopark-benefits-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.geopark-benefit{border:1px solid #f0dfd0;background:#fffaf5;border-radius:10px;padding:11px}
-.geopark-benefit b{display:block;font-size:11.5px;color:#6d2d1d;margin-bottom:4px}
-.geopark-benefit small{display:block;font-size:10px;line-height:1.35;color:#645d58}
-@media(max-width:760px){.geopark-components-grid,.geopark-benefits-grid{grid-template-columns:1fr}.geopark-about-body{padding:12px!important}}
+.about-section{margin:0 0 22px}
+.about-section h3{margin:0 0 10px;color:#11713b;font-size:18px}
+.about-definition{background:#eef5e6;border:1px solid #d4e4c2;border-radius:12px;padding:16px}
+.about-definition p,.about-lead{font-size:12px;line-height:1.65;color:#26332b;margin:0 0 10px}
+.component-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.component-card{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid #dbe7cf;border-radius:10px;background:#fbfdf9}
+.component-card span{font-size:26px;line-height:1;font-weight:900;color:#98bc40;min-width:24px}
+.component-card b{font-size:11px;line-height:1.4;color:#26332b}
+.benefit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.benefit-card{padding:13px;border-radius:10px;background:linear-gradient(180deg,#b4d849,#8fb934);color:#17331d;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.benefit-card b{display:block;font-size:11px;line-height:1.4;margin-bottom:8px}
+.benefit-card small{display:block;font-size:9.5px;line-height:1.5;color:#203526}
+@media(max-width:900px){.benefit-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.component-grid,.benefit-grid{grid-template-columns:1fr}}
 
 </style>
 </head>
@@ -725,37 +725,62 @@ window.addEventListener('keydown',e=>{if(e.key==='Escape')closeSiteGallery()});
       <div><div style="font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.85">Gombak - Hulu Langat Geopark</div><h2>Apa Itu Geopark?</h2></div>
       <button class="geo-modal-close" id="aboutGeoparkClose" aria-label="Tutup">×</button>
     </div>
-    <div class="geo-modal-body geopark-about-body">
-      <section class="about-section">
+
+    <div class="geo-modal-body">
+      <div class="about-section about-definition">
         <h3>Apa Itu Geopark?</h3>
-        <p class="geo-intro"><b>Geopark</b> ialah pembangunan wilayah lestari yang berteraskan warisan geologi, bersama warisan biologi dan budaya setempat. Ia bertujuan melindungi dan meningkatkan integriti sesuatu tempat melalui penggunaan sumber warisan secara lestari, pendidikan, pemuliharaan serta pembangunan sosioekonomi komuniti.</p>
-      </section>
+        <p>Geopark adalah satu kawasan dengan keluasan bersesuaian, mempunyai sempadan yang jelas dan mengandungi beberapa tapak warisan geologi yang dikenali sebagai geotapak berkepentingan kebangsaan, serantau atau antarabangsa yang dibangunkan secara lestari bagi meningkatkan apresiasi, tahap ekonomi dan nilai budaya penduduknya terhadap warisan geologi tersebut, terutamanya melalui penglibatan komuniti dalam aktiviti berteraskan pelancongan.</p>
+        <p>Geopark mempunyai unsur-unsur ekologi, arkeologi, geologi, sejarah dan budaya, dan memastikan hubungan di antara unsur-unsur tersebut diperkukuhkan melalui pengurusan dan kawal selia secara mampan dan menyeluruh.</p>
+      </div>
 
-      <section class="about-section">
+      <div class="about-section">
         <h3>8 Komponen Geopark</h3>
-        <div class="geopark-components-grid">
-          <div class="geopark-component"><span>01</span><b>Warisan Geologi</b><small>Mempunyai satu atau lebih warisan geologi (geotapak) bernilai kebangsaan.</small></div>
-          <div class="geopark-component"><span>02</span><b>Rangkaian Geotapak</b><small>Mempunyai sekitar 15–25 geotapak bernilai negeri atau kebangsaan.</small></div>
-          <div class="geopark-component"><span>03</span><b>Warisan Berkaitan</b><small>Mempunyai biotapak dan tapak budaya yang berkaitan dengan warisan geologi.</small></div>
-          <div class="geopark-component"><span>04</span><b>Sempadan Geopark</b><small>Mempunyai sempadan sesuai berdasarkan warisan, komuniti dan geografi kawasan.</small></div>
-          <div class="geopark-component"><span>05</span><b>Komuniti Setempat</b><small>Membangunkan komuniti yang mempunyai hubungan ekonomi dengan sumber warisan.</small></div>
-          <div class="geopark-component"><span>06</span><b>Geopelancongan</b><small>Geotapak sesuai dibangunkan sebagai destinasi pelancongan dengan kemudahan lengkap.</small></div>
-          <div class="geopark-component"><span>07</span><b>Governans</b><small>Mempunyai struktur dan agensi pengurusan yang sesuai bagi pembangunan geopark.</small></div>
-          <div class="geopark-component"><span>08</span><b>Pendidikan & Kesedaran</b><small>Meningkatkan kefahaman masyarakat mengenai warisan bumi, pemuliharaan dan kelestarian.</small></div>
+        <p class="about-lead">Geopark merupakan gagasan pembangunan (bukan perlindungan) yang tidak memerlukan perundangan atau pewartaan dan sentiasa menghormati hak dan bidang kuasa kerajaan negeri dan negara.</p>
+        <div class="component-grid">
+          <div class="component-card"><span>1</span><b>Geopark ialah peraga pembangunan wilayah lestari</b></div>
+          <div class="component-card"><span>2</span><b>Mempunyai satu atau lebih warisan geologi (geotapak bernilai kebangsaan)</b></div>
+          <div class="component-card"><span>3</span><b>Mempunyai 15-25 geotapak bernilai negeri / kebangsaan</b></div>
+          <div class="component-card"><span>4</span><b>Mempunyai tapak warisan lain yang berkaitan dengan warisan geologi (biotapak dan tapak budaya)</b></div>
+          <div class="component-card"><span>5</span><b>Sempadan geotapak yang sesuai</b></div>
+          <div class="component-card"><span>6</span><b>Pembangunan komuniti setempat</b></div>
+          <div class="component-card"><span>7</span><b>Pembangunan geopelancongan</b></div>
+          <div class="component-card"><span>8</span><b>Governans yang sesuai</b></div>
         </div>
-      </section>
+      </div>
 
-      <section class="about-section">
+      <div class="about-section">
         <h3>Manfaat Geopark</h3>
-        <div class="geopark-benefits-grid">
-          <div class="geopark-benefit"><b>🌍 Pembelajaran Geologi</b><small>Meningkatkan pengetahuan mengenai alam geologi dan sejarah bumi.</small></div>
-          <div class="geopark-benefit"><b>💼 Peluang Pekerjaan</b><small>Membuka peluang pekerjaan baharu kepada komuniti setempat.</small></div>
-          <div class="geopark-benefit"><b>🌿 Penambahbaikan Landskap</b><small>Mendorong peningkatan kualiti landskap dan persekitaran kawasan.</small></div>
-          <div class="geopark-benefit"><b>🏪 Perniagaan Bertambah Maju</b><small>Membantu aktiviti perniagaan dan ekonomi komuniti berkembang.</small></div>
-          <div class="geopark-benefit"><b>♻️ Pemeliharaan Alam Sekitar</b><small>Mengukuhkan pemeliharaan dan pemuliharaan sumber alam sekitar.</small></div>
-          <div class="geopark-benefit"><b>🧭 Produk Geopelancongan</b><small>Mempromosi dan menggalakkan pembangunan produk geopelancongan.</small></div>
+        <div class="benefit-grid">
+          <div class="benefit-card">
+            <b>Pengiktirafan status geopark boleh melonjakkan kawasan daerah dan negeri Selangor di persada Nasional dan global</b>
+            <small>Membangunkan sektor pelancongan tabi'i yang baru melalui pendekatan geopelancongan di kawasan sekitar Selangor dan Lembah Klang dengan memberi pilihan alternatif dan meningkatkan kepelbagaian pasaran pelancongan dalam bentuk pakej pelancongan ke geotapak, biotapak, tapak budaya, georintis dan geoproduk asli seperti makanan geotapak dan cenderamata geopark.</small>
+          </div>
+          <div class="benefit-card">
+            <b>Geotourism Branding merupakan penjanaan ekonomi baharu</b>
+            <small>Mendapatkan pengiktirafan dan penjenamaan kebangsaan dan antarabangsa (branding of GEOPARK) untuk pemuliharaan dan penggunaan lestari sumber warisan geologi bernilai tinggi yang terdapat di sekitar kawasan geopark.</small>
+          </div>
+          <div class="benefit-card">
+            <b>Menarik pelaburan baharu dalam kawasan geotapak</b>
+            <small>Mendapatkan pengiktirafan dan penjenamaan kebangsaan dan antarabangsa (branding of GEOPARK) untuk pemuliharaan dan penggunaan lestari sumber warisan geologi bernilai tinggi yang terdapat di sekitar kawasan geopark.</small>
+          </div>
+          <div class="benefit-card">
+            <b>Mempromosikan pembangunan mampan dalam PBT serta mencapai keselarasan New Urban Agenda (NUA) dan Sustainable Development Goals (SDGs)</b>
+            <small>Geopark bukan sahaja membantu untuk mencapai Matlamat Pembangunan Lestari (SDGs), tetapi mengambil tindakan kelestarian dalam seluruh wilayahnya. Pelaksanaan Geopark adalah seiring dengan pembangunan mampan yang dilaksanakan di peringkat Pihak Berkuasa Tempatan (PBT) yang memperkasakan komuniti setempat dengan menggalakkan penggunaan sumber warisan alam. Geopark turut menggalakkan pengurusan secara bersama yang membawa pihak-pihak berkepentingan menjalin dan membentuk rakan strategik di dalam pembangunan Geopark.</small>
+          </div>
+          <div class="benefit-card">
+            <b>Mempertingkatkan usaha &amp; matlamat Negeri atau PBT dalam pemeliharaan alam semulajadi</b>
+            <small>Mengekalkan atau memulihkan kawasan hijau yang berperanan menjaga keseimbangan sekitaran di Lembah Klang khususnya yang telah mengalami degradasi secara serius. Jadi, kesan aktiviti manusia dan kawasan yang menjadi komponen utama pembangunan melalui pendekatan ekonomi jangka pendek dan kawasan penampan sekitaran serta pengekalan gen kehidupan (flora dan fauna).</small>
+          </div>
+          <div class="benefit-card">
+            <b>Inklusiviti Komuniti melalui keterlibatan komuniti secara ‘bottom-up’</b>
+            <small>Celebrating Earth Heritage, Sustaining Local Communities menggalakkan pendekatan bawah atas dengan memperkasakan komuniti setempat melalui peluang membangunkan kerjasama untuk tujuan mempromosikan kawasan yang mempunyai kepentingan saintifik tinggi.</small>
+          </div>
         </div>
-      </section>
+      </div>
+    </div>
+
+  </div>
+</div>
     </div>
   </div>
 </div>
