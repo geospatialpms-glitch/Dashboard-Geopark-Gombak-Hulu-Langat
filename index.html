@@ -12,8 +12,8 @@
 .topline{height:4px;background:linear-gradient(90deg,var(--green),var(--lime),var(--orange),var(--red))}
 .header{height:105px;background:linear-gradient(90deg,#11713b 0%,#98bc40 38%,#e9532e 72%,#aa2423 100%);display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid #d8c6b6;box-shadow:inset 0 -1px 0 rgba(255,255,255,.12)}
 .header-left{display:flex;align-items:center;gap:18px}.logo{width:190px;height:auto;object-fit:contain}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;color:#ffffff;text-transform:uppercase}
-.header h1{font-size:25px;margin:5px 0 3px;color:#ffffff;font-weight:900}.header p{margin:0;font-size:12px;color:#fff7ef}.geo-ribbon{min-width:140px;height:76px;display:flex;align-items:center;justify-content:center;background:transparent;position:relative;overflow:visible}
-.geo-ribbon:before,.geo-ribbon:after{display:none}
+.header h1{font-size:25px;margin:5px 0 3px;color:#ffffff;font-weight:900}.header p{margin:0;font-size:12px;color:#fff7ef}.geo-ribbon{min-width:150px;height:76px;display:flex;align-items:center;justify-content:center;background:transparent;position:relative;overflow:visible}
+.geo-ribbon:before,.geo-ribbon:after{display:none!important;content:none!important}
 .shell{display:grid;grid-template-columns:195px minmax(0,1fr);min-height:calc(100vh - 109px)}
 .sidebar{background:linear-gradient(180deg,#11713b 0%,#2f8b3c 38%,#98bc40 100%);border-right:1px solid #0d6031;padding:14px 10px;position:sticky;top:0;height:calc(100vh - 0px)}
 .navbtn{width:100%;border:0;background:transparent;text-align:left;padding:12px 14px;border-radius:10px;margin-bottom:5px;font-size:12px;color:#ffffff;cursor:pointer;display:flex;gap:11px;align-items:center}.navbtn:hover{background:rgba(255,255,255,.14);color:#ffffff}.navbtn.active{color:white;background:linear-gradient(90deg,#e9532e,#aa2423);box-shadow:0 7px 16px rgba(233,83,46,.35);font-weight:700}.navicon{font-size:15px;width:18px;text-align:center;color:inherit}
@@ -33,7 +33,6 @@ main{padding:12px 14px 12px;min-width:0;height:calc(100vh - 109px);display:flex;
 @media(max-width:760px){.geo-trail-grid{grid-template-columns:1fr}.geo-modal{padding:10px}.geo-modal-card{max-height:92vh}}
 
 @media(max-width:1200px){main{height:auto;overflow:visible}.dashboard-grid{flex:none}.shell{grid-template-columns:80px 1fr}.navbtn span:last-child{display:none}.navbtn{justify-content:center}.kpis{grid-template-columns:repeat(3,1fr)}.dashboard-grid{grid-template-columns:1fr}.sidebar{padding:12px 8px}.filterbar{grid-template-columns:repeat(3,1fr)}}
-.geo-ribbon img{max-height:72px;max-width:132px;display:block;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,.12))}
 @media(max-width:760px){.header{height:auto;padding:12px}.logo{width:120px}.header h1{font-size:18px}.geo-ribbon{display:none}.shell{display:block}.sidebar{display:none}.kpis{grid-template-columns:1fr 1fr}.filterbar{grid-template-columns:1fr 1fr}.rightgrid{grid-template-columns:1fr}.wide{grid-column:auto}#map{height:430px}}
 
 .info-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
@@ -183,6 +182,81 @@ main{
   vertical-align:middle;
 }
 
+
+.navicon-foot{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center}
+.navicon-foot img{width:18px;height:18px;object-fit:contain;display:block}
+
+
+.navicon-homeimg{width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center}
+.navicon-homeimg img{width:20px;height:20px;object-fit:contain;display:block}
+.navicon-trailimg{width:22px;height:18px;display:inline-flex;align-items:center;justify-content:center}
+.navicon-trailimg img{width:22px;height:18px;object-fit:contain;display:block}
+
+
+.popup-gallery-btn{border:0;background:#e9532e;color:#fff;font-size:8.5px;font-weight:800;padding:5px 9px;border-radius:7px;cursor:pointer;box-shadow:0 2px 6px #0002;white-space:nowrap}
+.popup-gallery-btn:hover{background:#c94022}
+.popup-footer-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
+.gallery-modal{position:fixed;inset:0;background:rgba(5,20,14,.78);z-index:5000;display:none;align-items:center;justify-content:center;padding:20px}
+.gallery-modal.open{display:flex}
+.gallery-card{width:min(980px,95vw);max-height:92vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:0 22px 70px rgba(0,0,0,.38)}
+.gallery-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:linear-gradient(90deg,#11713b,#98bc40);color:#fff;position:sticky;top:0;z-index:2}
+.gallery-head h3{margin:0;font-size:16px}
+.gallery-close{border:0;background:#ffffff25;color:#fff;width:34px;height:34px;border-radius:50%;font-size:20px;cursor:pointer}
+.gallery-body{padding:16px}
+.gallery-main{width:100%;height:min(62vh,560px);object-fit:contain;background:#eef2ec;border-radius:12px;display:block;cursor:zoom-in}
+.gallery-thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.gallery-thumb{width:88px;height:60px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent}
+.gallery-thumb.active{border-color:#e9532e}
+.gallery-empty{padding:28px;text-align:center;color:#68746d;font-size:12px}
+@media(max-width:760px){.gallery-modal{padding:8px}.gallery-body{padding:10px}.gallery-main{height:52vh}.gallery-thumb{width:72px;height:50px}}
+
+
+.gallery-lightbox{
+  position:fixed;inset:0;z-index:7000;display:none;
+  align-items:center;justify-content:center;
+  background:rgba(0,0,0,.92);padding:24px;
+}
+.gallery-lightbox.open{display:flex}
+.gallery-lightbox img{
+  max-width:96vw;max-height:92vh;object-fit:contain;
+  display:block;border-radius:8px;cursor:zoom-out;
+}
+.gallery-lightbox-close{
+  position:absolute;top:14px;right:18px;
+  width:40px;height:40px;border:0;border-radius:50%;
+  background:rgba(255,255,255,.16);color:#fff;
+  font-size:26px;line-height:40px;cursor:pointer;
+}
+
+
+.navicon-geopark{width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center}
+.navicon-geopark img{width:22px;height:22px;object-fit:contain;display:block}
+
+
+.about-section{margin:0 0 22px}
+.about-section h3{margin:0 0 10px;color:#11713b;font-size:18px}
+.about-definition{background:#eef5e6;border:1px solid #d4e4c2;border-radius:12px;padding:16px}
+.about-definition p,.about-lead{font-size:12px;line-height:1.65;color:#26332b;margin:0 0 10px}
+.component-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.component-card{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid #dbe7cf;border-radius:10px;background:#fbfdf9}
+.component-card span{font-size:26px;line-height:1;font-weight:900;color:#98bc40;min-width:24px}
+.component-card b{font-size:11px;line-height:1.4;color:#26332b}
+.benefit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.benefit-card{padding:13px;border-radius:10px;background:linear-gradient(180deg,#b4d849,#8fb934);color:#17331d;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.benefit-card b{display:block;font-size:11px;line-height:1.4;margin-bottom:8px}
+.benefit-card small{display:block;font-size:9.5px;line-height:1.5;color:#203526}
+@media(max-width:900px){.benefit-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.component-grid,.benefit-grid{grid-template-columns:1fr}}
+
+
+.geo-ribbon img{
+  max-height:72px;
+  max-width:140px;
+  display:block;
+  object-fit:contain;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.12));
+}
+
 </style>
 </head>
 <body><div class="topline"></div>
@@ -191,11 +265,12 @@ main{
 </header>
 <div class="shell">
 <aside class="sidebar">
- <button class="navbtn active" data-target="utama"><span class="navicon">⌂</span><span>Utama</span></button>
+ <button class="navbtn active" data-target="utama"><span class="navicon navicon-homeimg"><img src="data:image/png;base64,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" alt="Home"></span><span>Utama</span></button>
+<button class="navbtn" id="aboutGeoparkBtn" type="button"><span class="navicon navicon-geopark"><img src="data:image/png;base64,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" alt="Logo Geopark"></span><span>Apa Itu Geopark</span></button>
 <button class="navbtn" id="geologyInfoBtn"><span class="navicon">◫</span><span>Kepelbagaian Geologi</span></button>
- <button class="navbtn" id="geoTrailBtn" type="button" onclick="openGeoTrail()"><span class="navicon">⌁</span><span>Geo Trail</span></button>
+ <button class="navbtn" id="geoTrailBtn" type="button" onclick="openGeoTrail()"><span class="navicon navicon-trailimg"><img src="data:image/png;base64,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" alt="Jejak Geo Trail"></span><span>Geo Trail</span></button>
  <button class="navbtn" id="siteListInfoBtn"><span class="navicon">☷</span><span>Senarai Geotapak</span></button>
- <button class="navbtn" id="downloadBtn"><span class="navicon">⇩</span><span>Muat Turun Data</span></button>
+ <button class="navbtn" id="downloadBtn"><span class="navicon">⇩</span><span>Muat Turun Maklumat</span></button>
 </aside>
 <main id="utama">
 <section class="kpis">
@@ -343,7 +418,7 @@ setTimeout(()=>{
   makeDistrictOption("Hulu Langat","Hulu Langat");
 },0);
 let markerMap=new Map(),visibleMarkers=[];
-function popup(s){let agencies=AG[s.code]||[];return `<img class="popup-img" src="${IMG[s.code]||""}" alt="${s.code}"><div class="popup-title">${s.code} — ${s.name}</div><div class="popup-grid"><b>Era Geologi:</b> ${s.era}<br><b>Tahap Kepentingan Geologi:</b> ${s.importance}<br><b>Koordinat:</b><br>X: ${s.lat}<br>Y: ${s.lng}<br><b>Guna Tanah Semasa:</b> ${s.landuse}<br><b>Agensi Kawal Selia:</b>${agencies.length?`<ol class="popup-agency">${agencies.map(a=>`<li>${a}</li>`).join("")}</ol>`:"<br>Tiada maklumat dinyatakan dalam PDF"}<br><b>Kawasan Pentadbiran:</b> ${s.pbt}<br><b>Kepelbagaian:</b> ${s.cat}${s.updated?'<br><b style="color:#aa2423">Koordinat dikemas kini</b>':""}</div><span class="popup-tag">Geotapak GHLGp</span>`}
+function popup(s){let agencies=AG[s.code]||[];return `<img class="popup-img" src="${IMG[s.code]||""}" alt="${s.code}"><div class="popup-title">${s.code} — ${s.name}</div><div class="popup-grid"><b>Era Geologi:</b> ${s.era}<br><b>Tahap Kepentingan Geologi:</b> ${s.importance}<br><b>Koordinat:</b><br>X: ${s.lat}<br>Y: ${s.lng}<br><b>Guna Tanah Semasa:</b> ${s.landuse}<br><b>Agensi Kawal Selia:</b>${agencies.length?`<ol class="popup-agency">${agencies.map(a=>`<li>${a}</li>`).join("")}</ol>`:"<br>Tiada maklumat dinyatakan dalam PDF"}<br><b>Kawasan Pentadbiran:</b> ${s.pbt}<br><b>Kepelbagaian:</b> ${s.cat}${s.updated?'<br><b style="color:#aa2423">Koordinat dikemas kini</b>':""}</div><div class="popup-footer-row"><span class="popup-tag">Geotapak GHLGp</span><button class="popup-gallery-btn" type="button" onclick="openSiteGallery('${s.code}')">▣ Galeri Gambar</button></div>`}
 function drawMarkers(data){visibleMarkers.forEach(m=>map.removeLayer(m));visibleMarkers=[];markerMap=new Map();data.forEach(s=>{let col=s.district==="Gombak"?C.lime:C.orange;let icon=L.divIcon({className:"geo-point-icon",html:`<div class="geo-point-inner" style="background:${col}">${s.code}</div>`,iconSize:[24,24],iconAnchor:[12,12]});let m=L.marker([s.lat,s.lng],{icon}).addTo(map).bindPopup(popup(s),{maxWidth:300});visibleMarkers.push(m);markerMap.set(s.code,m)})}
 let areaChart;
 const baseOpts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{display:false},ticks:{font:{size:9}}}}};
@@ -368,7 +443,100 @@ gombakCard.onclick=()=>toggleDistrictCard(gombakCard,huluLangatCard,"Gombak");
 huluLangatCard.onclick=()=>toggleDistrictCard(huluLangatCard,gombakCard,"Hulu Langat");
 districtFilter.addEventListener("change",()=>{gombakCard.classList.toggle("glow",districtFilter.value==="Gombak");huluLangatCard.classList.toggle("glow",districtFilter.value==="Hulu Langat")});
 document.querySelectorAll(".navbtn[data-target]").forEach(b=>b.onclick=()=>{document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.target)?.scrollIntoView({behavior:"smooth",block:"start"})});
-document.getElementById("downloadBtn").onclick=()=>{let rows=["Kod,Nama,Daerah,PBT,Era Geologi,Tahap Kepentingan,Guna Tanah,X,Y",...filtered().map(s=>[s.code,`"${s.name}"`,s.district,s.pbt,s.era,s.importance,`"${s.landuse}"`,s.lat,s.lng].join(","))];let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([rows.join("\n")],{type:"text/csv"}));a.download="geotapak-ghlgp.csv";a.click()};
+document.getElementById("downloadBtn").onclick=()=>{
+  const sites = filtered();
+  const totalSites = SITES.length;
+  const totalArea = 112955;
+  const districtCounts = {
+    "Gombak": SITES.filter(s=>s.district==="Gombak").length,
+    "Hulu Langat": SITES.filter(s=>s.district==="Hulu Langat").length
+  };
+  const geologyCounts = {};
+  SITES.forEach(s=>{ geologyCounts[s.cat] = (geologyCounts[s.cat]||0)+1; });
+
+  const report = `<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<title>Laporan Dashboard Gombak - Hulu Langat Geopark (GHLGp)</title>
+<style>
+body{font-family:Arial,sans-serif;margin:24px;color:#1f2937}
+h1,h2{color:#0f6b3b;margin:0 0 12px}
+h1{font-size:28px}
+h2{font-size:20px;margin-top:28px}
+p,li,td,th{font-size:13px}
+table{border-collapse:collapse;width:100%;margin-top:10px}
+th,td{border:1px solid #d1d5db;padding:8px;vertical-align:top}
+th{background:#f3f4f6;text-align:left}
+.summary{display:grid;grid-template-columns:repeat(4,minmax(140px,1fr));gap:12px;margin:18px 0}
+.card{border:1px solid #cfe3d1;border-radius:10px;padding:12px;background:#f7fbf7}
+.label{font-size:12px;color:#4b5563;font-weight:700}
+.value{font-size:24px;font-weight:800;color:#0f172a}
+.small{font-size:12px;color:#6b7280}
+ul{margin-top:6px}
+</style>
+</head>
+<body>
+<h1>Dashboard Gombak - Hulu Langat Geopark (GHLGp)</h1>
+<p>Pemantauan geotapak dan pengurusan spatial GHL Geopark</p>
+
+<div class="summary">
+  <div class="card"><div class="label">Jumlah Geotapak</div><div class="value">${totalSites}</div></div>
+  <div class="card"><div class="label">Jumlah Keluasan Geopark</div><div class="value">112,955</div><div class="small">hektar</div></div>
+  <div class="card"><div class="label">Daerah Gombak</div><div class="value">${districtCounts["Gombak"]}</div><div class="small">geotapak</div></div>
+  <div class="card"><div class="label">Daerah Hulu Langat</div><div class="value">${districtCounts["Hulu Langat"]}</div><div class="small">geotapak</div></div>
+</div>
+
+<h2>Keluasan Mengikut Daerah</h2>
+<ul>
+  <li>Gombak — 47,947 hektar</li>
+  <li>Hulu Langat — 65,008 hektar</li>
+</ul>
+
+<h2>Kepelbagaian Geologi</h2>
+<ul>
+  ${Object.entries(geologyCounts).map(([k,v])=>`<li>${k} — ${v} geotapak</li>`).join("")}
+</ul>
+
+<h2>Geo Trail</h2>
+<ul>
+  <li>Trail 1: Gombak</li>
+  <li>Trail 2: Hulu Langat</li>
+  <li>Komponen sokongan: interpretasi, akses pelawat, konservasi dan geopelancongan</li>
+</ul>
+
+<h2>Senarai Geotapak Dipaparkan</h2>
+<table>
+<thead><tr><th>Bil</th><th>Kod</th><th>Nama Geotapak</th><th>Daerah</th><th>PBT</th><th>Era Geologi</th><th>Tahap Kepentingan</th><th>Guna Tanah</th><th>Koordinat</th></tr></thead>
+<tbody>
+${sites.map((s,i)=>`<tr>
+<td>${i+1}</td>
+<td>${s.code}</td>
+<td>${s.name}</td>
+<td>${s.district}</td>
+<td>${s.pbt}</td>
+<td>${s.era}</td>
+<td>${s.importance}</td>
+<td>${s.landuse}</td>
+<td>X: ${s.lat}<br>Y: ${s.lng}</td>
+</tr>`).join("")}
+</tbody>
+</table>
+
+<p class="small" style="margin-top:22px">Sumber: Coffee Table Gombak-Hulu Langat Geopark Edisi 2024.</p>
+
+<div class="gallery-lightbox" id="galleryLightbox" aria-hidden="true" onclick="if(event.target===this)closeGalleryLightbox()">
+  <button class="gallery-lightbox-close" type="button" onclick="closeGalleryLightbox()" aria-label="Tutup">×</button>
+  <img id="galleryLightboxImage" src="" alt="Gambar geotapak" onclick="closeGalleryLightbox()">
+</div>
+
+</body>
+</html>`;
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([report],{type:"text/html"}));
+  a.download="laporan-dashboard-ghlgp.html";
+  a.click();
+};
 
 
 
@@ -508,4 +676,160 @@ function openGeoTrail(){
 
 
 
+
+<div class="gallery-modal" id="siteGalleryModal" aria-hidden="true">
+  <div class="gallery-card" role="dialog" aria-modal="true" aria-labelledby="siteGalleryTitle">
+    <div class="gallery-head">
+      <h3 id="siteGalleryTitle">Galeri Geotapak</h3>
+      <button class="gallery-close" type="button" onclick="closeSiteGallery()" aria-label="Tutup">×</button>
+    </div>
+    <div class="gallery-body" id="siteGalleryBody"></div>
+  </div>
+</div>
+<script>
+const SITE_GALLERY = Object.fromEntries(SITES.map(s=>[s.code, (IMG[s.code] ? [IMG[s.code]] : [])]));
+function openSiteGallery(code){
+  const site=SITES.find(s=>s.code===code);
+  const imgs=SITE_GALLERY[code]||[];
+  const modal=document.getElementById('siteGalleryModal');
+  const title=document.getElementById('siteGalleryTitle');
+  const body=document.getElementById('siteGalleryBody');
+  title.textContent=site?`${site.code} — ${site.name}`:`Galeri ${code}`;
+  if(!imgs.length){body.innerHTML='<div class="gallery-empty">Belum ada gambar galeri untuk geotapak ini.</div>';}
+  else{body.innerHTML=`<img id="galleryMainImage" class="gallery-main" src="${imgs[0]}" alt="${code}" onclick="openGalleryLightbox(this.src,this.alt)"><div class="gallery-thumbs">${imgs.map((src,i)=>`<img class="gallery-thumb ${i===0?'active':''}" src="${src}" alt="${code} ${i+1}" onclick="selectGalleryImage(this,'${code}',${i})">`).join('')}</div>`;}
+  modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+}
+function selectGalleryImage(el,code,index){const imgs=SITE_GALLERY[code]||[];const main=document.getElementById('galleryMainImage');if(main&&imgs[index])main.src=imgs[index];document.querySelectorAll('#siteGalleryModal .gallery-thumb').forEach(x=>x.classList.remove('active'));el.classList.add('active');}
+
+function openGalleryLightbox(src,alt){
+  const lb=document.getElementById('galleryLightbox');
+  const img=document.getElementById('galleryLightboxImage');
+  if(!lb||!img)return;
+  img.src=src;
+  img.alt=alt||'Gambar geotapak';
+  lb.classList.add('open');
+  lb.setAttribute('aria-hidden','false');
+}
+function closeGalleryLightbox(){
+  const lb=document.getElementById('galleryLightbox');
+  if(!lb)return;
+  lb.classList.remove('open');
+  lb.setAttribute('aria-hidden','true');
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    closeGalleryLightbox();
+    closeSiteGallery();
+  }
+});
+
+function closeSiteGallery(){const modal=document.getElementById('siteGalleryModal');if(!modal)return;modal.classList.remove('open');modal.setAttribute('aria-hidden','true');}
+window.addEventListener('keydown',e=>{if(e.key==='Escape')closeSiteGallery()});
+</script>
+
+
+<div class="geo-modal" id="aboutGeoparkModal" aria-hidden="true">
+  <div class="geo-modal-card">
+    <div class="geo-modal-head">
+      <div><div style="font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.85">Gombak - Hulu Langat Geopark</div><h2>Apa Itu Geopark?</h2></div>
+      <button class="geo-modal-close" id="aboutGeoparkClose" aria-label="Tutup">×</button>
+    </div>
+
+    <div class="geo-modal-body">
+      <div class="about-section about-definition">
+        <h3>Apa Itu Geopark?</h3>
+        <p>Geopark adalah satu kawasan dengan keluasan bersesuaian, mempunyai sempadan yang jelas dan mengandungi beberapa tapak warisan geologi yang dikenali sebagai geotapak berkepentingan kebangsaan, serantau atau antarabangsa yang dibangunkan secara lestari bagi meningkatkan apresiasi, tahap ekonomi dan nilai budaya penduduknya terhadap warisan geologi tersebut, terutamanya melalui penglibatan komuniti dalam aktiviti berteraskan pelancongan.</p>
+        <p>Geopark mempunyai unsur-unsur ekologi, arkeologi, geologi, sejarah dan budaya, dan memastikan hubungan di antara unsur-unsur tersebut diperkukuhkan melalui pengurusan dan kawal selia secara mampan dan menyeluruh.</p>
+      </div>
+
+      <div class="about-section">
+        <h3>8 Komponen Geopark</h3>
+        <p class="about-lead">Geopark merupakan gagasan pembangunan (bukan perlindungan) yang tidak memerlukan perundangan atau pewartaan dan sentiasa menghormati hak dan bidang kuasa kerajaan negeri dan negara.</p>
+        <div class="component-grid">
+          <div class="component-card"><span>1</span><b>Geopark ialah peraga pembangunan wilayah lestari</b></div>
+          <div class="component-card"><span>2</span><b>Mempunyai satu atau lebih warisan geologi (geotapak bernilai kebangsaan)</b></div>
+          <div class="component-card"><span>3</span><b>Mempunyai 15-25 geotapak bernilai negeri / kebangsaan</b></div>
+          <div class="component-card"><span>4</span><b>Mempunyai tapak warisan lain yang berkaitan dengan warisan geologi (biotapak dan tapak budaya)</b></div>
+          <div class="component-card"><span>5</span><b>Sempadan geotapak yang sesuai</b></div>
+          <div class="component-card"><span>6</span><b>Pembangunan komuniti setempat</b></div>
+          <div class="component-card"><span>7</span><b>Pembangunan geopelancongan</b></div>
+          <div class="component-card"><span>8</span><b>Governans yang sesuai</b></div>
+        </div>
+      </div>
+
+      <div class="about-section">
+        <h3>Manfaat Geopark</h3>
+        <div class="benefit-grid">
+          <div class="benefit-card">
+            <b>Pengiktirafan status geopark boleh melonjakkan kawasan daerah dan negeri Selangor di persada Nasional dan global</b>
+            <small>Membangunkan sektor pelancongan tabi'i yang baru melalui pendekatan geopelancongan di kawasan sekitar Selangor dan Lembah Klang dengan memberi pilihan alternatif dan meningkatkan kepelbagaian pasaran pelancongan dalam bentuk pakej pelancongan ke geotapak, biotapak, tapak budaya, georintis dan geoproduk asli seperti makanan geotapak dan cenderamata geopark.</small>
+          </div>
+          <div class="benefit-card">
+            <b>Geotourism Branding merupakan penjanaan ekonomi baharu</b>
+            <small>Mendapatkan pengiktirafan dan penjenamaan kebangsaan dan antarabangsa (branding of GEOPARK) untuk pemuliharaan dan penggunaan lestari sumber warisan geologi bernilai tinggi yang terdapat di sekitar kawasan geopark.</small>
+          </div>
+          <div class="benefit-card">
+            <b>Menarik pelaburan baharu dalam kawasan geotapak</b>
+            <small>Mendapatkan pengiktirafan dan penjenamaan kebangsaan dan antarabangsa (branding of GEOPARK) untuk pemuliharaan dan penggunaan lestari sumber warisan geologi bernilai tinggi yang terdapat di sekitar kawasan geopark.</small>
+          </div>
+          <div class="benefit-card">
+            <b>Mempromosikan pembangunan mampan dalam PBT serta mencapai keselarasan New Urban Agenda (NUA) dan Sustainable Development Goals (SDGs)</b>
+            <small>Geopark bukan sahaja membantu untuk mencapai Matlamat Pembangunan Lestari (SDGs), tetapi mengambil tindakan kelestarian dalam seluruh wilayahnya. Pelaksanaan Geopark adalah seiring dengan pembangunan mampan yang dilaksanakan di peringkat Pihak Berkuasa Tempatan (PBT) yang memperkasakan komuniti setempat dengan menggalakkan penggunaan sumber warisan alam. Geopark turut menggalakkan pengurusan secara bersama yang membawa pihak-pihak berkepentingan menjalin dan membentuk rakan strategik di dalam pembangunan Geopark.</small>
+          </div>
+          <div class="benefit-card">
+            <b>Mempertingkatkan usaha &amp; matlamat Negeri atau PBT dalam pemeliharaan alam semulajadi</b>
+            <small>Mengekalkan atau memulihkan kawasan hijau yang berperanan menjaga keseimbangan sekitaran di Lembah Klang khususnya yang telah mengalami degradasi secara serius. Jadi, kesan aktiviti manusia dan kawasan yang menjadi komponen utama pembangunan melalui pendekatan ekonomi jangka pendek dan kawasan penampan sekitaran serta pengekalan gen kehidupan (flora dan fauna).</small>
+          </div>
+          <div class="benefit-card">
+            <b>Inklusiviti Komuniti melalui keterlibatan komuniti secara ‘bottom-up’</b>
+            <small>Celebrating Earth Heritage, Sustaining Local Communities menggalakkan pendekatan bawah atas dengan memperkasakan komuniti setempat melalui peluang membangunkan kerjasama untuk tujuan mempromosikan kawasan yang mempunyai kepentingan saintifik tinggi.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  function setActive(btn){
+    document.querySelectorAll('.navbtn').forEach(function(x){x.classList.remove('active');});
+    if(btn) btn.classList.add('active');
+  }
+  function openModal(btn, modal){
+    if(!modal) return;
+    setActive(btn);
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+  }
+  function closeModal(modal){
+    if(!modal) return;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+  }
+
+  var aboutBtn=document.getElementById('aboutGeoparkBtn');
+  var aboutModal=document.getElementById('aboutGeoparkModal');
+  var aboutClose=document.getElementById('aboutGeoparkClose');
+  if(aboutBtn) aboutBtn.addEventListener('click',function(){openModal(aboutBtn,aboutModal);});
+  if(aboutClose) aboutClose.addEventListener('click',function(){closeModal(aboutModal);});
+  if(aboutModal) aboutModal.addEventListener('click',function(e){if(e.target===aboutModal)closeModal(aboutModal);});
+
+  // Ensure sidebar buttons visibly activate when used. Existing handlers continue to run.
+  ['geologyInfoBtn','geoTrailBtn','siteListInfoBtn'].forEach(function(id){
+    var b=document.getElementById(id);
+    if(b) b.addEventListener('click',function(){setActive(b);});
+  });
+  var download=document.getElementById('downloadBtn');
+  if(download) download.addEventListener('click',function(){setActive(download);});
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') closeModal(aboutModal);
+  });
+})();
+</script>
 </body></html>
