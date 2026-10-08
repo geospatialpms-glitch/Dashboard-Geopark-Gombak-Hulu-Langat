@@ -130,7 +130,7 @@ header h1{
 }
 
 
-/* Susun atur terkini: donut chart atas kiri, attribute table bawah kiri, peta di kanan */
+/* Susun atur: peta kiri, donut chart atas kanan, attribute table bawah kanan */
 main{
   height:auto !important;
   min-height:calc(100vh - 109px);
@@ -141,37 +141,10 @@ main{
 }
 .dashboard-main-grid{
   display:grid;
-  grid-template-columns:minmax(430px,.85fr) minmax(0,1.65fr);
+  grid-template-columns:minmax(0,1.65fr) minmax(430px,.85fr);
   gap:10px;
   align-items:stretch;
   min-height:0;
-}
-.left-analysis{
-  display:grid;
-  grid-template-rows:300px minmax(0,1fr);
-  gap:10px;
-  min-height:650px;
-}
-.left-analysis>.panel{
-  min-height:0;
-  display:flex;
-  flex-direction:column;
-}
-.left-analysis .chartbox{
-  height:auto;
-  min-height:0;
-  flex:1;
-  padding:9px;
-}
-.left-analysis .table-panel{
-  margin-top:0;
-}
-.left-analysis .compact-table .table-wrap{
-  height:auto;
-  max-height:none;
-  flex:1;
-  min-height:0;
-  overflow:auto;
 }
 .dashboard-main-grid .map-panel{
   min-height:0;
@@ -186,13 +159,40 @@ main{
   height:650px !important;
   min-height:650px !important;
 }
+.right-analysis{
+  display:grid;
+  grid-template-rows:300px minmax(0,1fr);
+  gap:10px;
+  min-height:650px;
+}
+.right-analysis>.panel{
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+}
+.right-analysis .chartbox{
+  height:auto;
+  min-height:0;
+  flex:1;
+  padding:9px;
+}
+.right-analysis .table-panel{
+  margin-top:0;
+}
+.right-analysis .compact-table .table-wrap{
+  height:auto;
+  max-height:none;
+  flex:1;
+  min-height:0;
+  overflow:auto;
+}
 @media(max-width:1100px){
   .dashboard-main-grid{grid-template-columns:1fr}
-  .left-analysis{
+  .dashboard-main-grid #map{height:500px !important;min-height:500px !important}
+  .right-analysis{
     min-height:620px;
     grid-template-rows:300px 310px;
   }
-  .dashboard-main-grid #map{height:500px !important;min-height:500px !important}
 }
 
 
@@ -277,11 +277,11 @@ main{
 </section>
 <section class="dashboard-stack" id="taburan">
  <div class="dashboard-main-grid" id="analisis">
-   <div class="left-analysis">
+   <div class="panel map-panel"><div class="panel-title"><div class="accent">Taburan Geotapak Gombak - Hulu Langat Geopark</div><span class="panel-sub" style="color:#fff">Satelit • sempadan daerah • popup geotapak</span></div><div style="position:relative"><input id="mapSearch" class="map-search" placeholder="Cari nama atau kod geotapak..."><div id="map"></div></div></div>
+   <div class="right-analysis">
      <div class="panel area-panel-click" id="areaPanel"><div class="panel-title"><div class="accent">Keluasan Mengikut Daerah</div></div><div class="chartbox"><canvas id="areaChart"></canvas></div></div>
      <div class="panel table-panel compact-table" id="senarai"><div class="panel-title"><div class="accent">Senarai Geotapak GHL Geopark</div><span class="panel-sub" id="tableCount">20 rekod</span></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Bil</th><th>Kod</th><th>Nama Geotapak</th><th>Daerah</th><th>PBT</th><th>Status</th></tr></thead><tbody id="tableBody"></tbody></table></div></div>
    </div>
-   <div class="panel map-panel"><div class="panel-title"><div class="accent">Taburan Geotapak Gombak - Hulu Langat Geopark</div><span class="panel-sub" style="color:#fff">Satelit • sempadan daerah • popup geotapak</span></div><div style="position:relative"><input id="mapSearch" class="map-search" placeholder="Cari nama atau kod geotapak..."><div id="map"></div></div></div>
  </div>
 </section>
 <div class="footer-note">Sumber: Coffee Table Gombak-Hulu Langat Geopark Edisi 2024</div>
