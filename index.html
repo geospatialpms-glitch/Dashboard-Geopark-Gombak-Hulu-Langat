@@ -155,8 +155,17 @@ main{
   flex:1;
   min-height:0;
 }
+.dashboard-main-grid .map-panel{
+  height:auto !important;
+  align-self:stretch;
+}
+.dashboard-main-grid .map-panel>div:last-child{
+  flex:1 1 auto;
+  height:auto;
+  min-height:0;
+}
 .dashboard-main-grid #map{
-  height:650px !important;
+  height:100% !important;
   min-height:650px !important;
 }
 .right-analysis{
@@ -482,6 +491,8 @@ document.addEventListener("keydown",e=>{
 });
 
 applyFilters();
+setTimeout(()=>{ map.invalidateSize(true); },180);
+window.addEventListener("resize",()=>setTimeout(()=>map.invalidateSize(false),80));
 </script>
 
 <div class="geo-modal" id="aboutGeoparkModal" aria-hidden="true">
