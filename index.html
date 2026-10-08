@@ -130,15 +130,13 @@ header h1{
 }
 
 
-/* Susun atur: peta kiri, donut chart atas kanan, attribute table bawah kanan */
+/* Susun atur: peta kiri, donut atas kanan, attribute table bawah kanan */
 main{
   height:auto !important;
   min-height:calc(100vh - 109px);
   overflow:visible !important;
 }
-.dashboard-stack{
-  min-height:0;
-}
+.dashboard-stack{min-height:0}
 .dashboard-main-grid{
   display:grid;
   grid-template-columns:minmax(0,1.65fr) minmax(430px,.85fr);
@@ -147,7 +145,8 @@ main{
   min-height:0;
 }
 .dashboard-main-grid .map-panel{
-  min-height:0;
+  height:650px;
+  min-height:650px;
   display:flex;
   flex-direction:column;
 }
@@ -156,14 +155,16 @@ main{
   min-height:0;
 }
 .dashboard-main-grid #map{
-  height:650px !important;
-  min-height:650px !important;
+  height:100% !important;
+  min-height:0 !important;
+  width:100%;
 }
 .right-analysis{
-  display:grid;
-  grid-template-rows:300px minmax(0,1fr);
-  gap:10px;
+  height:650px;
   min-height:650px;
+  display:grid;
+  grid-template-rows:300px 340px;
+  gap:10px;
 }
 .right-analysis>.panel{
   min-height:0;
@@ -176,9 +177,7 @@ main{
   flex:1;
   padding:9px;
 }
-.right-analysis .table-panel{
-  margin-top:0;
-}
+.right-analysis .table-panel{margin-top:0}
 .right-analysis .compact-table .table-wrap{
   height:auto;
   max-height:none;
@@ -188,11 +187,8 @@ main{
 }
 @media(max-width:1100px){
   .dashboard-main-grid{grid-template-columns:1fr}
-  .dashboard-main-grid #map{height:500px !important;min-height:500px !important}
-  .right-analysis{
-    min-height:620px;
-    grid-template-rows:300px 310px;
-  }
+  .dashboard-main-grid .map-panel{height:500px;min-height:500px}
+  .right-analysis{height:620px;min-height:620px;grid-template-rows:300px 310px}
 }
 
 
@@ -471,6 +467,8 @@ document.addEventListener("keydown",e=>{
 });
 
 applyFilters();
+setTimeout(()=>{ map.invalidateSize(true); map.fitBounds(districtLayer.getBounds(),{padding:[18,18]}); },150);
+window.addEventListener("resize",()=>setTimeout(()=>map.invalidateSize(false),80));
 </script>
 <div class="geo-modal" id="geoTrailModal" aria-hidden="true">
   <div class="geo-modal-card">
