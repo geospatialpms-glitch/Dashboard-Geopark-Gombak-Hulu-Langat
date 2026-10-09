@@ -395,7 +395,7 @@ const sat=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Worl
 const road=L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"© OpenStreetMap"});
 sat.addTo(map);
 const districtColors={"Gombak":"#98bc40","Hulu Langat":"#e9532e"};
-const districtLayer=L.geoJSON(DIST,{style:f=>({color:districtColors[f.properties.Daerah]||"#fff",weight:2.2,fillColor:districtColors[f.properties.Daerah]||"#fff",fillOpacity:.12}),onEachFeature:(f,l)=>{l.bindPopup(`<b>${f.properties.Daerah}</b><br>Keluasan: ${f.properties.Keluasan}<br>Geotapak: ${f.properties.GEOTAPAK}`);l.bindTooltip(f.properties.Daerah,{sticky:true,direction:"top",offset:[0,-6],className:"district-hover-tooltip",opacity:1});l.on("mouseover",()=>l.setStyle({weight:3.2,fillOpacity:.2}));l.on("mouseout",()=>l.setStyle({weight:2.2,fillOpacity:.12}));}}).addTo(map);
+const districtLayer=L.geoJSON(DIST,{style:f=>({color:districtColors[f.properties.Daerah]||"#fff",weight:2.2,fillColor:districtColors[f.properties.Daerah]||"#fff",fillOpacity:.12}),onEachFeature:(f,l)=>l.bindPopup(`<b>${f.properties.Daerah}</b><br>Keluasan: ${f.properties.Keluasan}<br>Geotapak: ${f.properties.GEOTAPAK}`)}).addTo(map);
 map.fitBounds(districtLayer.getBounds(),{padding:[18,18]});
 const layerControl=L.control.layers({"Satelit":sat,"Jalan":road},{"Sempadan Daerah":districtLayer},{position:"topleft"}).addTo(map);
 
