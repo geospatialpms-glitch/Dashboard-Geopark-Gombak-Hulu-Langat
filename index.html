@@ -39,6 +39,14 @@ main{padding:12px 14px 12px;min-width:0;height:calc(100vh - 109px);display:flex;
 
 .info-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
 .info-stat{border:1px solid #dfe9dc;border-radius:12px;padding:12px;background:#fbfff8}
+.info-stat{border:1px solid #dfe9dc;border-radius:12px;padding:12px;background:#fbfff8;display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0}
+.info-stat-content{min-width:0}
+.info-stat-icon{width:35px;height:35px;flex:none;display:grid;place-items:center;border-radius:10px;background:#eef5e7;color:#3d7547}
+.info-stat-icon svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.info-stat:nth-child(2) .info-stat-icon{background:#eaf2e8;color:#447748}
+.info-stat:nth-child(3) .info-stat-icon{background:#fff0e3;color:#b56832}
+.info-stat:nth-child(4) .info-stat-icon{background:#ebf3ed;color:#2f806c}
+@media(max-width:480px){.info-stat{padding:8px;gap:4px}.info-stat-icon{width:28px;height:28px}.info-stat-icon svg{width:20px;height:20px}}
 .info-stat b{display:block;font-size:22px;color:#174b31}.info-stat span{font-size:10px;color:#617069;line-height:1.4}
 .info-section{margin-top:14px}.info-section h3{font-size:13px;color:#174b31;margin:0 0 8px}
 .info-list{display:grid;gap:10px;margin-top:6px}
@@ -337,9 +345,15 @@ document.addEventListener("DOMContentLoaded",()=>{
    ["Rupabumi Antropogenik","Antropogenik"],
    ["Proses Geologi","Proses Geologi"]
   ];
+  const categoryIcons={
+   "Batuan / Fosil":"<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 21c-6.2 0-10-4.1-10-9.2C2 7.2 5.8 3 12 3s10 4.2 10 8.8C22 16.9 18.2 21 12 21Z\"/><path d=\"M12 17c-3.8 0-6-2.3-6-5.2C6 8.9 8.2 7 11 7c2.3 0 4 1.6 4 3.5 0 1.6-1.2 2.5-2.4 2.5S11 12.4 11 11.5\"/><path d=\"M4 16l-2 2M18 5l2-2\"/></svg>",
+   "Rupabumi Landskap":"<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m2 20 7.2-13 4.3 7 2.2-4L22 20H2Z\"/><path d=\"m6.9 11 2.3 1.2 2.1-1.7M16 14l2 1.2 1.4-.7\"/></svg>",
+   "Rupabumi Antropogenik":"<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 21V8l7-4v17M10 21V12l11-5v14M2 21h20M6 11h1M6 15h1M6 19h1M14 14h1M18 12h1M14 18h1M18 17h1\"/></svg>",
+   "Proses Geologi":"<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M2 6c4-3 7 3 11 0s6-2 9-1M2 12c4-3 7 3 11 0s6-2 9-1M2 18c4-3 7 3 11 0s6-2 9-1\"/><path d=\"m17 20 3 2 2-3\"/></svg>"
+  };
   document.getElementById("geologyStats").innerHTML=cats.map(([key,label])=>{
     const n=SITES.filter(s=>s.cat===key).length;
-    return `<div class="info-stat"><b>${n}</b><span>${label}</span></div>`;
+    return `<div class="info-stat"><div class="info-stat-content"><b>${n}</b><span>${label}</span></div><div class="info-stat-icon" role="img" aria-label="Ikon ${label}">${categoryIcons[key]||""}</div></div>`;
   }).join("");
   geologyBtn.addEventListener("click",()=>openInfo(geologyBtn,geologyModal));
   geologyClose.addEventListener("click",()=>closeInfo(geologyModal));
