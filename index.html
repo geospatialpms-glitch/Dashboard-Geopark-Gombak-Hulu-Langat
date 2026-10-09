@@ -30,6 +30,8 @@ main{padding:12px 14px 12px;min-width:0;height:calc(100vh - 109px);display:flex;
 .trail-card{border:1px solid #dfe9dc;border-radius:14px;padding:14px;background:#fbfff8}.trail-card h3{margin:0 0 8px;font-size:14px;color:#174b31}.trail-card .tag{display:inline-block;font-size:9px;font-weight:800;color:#fff;background:#e9532e;border-radius:999px;padding:4px 8px;margin-bottom:8px}
 .trail-card ul{margin:8px 0 0 18px;padding:0}.trail-card li{font-size:11px;line-height:1.55;margin:4px 0;color:#43534c}.geo-actions{margin-top:14px;border-top:1px solid #e7eee4;padding-top:14px}
 .geo-actions h3{font-size:13px;margin:0 0 8px;color:#174b31}.geo-actions .chiprow{display:flex;flex-wrap:wrap;gap:7px}.geo-actions .chip{font-size:10px;padding:6px 9px;border-radius:999px;background:#edf6df;color:#456624;font-weight:700}
+.jejak-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}.jejak-tab{background:#f5faef;border:1px solid #cbdcbd;border-radius:13px;padding:13px 12px;text-align:left;color:#21543a;cursor:pointer;font:inherit}.jejak-tab strong{display:block;font-size:13px}.jejak-tab small{display:block;font-size:10px;margin-top:5px;opacity:.75}.jejak-tab.active{background:linear-gradient(120deg,#11713b,#76a83a);color:white;border-color:#11713b;box-shadow:0 6px 15px #11713b33}.jejak-panel[hidden],.jejak-detail[hidden]{display:none!important}.jejak-section-title{display:flex;align-items:center;justify-content:space-between;margin:10px 0;font-size:14px;color:#174b31}.jejak-section-title span{font-size:10px;color:#805322;background:#fff0dd;border-radius:20px;padding:5px 9px}.jejak-subtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.jejak-subtab{border:1px solid #dccbb5;border-radius:20px;padding:8px 14px;background:white;color:#65452a;font-size:11px;font-weight:800;cursor:pointer}.jejak-subtab.active{background:#e9532e;border-color:#e9532e;color:white}.jejak-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.jejak-entry{display:flex;gap:11px;align-items:center;text-align:left;width:100%;padding:12px;background:#fcfdf9;border:1px solid #e1e9dc;border-radius:12px;cursor:pointer;color:#213c2b;font:inherit;min-height:67px}.jejak-entry:hover,.jejak-entry.active{border-color:#e9532e;background:#fff8ef;box-shadow:0 3px 12px #bb704020}.jejak-code{width:40px;height:40px;flex:none;display:grid;place-items:center;border-radius:11px;background:#e7f2db;color:#226435;font-weight:900;font-size:12px}.jejak-entry.active .jejak-code{background:#e9532e;color:white}.jejak-entry b{display:block;font-size:11px;line-height:1.4}.jejak-entry small{font-size:9px;color:#777;display:block;margin-top:4px}.jejak-detail{margin-top:14px;padding:16px;border:1px solid #e8d6b8;background:linear-gradient(115deg,#fff9ef,#f5faed);border-left:5px solid #e9532e;border-radius:13px}.jejak-detail h3{font-size:15px;color:#225b39;margin:0 0 8px}.jejak-detail p{font-size:11px;line-height:1.75;color:#3c5144;margin:5px 0}.jejak-detail .detail-label{font-weight:800;color:#8c4b21}.jejak-source{font-size:9px;color:#738075;margin-top:16px;border-top:1px solid #e5ebdf;padding-top:10px}
+@media(max-width:760px){.jejak-tabs{grid-template-columns:1fr}.jejak-list{grid-template-columns:1fr}}
 @media(max-width:760px){.geo-trail-grid{grid-template-columns:1fr}.geo-modal{padding:10px}.geo-modal-card{max-height:92vh}}
 
 @media(max-width:1200px){main{height:auto;overflow:visible}.dashboard-grid{flex:none}.shell{grid-template-columns:80px 1fr}.navbtn span:last-child{display:none}.navbtn{justify-content:center}.kpis{grid-template-columns:repeat(3,1fr)}.dashboard-grid{grid-template-columns:1fr}.sidebar{padding:12px 8px}.filterbar{grid-template-columns:repeat(3,1fr)}}
@@ -561,18 +563,26 @@ window.addEventListener("resize",()=>setTimeout(()=>map.invalidateSize(false),80
       <button class="geo-modal-close" id="geoTrailClose" aria-label="Tutup">×</button>
     </div>
     <div class="geo-modal-body">
-      <p class="geo-intro">Jejak Geologi (Geo Trail) menghubungkan geotapak, elemen warisan dan landskap sebagai rangkaian geopelancongan. Cadangan dibahagikan kepada dua jejak utama: <b>Trail 1: Gombak</b> dan <b>Trail 2: Hulu Langat</b>.</p>
-      <div class="geo-trail-grid">
-        <div class="trail-card"><span class="tag">Trail 1</span><h3>Geo Trail Gombak</h3><ul>
-          <li>Permatang Kuarza Gombak Selangor (PKGS)</li><li>Batu Caves dan warisan batu kapur</li><li>Air Terjun Sungai Kanching</li><li>Batu Arang dan kawasan bekas perlombongan</li><li>Tasik Biru Seri Kundang</li><li>Kompleks geologi Genting Sempah / Gombak</li>
-        </ul></div>
-        <div class="trail-card"><span class="tag">Trail 2</span><h3>Geo Trail Hulu Langat</h3><ul>
-          <li>Gunung Nuang dan kawasan granit</li><li>Air Terjun Sungai Gabai</li><li>Kompleks Air Panas Dusun Tua</li><li>Air Terjun Sungai Tekala</li><li>Granit Semenyih dan kawasan empangan</li><li>Telaga Air Panas Artesian Kampung Jawa</li>
-        </ul></div>
+      <p class="geo-intro">Terokai rangkaian geopelancongan Gombak–Hulu Langat melalui tiga jenis jejak. Pilih kategori, kemudian tekan mana-mana lokasi untuk membaca penerangannya.</p>
+      <div class="jejak-tabs" role="tablist" aria-label="Kategori Jejak GHLGp">
+        <button type="button" class="jejak-tab active" data-jejak="geologi" role="tab" aria-selected="true"><strong>⛰ Jejak Geologi</strong><small>Gombak &amp; Hulu Langat · 13 geotapak</small></button>
+        <button type="button" class="jejak-tab" data-jejak="makanan" role="tab" aria-selected="false"><strong>🍽 Jejak Makanan</strong><small>13 lokasi makanan</small></button>
+        <button type="button" class="jejak-tab" data-jejak="warisan" role="tab" aria-selected="false"><strong>🏛 Jejak Warisan</strong><small>6 lokasi warisan &amp; rekreasi</small></button>
       </div>
-      <div class="geo-actions"><h3>Komponen Sokongan Geo Trail</h3><div class="chiprow">
-        <span class="chip">Pakej Lawatan</span><span class="chip">Aplikasi / Pelan Lokasi</span><span class="chip">Geo-ride</span><span class="chip">Kalendar Aktiviti</span><span class="chip">Pusat Satelit</span><span class="chip">Kiosk Geotapak</span><span class="chip">Panel Informasi</span><span class="chip">Jejak Warisan</span><span class="chip">Jejak Makanan</span>
-      </div></div>
+      <section class="jejak-panel" data-jejak-panel="geologi" role="tabpanel">
+        <div class="jejak-section-title"><strong>Jejak Geologi</strong><span>2 Laluan</span></div>
+        <div class="jejak-subtabs"><button type="button" class="jejak-subtab active" data-jejak-area="gombak">Jejak 1 · Gombak</button><button type="button" class="jejak-subtab" data-jejak-area="hululangat">Jejak 2 · Hulu Langat</button></div>
+        <div class="jejak-list" id="jejakGeologiList"></div><div class="jejak-detail" id="jejakGeologiDetail" aria-live="polite"></div>
+      </section>
+      <section class="jejak-panel" data-jejak-panel="makanan" role="tabpanel" hidden>
+        <div class="jejak-section-title"><strong>Jejak Makanan (Food Trail)</strong><span>E1–E13</span></div>
+        <div class="jejak-list" id="jejakMakananList"></div><div class="jejak-detail" id="jejakMakananDetail" aria-live="polite"></div>
+      </section>
+      <section class="jejak-panel" data-jejak-panel="warisan" role="tabpanel" hidden>
+        <div class="jejak-section-title"><strong>Jejak Warisan (Heritage Trail)</strong><span>6 Lokasi</span></div>
+        <div class="jejak-list" id="jejakWarisanList"></div><div class="jejak-detail" id="jejakWarisanDetail" aria-live="polite"></div>
+      </section>
+      <div class="jejak-source">Sumber: Dokumen Jejak GHLGp, halaman 201–210. Waktu operasi restoran ialah maklumat dalam dokumen dan perlu disahkan semula sebelum lawatan.</div>
     </div>
   </div>
 </div>
@@ -621,6 +631,78 @@ function setSidebarActive(btn){
   if(btn) btn.classList.add("active");
 }
 
+const jejakData={
+ gombak:[
+  {code:"G30",name:"Bekas Lombong Arang Batu, Batu Arang",desc:"Kawasan bekas perlombongan arang batu yang telah wujud sejak tahun 1911. Batu Arang pernah menjadi bandar perlombongan utama Selangor."},
+  {code:"G29",name:"Tasik Biru Seri Kundang",desc:"Tasik bekas lombong yang popular untuk aktiviti riadah hujung minggu dan pernah menjadi lokasi program sukan air antarabangsa."},
+  {code:"G26",name:"Air Terjun Sungai Kanching",desc:"Terletak di Hutan Simpan Kanching, sebuah hutan pelajaran. Air terjun ini mempunyai tujuh strata atau tingkat air terjun."},
+  {code:"G4",name:"Formasi Batu Kapur Kuala Lumpur – Anak Takun",desc:"Bukit Takun ialah bukit batu kapur yang menjulang di atas dasar granit, dikelilingi hutan dan Padang Golf Templer."},
+  {code:"G18",name:"Mata Air Panas Selayang",desc:"Mata air panas semula jadi di Jalan Kuching dengan kemudahan rekreasi serta nilai pendidikan awam berhubung aktiviti tektonik."},
+  {code:"G28",name:"Gua Batu Caves",desc:"Siri gua batu kapur dan tapak keagamaan terkenal di Malaysia, dengan batu kapur Paleozoik Awal (Ordovisi–Silur)."},
+  {code:"G9",name:"Fosil Pleistosen Akhir Batu Caves",desc:"Geotapak di bukit batu kapur Batu Caves, berkaitan sejarah pengendapan laut cetek dan tinggalan fosil."},
+  {code:"G23",name:"Permatang Kuarza Gombak Selangor (PKGS)",desc:"Turut dikenali sebagai Bukit Tabur. Kawasan kira-kira 114 hektar diwartakan sebagai Hutan Simpan Ulu Gombak Tambahan pada 18 Februari 2010; terkenal dengan daik kuarza yang panjang."}
+ ],
+ hululangat:[
+  {code:"G25",name:"Puncak Granit Gunung Nuang",desc:"Puncak tertinggi di Selangor yang terletak berhampiran sempadan Selangor–Pahang serta titik pertemuan Selangor, Pahang dan Negeri Sembilan."},
+  {code:"G22",name:"Profil Hulu Langat – Sungai Gabai",desc:"Air Terjun Sungai Gabai ialah antara air terjun yang paling popular di Negeri Selangor."},
+  {code:"G16",name:"Kompleks Air Panas Dusun Tua",desc:"Merangkumi mata air panas IKBN, Dusun Tua dan Sungai Serai. Dalam dokumen, akses awam dinyatakan tertumpu pada Dusun Tua dan Sungai Serai dengan kemudahan asas."},
+  {code:"G27",name:"Air Terjun Sungai Tekala",desc:"Salah satu destinasi pelancongan air terjun di Daerah Hulu Langat."},
+  {code:"G17",name:"Mata Air Panas Sungai Lalang",desc:"Terletak di Jalan Sungai Lalang, Semenyih. Geotapak ini bernilai untuk pembelajaran geosains dan pendidikan masyarakat."}
+ ],
+ makanan:[
+  {code:"E1",name:"Roti Lelah Batu Arang",address:"Batu Arang, Selangor",hours:"6.00 pagi – 1.00 petang",menu:"Roti leleh telur goyang"},
+  {code:"E2",name:"Anjung D Tasek Biru",address:"Jalan Tasik Biru 1, Taman Tasik Biru",hours:"6.00 pagi – 11.00 malam",menu:"Steamboat"},
+  {code:"E3",name:"Restoran Singgah D Klasik",address:"Jalan Raya 2, Serdang Jaya",hours:"5.00 petang – 1.30 pagi",menu:"Set tomyam dan masakan laut"},
+  {code:"E4",name:"Bamboos Thai Café",address:"65, Jalan Prima SG3/1, Prima Seri Gombak",hours:"6.30 petang – 11.00 malam",menu:"Masakan Thai eksotik"},
+  {code:"E5",name:"Restoran Golek-Golek",address:"Jalan Lingkaran Tengah 2",hours:"7.00 petang – 12.00 malam",menu:"Masakan tradisional Negeri Sembilan"},
+  {code:"E6",name:"Tamarind Springs Restoran",address:"Jalan 1, Taman Tun Abdul Razak",hours:"12.00 tengah hari – 12.00 malam",menu:"Masakan Indochina"},
+  {code:"E7",name:"Restoran Veg Fish Farm Thai",address:"KM4, Jalan Hulu Langat",hours:"11.00 pagi – 11.30 malam",menu:"Masakan laut Thailand"},
+  {code:"E8",name:"D’Kusha Satay",address:"Pekan Batu 14",hours:"6.00 petang – 12.00 malam",menu:"Satay Kajang"},
+  {code:"E9",name:"Langat Seafood & Beer Garden",address:"Lot 100, Jalan Sungai Sop, Batu 14",hours:"11.30 pagi – 11.00 malam",menu:"Makanan laut"},
+  {code:"E10",name:"Restoran Terra Pong",address:"Lot 679, Pekan Batu Lapan Belas",hours:"12.00 tengah hari – 12.00 malam",menu:"Makanan laut dan masakan Thailand"},
+  {code:"E11",name:"Teratak Ikan Bakar Murni",address:"105, Jalan Sungai Lui, Kampung Jawa",hours:"6.00 petang – 1.00 pagi",menu:"Ikan bakar"},
+  {code:"E12",name:"Ikan Bakar Seri Nikat",address:"Kampung Ulu Lui",hours:"5.00 petang – 12.00 malam",menu:"Ikan bakar"},
+  {code:"E13",name:"Satay Kajang Hj. Samuri",address:"Jalan Hishammuddin, Bandar Kajang",hours:"4.00 petang – 1.00 pagi",menu:"Satay Kajang"}
+ ],
+ warisan:[
+  {code:"W1",name:"Air Terjun Komanwel",desc:"Kawasan rekreasi yang dilancarkan sempena Persidangan Perhutanan Komanwel ke-14 pada tahun 1993."},
+  {code:"W3",name:"Pusat Kawalan Kusta Negara",desc:"Pada tahun 1971 pusat ini turut berfungsi sebagai hospital untuk menempatkan pesakit kusta di Malaysia."},
+  {code:"B7",name:"Zoo Negara",desc:"Zoo Negara yang pertama di Malaysia, ditubuhkan pada 14 November 1963."},
+  {code:"B5",name:"Forest Research Institute Malaysia (FRIM)",desc:"Institusi penyelidikan perhutanan Malaysia; dokumen menyebut perubahan institusi pada 1 Oktober 1985 di bawah Akta Lembaga Penyelidikan dan Pembangunan Perhutanan Malaysia."},
+  {code:"G30",name:"Bekas Lombong Batu Arang",desc:"Bandar perlombongan arang batu Selangor yang berkembang sebelum Perang Dunia Kedua hingga tahun 1960-an."},
+  {code:"G29",name:"Bekas Lombong Tasik Biru Seri Kundang",desc:"Bekas lombong yang menjadi tumpuan riadah penduduk, terutamanya pada hujung minggu."}
+ ]
+};
+function renderJejakList(group,listId,detailId){
+ const list=document.getElementById(listId),detail=document.getElementById(detailId);
+ if(!list||!detail)return;
+ const entries=jejakData[group];list.replaceChildren();
+ entries.forEach((item,i)=>{
+  const btn=document.createElement("button");btn.type="button";btn.className="jejak-entry";
+  const code=document.createElement("span");code.className="jejak-code";code.textContent=item.code;
+  const info=document.createElement("span"),name=document.createElement("b");name.textContent=item.name;info.append(name);
+  if(item.menu){const small=document.createElement("small");small.textContent=item.menu;info.append(small)}
+  btn.append(code,info);list.append(btn);
+  btn.addEventListener("click",()=>{
+   list.querySelectorAll(".jejak-entry").forEach(x=>x.classList.remove("active"));btn.classList.add("active");detail.replaceChildren();
+   const h=document.createElement("h3");h.textContent=item.code+" · "+item.name;detail.append(h);
+   const add=(label,value)=>{if(!value)return;const p=document.createElement("p");if(label){const strong=document.createElement("span");strong.className="detail-label";strong.textContent=label+": ";p.append(strong)}p.append(document.createTextNode(value));detail.append(p)};
+   add("",item.desc);add("Alamat",item.address);add("Waktu Operasi (Rujukan PDF)",item.hours);add("Menu Istimewa",item.menu);
+  });
+  if(i===0)btn.click();
+ });
+}
+document.querySelectorAll(".jejak-tab").forEach(btn=>btn.addEventListener("click",()=>{
+ document.querySelectorAll(".jejak-tab").forEach(x=>{x.classList.toggle("active",x===btn);x.setAttribute("aria-selected",String(x===btn))});
+ document.querySelectorAll(".jejak-panel").forEach(x=>x.hidden=x.dataset.jejakPanel!==btn.dataset.jejak);
+}));
+document.querySelectorAll(".jejak-subtab").forEach(btn=>btn.addEventListener("click",()=>{
+ document.querySelectorAll(".jejak-subtab").forEach(x=>x.classList.toggle("active",x===btn));
+ renderJejakList(btn.dataset.jejakArea,"jejakGeologiList","jejakGeologiDetail");
+}));
+renderJejakList("gombak","jejakGeologiList","jejakGeologiDetail");
+renderJejakList("makanan","jejakMakananList","jejakMakananDetail");
+renderJejakList("warisan","jejakWarisanList","jejakWarisanDetail");
 function openGeoTrail(){
   var btn=document.getElementById("geoTrailBtn");
   var modal=document.getElementById("geoTrailModal");
