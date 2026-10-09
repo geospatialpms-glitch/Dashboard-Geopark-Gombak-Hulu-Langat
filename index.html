@@ -470,7 +470,21 @@ document.getElementById("resetBtn").onclick=()=>{districtFilter.value=pbtFilter.
 document.getElementById("searchBtn").onclick=()=>document.getElementById("mapSearch").focus();
 document.getElementById("mapSearch").addEventListener("keydown",e=>{if(e.key==="Enter"){let q=e.target.value.trim().toLowerCase();let s=SITES.find(x=>(x.code+" "+x.name).toLowerCase().includes(q));if(s)focusSite(s.code)}});
 const gombakCard=document.getElementById("gombakCard"),huluLangatCard=document.getElementById("huluLangatCard");
-function fitDistrict(name){let target=null;districtLayer.eachLayer(l=>{if(l.feature?.properties?.Daerah===name)target=l});if(target)map.fitBounds(target.getBounds(),{padding:[20,20]})}
+function fitDistrict(name){
+  // Rujuk data sempadan asal supaya fungsi zoom tetap berfungsi walaupun lapisan ditutup.
+  const target=districtSubLayers[name];
+  if(!target)return;
+  map.invalidateSize();
+  const bounds=target.getBounds();
+  if(!bounds.isValid())return;
+  if(name==="Hulu Langat"){
+    // Sedikit lebih dekat untuk Hulu Langat (sempadan lebih panjang utara-selatan).
+    const baseZoom=map.getBoundsZoom(bounds,false,L.point(24,24));
+    map.flyTo(bounds.getCenter(),Math.min(12,baseZoom+1),{animate:true,duration:0.9});
+  }else{
+    map.fitBounds(bounds,{padding:[20,20],animate:true});
+  }
+}
 function toggleDistrictCard(card,other,name){const active=card.classList.contains("glow");gombakCard.classList.remove("glow");huluLangatCard.classList.remove("glow");if(active){districtFilter.value="";applyFilters();map.fitBounds(districtLayer.getBounds(),{padding:[18,18]})}else{card.classList.add("glow");districtFilter.value=name;applyFilters();fitDistrict(name)}}
 gombakCard.onclick=()=>toggleDistrictCard(gombakCard,huluLangatCard,"Gombak");
 huluLangatCard.onclick=()=>toggleDistrictCard(huluLangatCard,gombakCard,"Hulu Langat");
