@@ -154,7 +154,11 @@ body{overflow:hidden}
   color:#e6eee9;font-size:9px;
   white-space:nowrap;
   opacity:.9;
+  display:flex;flex-direction:column;align-items:center;gap:7px;
 }
+.credit-logos{display:flex;align-items:center;justify-content:center;gap:28px}
+.credit-logos img{height:76px;width:106px;object-fit:contain;filter:drop-shadow(0 3px 5px rgba(0,0,0,.35))}
+.credit-logos img.selangor-crest{height:72px;width:77px}
 @media(max-width:1000px){
   body{overflow:auto}
   .topbar{padding:0 18px}
@@ -270,7 +274,13 @@ body{overflow:hidden}
       Klik Disini <span class="arrow">↗</span>
     </a>
   </section>
-<div class="credit">Gombak - Hulu Langat Geopark · Selangor Urban Observatory</div>
+<div class="credit">
+  <div class="credit-logos" aria-label="Logo Negeri Selangor dan Gombak Hulu Langat Geopark">
+    <img class="selangor-crest" src="logo-selangor-transparent.png" alt="Jata Negeri Selangor">
+    <img src="logo-ghlgp-transparent.png" alt="Logo Gombak Hulu Langat Geopark">
+  </div>
+  <span>Gombak - Hulu Langat Geopark · Selangor Urban Observatory</span>
+</div>
 </main>
 
 </body>
