@@ -31,6 +31,30 @@ main{padding:12px 14px 12px;min-width:0;height:calc(100vh - 109px);display:flex;
 .rightgrid{display:grid;grid-template-columns:1fr;grid-template-rows:1fr 1fr;gap:8px;min-height:0}.rightgrid>.panel{min-height:0;display:flex;flex-direction:column}.chartbox{height:auto;flex:1;min-height:0;padding:9px}.chartbox canvas{width:100%!important;height:100%!important}.wide{grid-column:1 / -1}.table-panel{margin-top:8px}.compact-table.table-panel{margin-top:0}.compact-table .table-wrap{height:auto;max-height:none;flex:1;min-height:0;overflow:auto}.table-wrap{max-height:270px;overflow:auto}.data-table{width:100%;border-collapse:collapse;font-size:9px}.data-table th{position:sticky;top:0;background:#f7f5f2;padding:7px;border-bottom:1px solid #dedbd6;text-align:left;font-size:8px}.data-table td{padding:6px 7px;border-bottom:1px solid #eeeae4}.data-table tr:hover td{background:#fff7ec;cursor:pointer}.badge{padding:3px 6px;border-radius:999px;font-size:8px;font-weight:700;background:#edf7e0;color:#4a6d26}.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);margin-right:4px}.footer-note{font-size:8px;color:#8a8d94;padding:5px 2px 0;text-align:right;flex:0 0 auto}
 .geo-modal{position:fixed;inset:0;background:rgba(6,38,24,.62);z-index:3000;display:none;align-items:center;justify-content:center;padding:24px}
 .geo-modal.open{display:flex}.geo-modal-card{width:min(980px,94vw);max-height:88vh;overflow:auto;background:#fff;border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.28);border:1px solid #dce8d8}
+/* Popup tiga menu utama: saiz frame seragam hampir memenuhi ruang skrin dashboard */
+#aboutGeoparkModal .geo-modal-card,
+#geologyInfoModal .geo-modal-card,
+#geoTrailModal .geo-modal-card{
+  width:min(1500px,calc(100vw - 44px));
+  height:calc(100dvh - 44px);
+  max-height:calc(100dvh - 44px);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+#aboutGeoparkModal .geo-modal-head,
+#geologyInfoModal .geo-modal-head,
+#geoTrailModal .geo-modal-head{flex:0 0 auto}
+#aboutGeoparkModal .geo-modal-body,
+#geologyInfoModal .geo-modal-body,
+#geoTrailModal .geo-modal-body{flex:1 1 auto;min-height:0;overflow-y:auto}
+@media(max-width:760px){
+  #aboutGeoparkModal .geo-modal-card,
+  #geologyInfoModal .geo-modal-card,
+  #geoTrailModal .geo-modal-card{
+    width:calc(100vw - 20px);height:calc(100dvh - 20px);max-height:calc(100dvh - 20px)
+  }
+}
 .geo-modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;background:linear-gradient(90deg,#11713b,#98bc40);color:#fff;position:sticky;top:0;z-index:2}
 .geo-modal-head h2{margin:0;font-size:20px}.geo-modal-close{border:0;background:#ffffff22;color:#fff;width:34px;height:34px;border-radius:50%;font-size:20px;cursor:pointer}
 .geo-modal-body{padding:18px 20px 22px}.geo-intro{font-size:12px;line-height:1.65;color:#40534a;margin:0 0 14px}.geo-trail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
