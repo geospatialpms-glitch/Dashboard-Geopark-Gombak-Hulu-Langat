@@ -868,4 +868,62 @@ function openGeoTrail(){
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&modal&&modal.classList.contains("open"))closeGallery()});
 })();
 </script>
-<style>.popup-img-g30{filter:none;image-rendering:auto;}</style><svg aria-hidden="true" width="0" height="0" style="position:absolute;pointer-events:none"><filter id="g30-sharpen" x="0" y="0" width="100%" height="100%"><feConvolveMatrix order="3" kernelMatrix="0 -0.45 0 -0.45 2.8 -0.45 0 -0.45 0" divisor="1" preserveAlpha="true"/></filter></svg></body></html>
+<style>.popup-img-g30{filter:none;image-rendering:auto;}</style><svg aria-hidden="true" width="0" height="0" style="position:absolute;pointer-events:none"><filter id="g30-sharpen" x="0" y="0" width="100%" height="100%"><feConvolveMatrix order="3" kernelMatrix="0 -0.45 0 -0.45 2.8 -0.45 0 -0.45 0" divisor="1" preserveAlpha="true"/></filter></svg><style id="inline-geopark-pages-style">
+/* Setiap menu memaparkan halaman penuh di kawasan main, bukan modal. */
+#utama.inline-page-mode > :not(.inline-info-section){display:none!important}
+#utama .inline-info-section.geo-modal{position:relative!important;inset:auto!important;z-index:auto!important;background:transparent!important;padding:0!important;align-items:stretch!important;justify-content:stretch!important;width:100%!important;flex:1 1 auto;min-height:calc(100vh - 145px);overflow:visible!important}
+#utama .inline-info-section.geo-modal:not(.open){display:none!important}
+#utama .inline-info-section.geo-modal.open{display:block!important}
+#utama .inline-info-section .geo-modal-card,
+#utama #aboutGeoparkModal .geo-modal-card,
+#utama #geologyInfoModal .geo-modal-card,
+#utama #geoTrailModal .geo-modal-card{width:100%!important;max-width:none!important;height:auto!important;min-height:calc(100vh - 145px)!important;max-height:none!important;overflow:visible!important;box-shadow:var(--shadow,0 1px 6px #0001)!important;border-radius:12px!important}
+#utama .inline-info-section .geo-modal-body{height:auto!important;max-height:none!important;overflow:visible!important;flex:1 1 auto}
+#utama .inline-info-section .geo-modal-close{display:none!important}
+#utama.inline-page-mode{overflow:visible!important}
+@media(max-width:760px){#utama .inline-info-section.geo-modal{min-height:calc(100vh - 100px)}#utama .inline-info-section .geo-modal-card{min-height:calc(100vh - 100px)!important}}
+</style><script id="inline-geopark-pages-script">
+(function(){
+  const main=document.getElementById('utama');
+  const pages=[
+    ['aboutGeoparkBtn','aboutGeoparkModal'],
+    ['geologyInfoBtn','geologyInfoModal'],
+    ['geoTrailBtn','geoTrailModal']
+  ];
+  if(!main)return;
+  const home=document.querySelector('.sidebar .navbtn[data-target="utama"]');
+  const entries=pages.map(([buttonId,pageId])=>({button:document.getElementById(buttonId),panel:document.getElementById(pageId)}));
+  entries.forEach(({panel})=>{
+    if(!panel)return;
+    panel.classList.add('inline-info-section');
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden','true');
+    main.appendChild(panel);
+  });
+  function activate(button,panel){
+    const isHome=!panel;
+    main.classList.toggle('inline-page-mode',!isHome);
+    entries.forEach(x=>{
+      if(!x.panel)return;
+      const selected=x.panel===panel;
+      x.panel.classList.toggle('open',selected);
+      x.panel.setAttribute('aria-hidden',selected?'false':'true');
+    });
+    document.querySelectorAll('.sidebar .navbtn').forEach(b=>b.classList.toggle('active',b===button));
+    window.scrollTo(0,0);
+    if(isHome&&typeof map!=='undefined'&&map.invalidateSize){
+      requestAnimationFrame(()=>map.invalidateSize(true));
+    }
+  }
+  entries.forEach(({button,panel})=>{
+    if(button&&panel)button.addEventListener('click',function(e){
+      e.preventDefault();e.stopImmediatePropagation();
+      activate(button,panel);
+    },true);
+  });
+  if(home)home.addEventListener('click',function(e){
+    e.preventDefault();e.stopImmediatePropagation();
+    activate(home,null);
+  },true);
+})();
+</script></body></html>
