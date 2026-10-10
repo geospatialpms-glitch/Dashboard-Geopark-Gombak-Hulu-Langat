@@ -443,7 +443,7 @@ sat.addTo(map);
 const districtColors={"Gombak":"#98bc40","Hulu Langat":"#e9532e"};
 const districtLayer=L.geoJSON(DIST,{style:f=>({color:districtColors[f.properties.Daerah]||"#fff",weight:2.2,fillColor:districtColors[f.properties.Daerah]||"#fff",fillOpacity:.12}),onEachFeature:(f,l)=>{l.bindPopup(`<b>${f.properties.Daerah}</b><br>Keluasan: ${f.properties.Keluasan}<br>Geotapak: ${f.properties.GEOTAPAK}`);l.on("mouseover",e=>{l.setStyle({weight:3.2,fillOpacity:.2});l.openPopup(e.latlng);});l.on("mouseout",()=>{l.setStyle({weight:2.2,fillOpacity:.12});l.closePopup();});}}).addTo(map);
 map.fitBounds(districtLayer.getBounds(),{padding:[18,18]});
-const layerControl=L.control.layers({"Satelit":sat,"Jalan":road,"Topographic":topo},{"Sempadan Daerah":districtLayer},{position:"topleft"}).addTo(map);
+const layerControl=L.control.layers({"Satelit":sat,"Jalan":road,"Topografi":topo},{"Sempadan Daerah":districtLayer},{position:"topleft"}).addTo(map);
 
 // Sub-option sempadan daerah: Gombak dan Hulu Langat
 const districtSubLayers={};
