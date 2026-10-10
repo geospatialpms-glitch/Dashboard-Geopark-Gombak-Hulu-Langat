@@ -438,11 +438,12 @@ const C={green:"#11713b",lime:"#98bc40",orange:"#e9532e",red:"#aa2423"};
 const map=L.map("map",{zoomControl:true});
 const sat=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{attribution:"Esri World Imagery"});
 const road=L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"© OpenStreetMap"});
+const topo=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",{attribution:"Tiles © Esri — Esri, HERE, Garmin, USGS, NGA, and other contributors",maxZoom:19});
 sat.addTo(map);
 const districtColors={"Gombak":"#98bc40","Hulu Langat":"#e9532e"};
 const districtLayer=L.geoJSON(DIST,{style:f=>({color:districtColors[f.properties.Daerah]||"#fff",weight:2.2,fillColor:districtColors[f.properties.Daerah]||"#fff",fillOpacity:.12}),onEachFeature:(f,l)=>{l.bindPopup(`<b>${f.properties.Daerah}</b><br>Keluasan: ${f.properties.Keluasan}<br>Geotapak: ${f.properties.GEOTAPAK}`);l.on("mouseover",e=>{l.setStyle({weight:3.2,fillOpacity:.2});l.openPopup(e.latlng);});l.on("mouseout",()=>{l.setStyle({weight:2.2,fillOpacity:.12});l.closePopup();});}}).addTo(map);
 map.fitBounds(districtLayer.getBounds(),{padding:[18,18]});
-const layerControl=L.control.layers({"Satelit":sat,"Jalan":road},{"Sempadan Daerah":districtLayer},{position:"topleft"}).addTo(map);
+const layerControl=L.control.layers({"Satelit":sat,"Jalan":road,"Topographic":topo},{"Sempadan Daerah":districtLayer},{position:"topleft"}).addTo(map);
 
 // Sub-option sempadan daerah: Gombak dan Hulu Langat
 const districtSubLayers={};
