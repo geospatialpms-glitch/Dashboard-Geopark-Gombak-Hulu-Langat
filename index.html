@@ -477,13 +477,8 @@ function fitDistrict(name){
   map.invalidateSize();
   const bounds=target.getBounds();
   if(!bounds.isValid())return;
-  if(name==="Hulu Langat"){
-    // Sedikit lebih dekat untuk Hulu Langat (sempadan lebih panjang utara-selatan).
-    const baseZoom=map.getBoundsZoom(bounds,false,L.point(24,24));
-    map.flyTo(bounds.getCenter(),Math.min(12,baseZoom+1),{animate:true,duration:0.9});
-  }else{
-    map.fitBounds(bounds,{padding:[20,20],animate:true});
-  }
+  // Kedua-dua daerah menggunakan animasi dan kelajuan zoom yang sama.
+  map.fitBounds(bounds,{padding:[20,20],animate:true,duration:0.8});
 }
 function toggleDistrictCard(card,other,name){const active=card.classList.contains("glow");gombakCard.classList.remove("glow");huluLangatCard.classList.remove("glow");if(active){districtFilter.value="";applyFilters();map.fitBounds(districtLayer.getBounds(),{padding:[18,18]})}else{card.classList.add("glow");districtFilter.value=name;applyFilters();fitDistrict(name)}}
 gombakCard.onclick=()=>toggleDistrictCard(gombakCard,huluLangatCard,"Gombak");
