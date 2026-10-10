@@ -290,7 +290,7 @@ main{
  <div><label>Pihak Berkuasa Tempatan (PBT)</label><select id="pbtFilter"><option value="">Semua PBT</option></select></div>
  <div><label>Tahap Kepentingan</label><select id="importanceFilter"><option value="">Semua</option></select></div>
  <div><label>Kepelbagaian</label><select id="catFilter"><option value="">Semua</option></select></div>
- <button class="action" id="resetBtn">↻ Reset</button><button class="action search" id="searchBtn">⌕ Cari Geotapak</button>
+ <button class="action" id="resetBtn">↻ Set Semula</button><button class="action search" id="searchBtn">⌕ Cari Geotapak</button>
 </section>
 <section class="dashboard-stack" id="taburan">
  <div class="dashboard-main-grid" id="analisis">
@@ -457,7 +457,7 @@ let areaChart;
 const baseOpts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{display:false},ticks:{font:{size:9}}}}};
 function makeCharts(data){
  const centerTextPlugin={id:"centerText",afterDraw(chart){const{ctx,chartArea}=chart;if(!chartArea)return;const x=(chartArea.left+chartArea.right)/2,y=(chartArea.top+chartArea.bottom)/2;ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="#17233b";ctx.font="800 18px Arial, sans-serif";ctx.fillText("112,955",x,y-8);ctx.fillStyle="#6d7482";ctx.font="700 11px Arial, sans-serif";ctx.fillText("hektar",x,y+13);ctx.restore();}};
- if(areaChart)areaChart.destroy();areaChart=new Chart(document.getElementById("areaChart"),{type:"doughnut",data:{labels:["Gombak — 47,947 hektar","Hulu Langat — 65,008 hektar"],datasets:[{data:[47947,65008],backgroundColor:[C.lime,C.orange],borderWidth:2,borderColor:"#fff"}]},plugins:[centerTextPlugin],options:{responsive:true,maintainAspectRatio:false,cutout:"64%",plugins:{legend:{position:"right",labels:{usePointStyle:true,boxWidth:8,font:{size:11}}},tooltip:{callbacks:{title:items=>items.length?items[0].label.split(" — ")[0]:"",label:c=>`${c.label}`}}}}});
+ if(areaChart)areaChart.destroy();areaChart=new Chart(document.getElementById("areaChart"),{type:"doughnut",data:{labels:["Gombak — 47,947 hektar","Hulu Langat — 65,008 hektar"],datasets:[{data:[47947,65008],backgroundColor:[C.lime,C.orange],borderWidth:2,borderColor:"#fff"}]},plugins:[centerTextPlugin],options:{responsive:true,maintainAspectRatio:false,cutout:"64%",onHover:(event,elements,chart)=>{chart.canvas.style.cursor=elements.length?"pointer":"default"},onClick:(event,elements)=>{if(elements.length)selectAreaDistrict(elements[0].index)},plugins:{legend:{position:"right",labels:{usePointStyle:true,boxWidth:8,font:{size:11}},onClick:(event,item)=>selectAreaDistrict(item.index)},tooltip:{callbacks:{title:items=>items.length?items[0].label.split(" — ")[0]:"",label:c=>`${c.label}`}}}}});
 }
 function renderTable(data){let tb=document.getElementById("tableBody");tb.innerHTML=data.map((s,i)=>`<tr data-code="${s.code}"><td>${i+1}</td><td><b>${s.code}</b></td><td>${s.name}</td><td>${s.district}</td><td>${s.pbt}</td><td><span class="badge"><span class="status-dot"></span>Aktif</span></td></tr>`).join("");document.getElementById("tableCount").textContent=data.length+" rekod";tb.querySelectorAll("tr").forEach(tr=>tr.onclick=()=>focusSite(tr.dataset.code))}
 function filtered(){return SITES.filter(s=>(!districtFilter.value||s.district===districtFilter.value)&&(!pbtFilter.value||s.pbt===pbtFilter.value)&&(!importanceFilter.value||s.importance===importanceFilter.value)&&(!catFilter.value||s.cat===catFilter.value))}
@@ -479,6 +479,11 @@ function fitDistrict(name){
   if(!bounds.isValid())return;
   // Kedua-dua daerah menggunakan animasi dan kelajuan zoom yang sama.
   map.fitBounds(bounds,{padding:[20,20],animate:true,duration:0.8});
+}
+function selectAreaDistrict(index){
+  if(index!==0&&index!==1)return;
+  const name=index===0?"Gombak":"Hulu Langat";
+  toggleDistrictCard(index===0?gombakCard:huluLangatCard,index===0?huluLangatCard:gombakCard,name);
 }
 function toggleDistrictCard(card,other,name){const active=card.classList.contains("glow");gombakCard.classList.remove("glow");huluLangatCard.classList.remove("glow");if(active){districtFilter.value="";applyFilters();map.fitBounds(districtLayer.getBounds(),{padding:[18,18]})}else{card.classList.add("glow");districtFilter.value=name;applyFilters();fitDistrict(name)}}
 gombakCard.onclick=()=>toggleDistrictCard(gombakCard,huluLangatCard,"Gombak");
