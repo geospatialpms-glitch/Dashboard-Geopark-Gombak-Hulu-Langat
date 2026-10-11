@@ -408,10 +408,10 @@ document.addEventListener("DOMContentLoaded",()=>{
       item.setAttribute("aria-pressed",String(selected));
     });
     closeInfo(geologyModal);
-    // Navigasi terus ke halaman Utama, sambil kekalkan tapisan kategori yang dipilih.
+    // Navigasi terus ke bahagian peta pada halaman Utama dengan tapisan kategori yang dipilih.
     document.querySelectorAll(".navbtn").forEach(btn=>btn.classList.remove("active"));
     document.querySelector('.navbtn[data-target="utama"]')?.classList.add("active");
-    document.getElementById("utama")?.scrollIntoView({behavior:"smooth",block:"start"});
+    document.getElementById("taburan")?.scrollIntoView({behavior:"smooth",block:"start"});
     setTimeout(()=>{
       map.invalidateSize();
       const sites=filtered();
