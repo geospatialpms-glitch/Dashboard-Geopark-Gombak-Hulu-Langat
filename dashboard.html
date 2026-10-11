@@ -987,44 +987,5 @@ function renderGeoparkBoundary(){
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',renderGeoparkBoundary);else renderGeoparkBoundary();
 })();
 </script>
-<style>
-/* Paparan pertama Jejak GHLGp - tiga kawasan gambar boleh dipilih */
-#geoTrailModal .jejak-first-frame{display:none;max-width:1150px;margin:14px auto 22px;position:relative;aspect-ratio:622/299;background:#073c2d url('jejak-ghlgp-pilihan.jpg') center/100% 100% no-repeat;border-radius:12px;overflow:hidden;box-shadow:0 12px 32px #07251b27}
-#geoTrailModal.jejak-landing .jejak-first-frame{display:block}
-#geoTrailModal.jejak-landing .geo-intro,#geoTrailModal.jejak-landing .jejak-tabs,#geoTrailModal.jejak-landing .jejak-panel,#geoTrailModal.jejak-landing .jejak-back{display:none!important}
-#geoTrailModal .jejak-image-button{position:absolute;display:block;border:2px solid transparent;border-radius:8px;background:transparent;cursor:pointer;color:transparent}
-#geoTrailModal .jejak-image-button:hover,#geoTrailModal .jejak-image-button:focus-visible{background:rgba(255,255,255,.13);border-color:#d6f29f;outline:none}
-#geoTrailModal .jejak-image-button[data-pick="geologi"]{left:2%;top:8%;width:26%;height:19%}
-#geoTrailModal .jejak-image-button[data-pick="makanan"]{left:8%;top:76%;width:28%;height:18%}
-#geoTrailModal .jejak-image-button[data-pick="warisan"]{left:56%;top:18%;width:29%;height:20%}
-#geoTrailModal .jejak-back{display:inline-flex;align-items:center;margin:0 0 12px;padding:9px 13px;border:1px solid #c7dcc1;border-radius:9px;background:#eaf6e5;color:#155d32;cursor:pointer;font-weight:700}
-#geoTrailModal .jejak-back:hover{background:#d8efcc}
-</style>
-<script>
-(function(){
- const modal=document.getElementById('geoTrailModal');
- if(!modal)return;
- const body=modal.querySelector('.geo-modal-body');
- if(!body)return;
- const landing=document.createElement('div');
- landing.className='jejak-first-frame';
- landing.setAttribute('aria-label','Pilih Jejak Geologi, Jejak Makanan atau Jejak Warisan');
- landing.innerHTML='<button type="button" class="jejak-image-button" data-pick="geologi" aria-label="Buka Jejak Geologi"></button><button type="button" class="jejak-image-button" data-pick="makanan" aria-label="Buka Jejak Makanan"></button><button type="button" class="jejak-image-button" data-pick="warisan" aria-label="Buka Jejak Warisan"></button>';
- body.prepend(landing);
- const back=document.createElement('button');
- back.className='jejak-back';back.type='button';back.textContent='← Kembali ke Pilihan Jejak';
- body.insertBefore(back,landing.nextSibling);
- function showLanding(){modal.classList.add('jejak-landing');body.scrollTop=0;}
- landing.querySelectorAll('[data-pick]').forEach(button=>button.addEventListener('click',()=>{
-   const tab=modal.querySelector('.jejak-tab[data-jejak="'+button.dataset.pick+'"]');
-   if(tab){tab.click();modal.classList.remove('jejak-landing');body.scrollTop=0;}
- }));
- back.addEventListener('click',showLanding);
- const side=document.getElementById('geoTrailBtn');
- if(side)side.addEventListener('click',showLanding);
- const original=window.openGeoTrail;
- window.openGeoTrail=function(){if(typeof original==='function')original();showLanding();};
- showLanding();
-})();
-</script>
+
 </body></html>
