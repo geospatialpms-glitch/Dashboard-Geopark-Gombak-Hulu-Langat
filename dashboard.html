@@ -411,7 +411,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     // Navigasi terus ke bahagian peta pada halaman Utama dengan tapisan kategori yang dipilih.
     document.querySelectorAll(".navbtn").forEach(btn=>btn.classList.remove("active"));
     document.querySelector('.navbtn[data-target="utama"]')?.classList.add("active");
-    document.getElementById("taburan")?.scrollIntoView({behavior:"smooth",block:"start"});
+    document.getElementById("utama")?.scrollIntoView({behavior:"smooth",block:"start"});
     setTimeout(()=>{
       map.invalidateSize();
       const sites=filtered();
