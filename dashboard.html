@@ -78,6 +78,7 @@ main{padding:12px 14px 12px;min-width:0;height:calc(100vh - 109px);display:flex;
 .info-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
 .info-stat{border:1px solid #dfe9dc;border-radius:12px;padding:12px;background:#fbfff8}
 .info-stat{border:1px solid #dfe9dc;border-radius:12px;padding:12px;background:#fbfff8;display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0}
+.info-stat[data-cat]{cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}.info-stat[data-cat]:hover,.info-stat[data-cat]:focus-visible{transform:translateY(-2px);box-shadow:0 5px 15px rgba(20,75,45,.15);border-color:#8fbe3f;outline:none}.info-stat.geo-category-selected{border:2px solid #11713b;box-shadow:0 0 0 2px rgba(17,113,59,.12)}
 .info-stat-content{min-width:0}
 .info-stat-icon{width:35px;height:35px;flex:none;display:grid;place-items:center;border-radius:10px;background:transparent;color:#161616}
 .info-stat-icon svg{width:27px;height:27px;display:block;stroke-linejoin:round}
@@ -391,12 +392,12 @@ document.addEventListener("DOMContentLoaded",()=>{
   };
   document.getElementById("geologyStats").innerHTML=cats.map(([key,label])=>{
     const n=SITES.filter(s=>s.cat===key).length;
-    return `<div class="info-stat"><div class="info-stat-content"><b>${n}</b><span>${label}</span></div><div class="info-stat-icon" role="img" aria-label="Ikon ${label}">${categoryIcons[key]||""}</div></div>`;
+    return `<div class="info-stat" data-cat="${key}" title="Lihat ${label} pada peta" aria-label="Tapis ${label} dan lihat geotapak pada peta"><div class="info-stat-content"><b>${n}</b><span>${label}</span></div><div class="info-stat-icon" role="img" aria-label="Ikon ${label}">${categoryIcons[key]||""}</div></div>`;
   }).join("");
   geologyBtn.addEventListener("click",()=>openInfo(geologyBtn,geologyModal));
   geologyClose.addEventListener("click",()=>closeInfo(geologyModal));
   geologyModal.addEventListener("click",e=>{if(e.target===geologyModal)closeInfo(geologyModal)});
-  const categoryRows=[...geologyModal.querySelectorAll(".info-row[data-cat]")];
+  const categoryRows=[...geologyModal.querySelectorAll(".info-row[data-cat], .info-stat[data-cat]")];
   function activateGeologyCategory(row){
     const nextValue=catFilter.value===row.dataset.cat?"":row.dataset.cat;
     catFilter.value=nextValue;
