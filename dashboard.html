@@ -89,8 +89,8 @@ main{padding:12px 14px 12px;min-width:0;height:calc(100vh - 109px);display:flex;
 .info-stat b{display:block;font-size:22px;color:#174b31}.info-stat span{font-size:10px;color:#617069;line-height:1.4}
 .info-section{margin-top:14px}.info-section h3{font-size:13px;color:#174b31;margin:0 0 8px}
 .info-list{display:grid;gap:10px;margin-top:6px}
-.info-row{border:1px solid #d9e6d2;border-radius:12px;padding:12px 14px;cursor:pointer;transition:all .2s ease;box-shadow:0 2px 8px rgba(19,53,34,.04)}
-.info-row:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(19,53,34,.08)}.info-row:focus-visible{outline:3px solid #247e4d;outline-offset:2px}.info-row.geo-category-selected{outline:2px solid #267a47;outline-offset:-2px;box-shadow:0 0 0 2px rgba(38,122,71,.14),0 4px 12px rgba(19,53,34,.12)}
+.info-row{border:1px solid #d9e6d2;border-radius:12px;padding:12px 14px;cursor:default;transition:all .2s ease;box-shadow:0 2px 8px rgba(19,53,34,.04)}
+.info-row:hover{transform:none;box-shadow:0 2px 8px rgba(19,53,34,.04)}.info-row:focus-visible{outline:3px solid #247e4d;outline-offset:2px}.info-row.geo-category-selected{outline:2px solid #267a47;outline-offset:-2px;box-shadow:0 0 0 2px rgba(38,122,71,.14),0 4px 12px rgba(19,53,34,.12)}
 .info-row b{font-size:11px;color:#183230;display:block}
 .info-row small{display:block;margin-top:4px;font-size:9px;line-height:1.45;color:#506158}
 .info-list .info-row:nth-child(1){background:linear-gradient(90deg,#edf6e4 0%,#f8fbf3 100%);border-left:6px solid #8fbe3f}
@@ -397,44 +397,8 @@ document.addEventListener("DOMContentLoaded",()=>{
   geologyBtn.addEventListener("click",()=>openInfo(geologyBtn,geologyModal));
   geologyClose.addEventListener("click",()=>closeInfo(geologyModal));
   geologyModal.addEventListener("click",e=>{if(e.target===geologyModal)closeInfo(geologyModal)});
-  const categoryRows=[...geologyModal.querySelectorAll(".info-row[data-cat]")];
-  function activateGeologyCategory(row){
-    const nextValue=catFilter.value===row.dataset.cat?"":row.dataset.cat;
-    catFilter.value=nextValue;
-    applyFilters();
-    categoryRows.forEach(item=>{
-      const selected=!!nextValue&&item.dataset.cat===nextValue;
-      item.classList.toggle("geo-category-selected",selected);
-      item.setAttribute("aria-pressed",String(selected));
-    });
-    closeInfo(geologyModal);
-    // Navigasi terus ke bahagian peta pada halaman Utama dengan tapisan kategori yang dipilih.
-    document.querySelectorAll(".navbtn").forEach(btn=>btn.classList.remove("active"));
-    document.querySelector('.navbtn[data-target="utama"]')?.classList.add("active");
-    document.getElementById("utama")?.scrollIntoView({behavior:"smooth",block:"start"});
-    setTimeout(()=>{
-      map.invalidateSize();
-      const sites=filtered();
-      if(sites.length){
-        const points=sites.map(s=>[s.lat,s.lng]).filter(p=>p.every(Number.isFinite));
-        if(points.length)map.fitBounds(L.latLngBounds(points),{padding:[45,45],maxZoom:12,animate:true,duration:0.8});
-      }else if(!nextValue){
-        map.fitBounds(districtLayer.getBounds(),{padding:[18,18],animate:true,duration:0.8});
-      }
-    },120);
-  }
-  categoryRows.forEach(row=>{
-    row.setAttribute("role","button");
-    row.setAttribute("tabindex","0");
-    row.setAttribute("aria-pressed","false");
-    row.addEventListener("click",()=>activateGeologyCategory(row));
-    row.addEventListener("keydown",event=>{
-      if(event.key==="Enter"||event.key===" "){
-        event.preventDefault();
-        activateGeologyCategory(row);
-      }
-    });
-  });
+  // Penerangan kategori untuk bacaan sahaja; tiada fungsi klik atau penapisan.
+
  }
 
  if(siteBtn&&siteModal){
