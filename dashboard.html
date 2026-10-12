@@ -505,14 +505,18 @@ document.getElementById("searchBtn").onclick=()=>document.getElementById("mapSea
 document.getElementById("mapSearch").addEventListener("keydown",e=>{if(e.key==="Enter"){let q=e.target.value.trim().toLowerCase();let s=SITES.find(x=>(x.code+" "+x.name).toLowerCase().includes(q));if(s)focusSite(s.code)}});
 const gombakCard=document.getElementById("gombakCard"),huluLangatCard=document.getElementById("huluLangatCard");
 function fitDistrict(name){
-  // Rujuk data sempadan asal supaya fungsi zoom tetap berfungsi walaupun lapisan ditutup.
-  const target=districtSubLayers[name];
-  if(!target)return;
-  map.invalidateSize();
-  const bounds=target.getBounds();
-  if(!bounds.isValid())return;
-  // Kedua-dua daerah menggunakan animasi dan kelajuan zoom yang sama.
-  map.fitBounds(bounds,{padding:[20,20],animate:true,duration:0.8});
+  // Zum mengikut geometri poligon daerah, bukan kedudukan geotapak.
+  const feature=DIST.features.find(f=>(f.properties?.Daerah||"").trim().toLowerCase()===name.trim().toLowerCase());
+  if(!feature)return;
+  const boundary=L.geoJSON(feature).getBounds();
+  if(!boundary.isValid())return;
+  // Saiz peta mungkin berubah ketika menukar bahagian dashboard.
+  requestAnimationFrame(()=>{
+    map.invalidateSize({pan:false});
+    map.closePopup();
+    map.stop();
+    map.flyToBounds(boundary,{padding:[18,18],animate:true,duration:0.8});
+  });
 }
 function selectAreaDistrict(index){
   if(index!==0&&index!==1)return;
