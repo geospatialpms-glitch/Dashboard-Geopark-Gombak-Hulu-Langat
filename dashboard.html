@@ -515,7 +515,12 @@ function fitDistrict(name){
     map.invalidateSize({pan:false});
     map.closePopup();
     map.stop();
-    map.flyToBounds(boundary,{padding:[18,18],animate:true,duration:0.8});
+    if(name.trim().toLowerCase()==="hulu langat"){
+      const zoom=Math.min(map.getMaxZoom(),map.getBoundsZoom(boundary,false,L.point(18,18))+1);
+      map.flyTo(boundary.getCenter(),zoom,{animate:true,duration:0.8});
+    }else{
+      map.flyToBounds(boundary,{padding:[18,18],animate:true,duration:0.8});
+    }
   });
 }
 function selectAreaDistrict(index){
