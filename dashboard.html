@@ -814,7 +814,7 @@ function renderJejakList(group,listId,detailId){
    : group==="warisan"
    ? [...jejakData[group]].sort((a,b)=>{
        const rank={W:0,B:1,G:2};
-       const parse=x=>{const m=/^([WBG])(\\d+)$/.exec(x.code);return m?[rank[m[1]],Number(m[2])]:[3,Infinity]};
+       const parse=x=>{const m=/^([WBG])([0-9]+)$/.exec(x.code);return m?[rank[m[1]],Number(m[2])]:[3,Infinity]};
        const aa=parse(a),bb=parse(b);return aa[0]-bb[0]||aa[1]-bb[1];
      })
    : jejakData[group];
