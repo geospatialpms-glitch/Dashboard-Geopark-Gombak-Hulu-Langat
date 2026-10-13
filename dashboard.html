@@ -688,7 +688,7 @@ window.addEventListener("resize",()=>setTimeout(()=>map.invalidateSize(false),80
       <div class="jejak-tabs" role="tablist" aria-label="Kategori Jejak GHLGp">
         <button type="button" class="jejak-tab active" data-jejak="geologi" role="tab" aria-selected="true"><strong>⛰ Jejak Geologi</strong><small>Gombak &amp; Hulu Langat · 13 geotapak</small></button>
         <button type="button" class="jejak-tab" data-jejak="makanan" role="tab" aria-selected="false"><strong>🍽 Jejak Makanan</strong><small>13 lokasi makanan</small></button>
-        <button type="button" class="jejak-tab" data-jejak="warisan" role="tab" aria-selected="false"><strong>🏛 Jejak Warisan</strong><small>6 lokasi warisan &amp; rekreasi</small></button>
+        <button type="button" class="jejak-tab" data-jejak="warisan" role="tab" aria-selected="false"><strong>🏛 Jejak Warisan</strong><small>11 lokasi warisan &amp; rekreasi</small></button>
       </div>
       <section class="jejak-panel" data-jejak-panel="geologi" role="tabpanel">
         <div class="jejak-section-title"><strong>Jejak Geologi</strong><span>2 Laluan</span></div>
@@ -700,7 +700,7 @@ window.addEventListener("resize",()=>setTimeout(()=>map.invalidateSize(false),80
         <div class="jejak-list" id="jejakMakananList"></div><div class="jejak-detail" id="jejakMakananDetail" aria-live="polite"></div>
       </section>
       <section class="jejak-panel" data-jejak-panel="warisan" role="tabpanel" hidden>
-        <div class="jejak-section-title"><strong>Jejak Warisan (Heritage Trail)</strong><span>6 Lokasi</span></div>
+        <div class="jejak-section-title"><strong>Jejak Warisan (Heritage Trail)</strong><span>11 Lokasi</span></div>
         <div class="jejak-list" id="jejakWarisanList"></div><div class="jejak-detail" id="jejakWarisanDetail" aria-live="polite"></div>
       </section>
       <div class="jejak-source">Sumber: Dokumen Jejak GHLGp, halaman 201–210. Waktu operasi restoran ialah maklumat dalam dokumen dan perlu disahkan semula sebelum lawatan.</div>
@@ -786,12 +786,17 @@ const jejakData={
   {code:"E13",name:"Satay Kajang Hj. Samuri",address:"Jalan Hishammuddin, Bandar Kajang",hours:"4.00 petang – 1.00 pagi",menu:"Satay Kajang"}
  ],
  warisan:[
-  {code:"W1",name:"Air Terjun Komanwel",desc:"Kawasan rekreasi yang dilancarkan sempena Persidangan Perhutanan Komanwel ke-14 pada tahun 1993."},
+  {code:"—",name:"Air Terjun Komanwel",desc:"Kawasan rekreasi yang dilancarkan sempena Persidangan Perhutanan Komanwel ke-14 pada tahun 1993."},
   {code:"W3",name:"Pusat Kawalan Kusta Negara",desc:"Pada tahun 1971 pusat ini turut berfungsi sebagai hospital untuk menempatkan pesakit kusta di Malaysia."},
   {code:"B7",name:"Zoo Negara",desc:"Zoo Negara yang pertama di Malaysia, ditubuhkan pada 14 November 1963."},
   {code:"B5",name:"Forest Research Institute Malaysia (FRIM)",desc:"Institusi penyelidikan perhutanan Malaysia; dokumen menyebut perubahan institusi pada 1 Oktober 1985 di bawah Akta Lembaga Penyelidikan dan Pembangunan Perhutanan Malaysia."},
   {code:"G30",name:"Bekas Lombong Batu Arang",desc:"Bandar perlombongan arang batu Selangor yang berkembang sebelum Perang Dunia Kedua hingga tahun 1960-an."},
-  {code:"G29",name:"Bekas Lombong Tasik Biru Seri Kundang",desc:"Bekas lombong yang menjadi tumpuan riadah penduduk, terutamanya pada hujung minggu."}
+  {code:"G29",name:"Bekas Lombong Tasik Biru Seri Kundang",desc:"Bekas lombong yang menjadi tumpuan riadah penduduk, terutamanya pada hujung minggu."},
+  {code:"W1",name:"Muzium Orang Asli, Gombak",desc:"Muzium Orang Asli terletak di Jalan Gombak kira-kira 20 km dari Kuala Lumpur dan mempamerkan koleksi artifak seperti sumpit buluh dan belanga yang berusia lebih daripada 600 tahun serta penerangan mengenai Orang Asli.",route:"Dari Pusat Eksplorasi GHL Geopark: 10 minit (kereta) / 36 minit (berjalan kaki), Jalan Taman Melawati (4.1 km)."},
+  {code:"W2",name:"Kuil Sri Mahamariamman, Batu Caves",desc:"1915–1932: Sejarah awal bermula dengan masyarakat Hindu mendirikan pondok atap sebagai kuil untuk beribadat. Thaipusam ialah perayaan utama yang disambut secara besar-besaran sehingga mencapai jumlah pengunjung 100 ribu orang dan merupakan sambutan kedua terbesar selepas Batu Caves.",route:"58 minit (kereta), Jalan Gombak (57 km), seperti dinyatakan dalam dokumen."},
+  {code:"G23",name:"Permatang Kuarza Gombak Selangor (PKGS)",desc:"Sejarah PKGS menunjukkan pembentukannya mencapai 200 juta tahun. Berukuran lebih 16 km, PKGS ialah permatang kuarza terpanjang di dunia dan berada dalam kelas tersendiri. Mempunyai pelbagai spesies biodiversiti yang unik.",route:"20 minit (kereta), Jalan Gombak–Jalan Lingkaran Tengah 2 (14 km)."},
+  {code:"G9",name:"Fosil Pleistosen Akhir Batu Caves",desc:"Batu kapur pembentuk Batu Caves dikatakan berumur sekitar 400 juta tahun. Beberapa pintu masuk gua digunakan sebagai tempat penampungan bagi masyarakat adat Temuan. Sejak 1892, festival Thaipusam di bulan Tamil (yang jatuh pada akhir Januari/awal Februari) akan mengadakan acara di sana.",route:"19 minit (kereta), Jalan Ulu Yam Bharu–Batu Caves dan Jalan Sungai Tua (13.9 km)."},
+  {code:"G26",name:"Air Terjun Sungai Kanching",desc:"Air Terjun Sungai Kanching terletak di Hutan Simpan Kanching yang merupakan Hutan Pelajaran kerana mempunyai plot demonstrasi bagi kegunaan. Dicalonkan dalam proses pewartaan daripada Jabatan Warisan Negara.",route:"7 minit (kereta) / 36 minit (berjalan kaki), Persiaran Bukit Takun 1–Jalan Rawang (4 km)."}
  ]
 };
 function renderJejakList(group,listId,detailId){
