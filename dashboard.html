@@ -811,6 +811,12 @@ function renderJejakList(group,listId,detailId){
  if(!list||!detail)return;
  const entries=(group==="gombak"||group==="hululangat")
    ? [...jejakData[group]].sort((a,b)=>Number(a.code.slice(1))-Number(b.code.slice(1)))
+   : group==="warisan"
+   ? [...jejakData[group]].sort((a,b)=>{
+       const rank={W:0,B:1,G:2};
+       const parse=x=>{const m=/^([WBG])(\\d+)$/.exec(x.code);return m?[rank[m[1]],Number(m[2])]:[3,Infinity]};
+       const aa=parse(a),bb=parse(b);return aa[0]-bb[0]||aa[1]-bb[1];
+     })
    : jejakData[group];
  list.replaceChildren();
  entries.forEach((item,i)=>{
@@ -834,7 +840,8 @@ function renderJejakList(group,listId,detailId){
     photo.className="jejak-heritage-photo";
     photo.setAttribute("role","img");
     photo.setAttribute("aria-label","Gambar "+item.name);
-    photo.style.backgroundPosition=((i%3)*50)+"% "+(Math.floor(i/3)*100/3)+"%";
+    const originalIndex=jejakData.warisan.indexOf(item);
+    photo.style.backgroundPosition=((originalIndex%3)*50)+"% "+(Math.floor(originalIndex/3)*100/3)+"%";
     btn.append(photo);
   }
   if(group==="makanan"){
@@ -867,7 +874,8 @@ function renderJejakList(group,listId,detailId){
      photo.className="jejak-heritage-detail-photo";
      photo.setAttribute("role","img");
      photo.setAttribute("aria-label","Gambar "+item.name);
-     photo.style.backgroundPosition=((i%3)*50)+"% "+(Math.floor(i/3)*100/3)+"%";
+     const originalIndex=jejakData.warisan.indexOf(item);
+    photo.style.backgroundPosition=((originalIndex%3)*50)+"% "+(Math.floor(originalIndex/3)*100/3)+"%";
      detail.append(photo);
    }
    if(group==="makanan"){
