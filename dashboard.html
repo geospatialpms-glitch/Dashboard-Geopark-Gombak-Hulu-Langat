@@ -880,7 +880,7 @@ function renderJejakList(group,listId,detailId){
    }
    const h=document.createElement("h3");h.textContent=item.code+" · "+item.name;detail.append(h);
    const add=(label,value)=>{if(!value)return;const p=document.createElement("p");if(label){const strong=document.createElement("span");strong.className="detail-label";strong.textContent=label+": ";p.append(strong)}p.append(document.createTextNode(value));detail.append(p)};
-   add("",item.desc);add("Alamat",item.address);add("Waktu Operasi (Rujukan PDF)",item.hours);add("Menu Istimewa",item.menu);
+   add("",item.desc);add("Alamat",item.address);add("Waktu Operasi",item.hours);add("Menu Istimewa",item.menu);
   });
   if(i===0)btn.click();
  });
