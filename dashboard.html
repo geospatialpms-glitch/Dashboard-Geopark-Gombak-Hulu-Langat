@@ -809,7 +809,10 @@ const jejakData={
 function renderJejakList(group,listId,detailId){
  const list=document.getElementById(listId),detail=document.getElementById(detailId);
  if(!list||!detail)return;
- const entries=jejakData[group];list.replaceChildren();
+ const entries=(group==="gombak"||group==="hululangat")
+   ? [...jejakData[group]].sort((a,b)=>Number(a.code.slice(1))-Number(b.code.slice(1)))
+   : jejakData[group];
+ list.replaceChildren();
  entries.forEach((item,i)=>{
   const btn=document.createElement("button");btn.type="button";btn.className="jejak-entry";
   const code=document.createElement("span");code.className="jejak-code";code.textContent=item.code;
