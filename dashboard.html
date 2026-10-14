@@ -1111,12 +1111,12 @@ function openGeotapakInfo(code){
  const close=document.createElement("button");close.textContent="×";close.setAttribute("aria-label","Tutup");
  header.append(heading,close);
  const body=document.createElement("div");body.className="geotapak-more-content";
- if(site&&typeof IMG!=="undefined"&&IMG[code]){const img=document.createElement("img");img.src=IMG[code];img.alt=site.name;body.append(img)}
+
  const title=document.createElement("h3");title.textContent=site?.name||more?.name||code;body.append(title);
  const pdfText=GEOTAPAK_INFO_PDF[code];
  if(pdfText){const heading=document.createElement("h4");heading.textContent="Maklumat Geotapak";heading.style.cssText="margin:16px 0 8px;color:#155c35";body.append(heading);const para=document.createElement("p");para.textContent=pdfText;para.style.lineHeight="1.65";body.append(para)}
  else if(more?.desc){const p=document.createElement("p");p.textContent=more.desc;body.append(p)}
- if(site){for(const [label,value] of [["Era Geologi",site.era],["Tahap Kepentingan Geologi",site.importance],["Guna Tanah Semasa",site.landuse],["Kawasan Pentadbiran",site.pbt],["Kepelbagaian",site.cat]]){if(value){const p=document.createElement("p");const b=document.createElement("b");b.textContent=label+": ";p.append(b,document.createTextNode(String(value)));body.append(p)}}}
+
 
  card.append(header,body);overlay.append(card);document.body.append(overlay);
  const dismiss=()=>{overlay.remove();document.removeEventListener("keydown",onKey)};
