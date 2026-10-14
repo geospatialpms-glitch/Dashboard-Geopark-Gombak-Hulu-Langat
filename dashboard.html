@@ -331,6 +331,17 @@ main{
 #geoTrailModal #jejakGeologiList .jejak-entry{min-height:106px}
 #geoTrailModal #jejakGeologiDetail::after{content:"";display:block;clear:both}
 @media(max-width:650px){#geoTrailModal .jejak-geology-photo{width:68px;height:76px}#geoTrailModal .jejak-geology-detail-photo{width:130px;height:143px}}
+
+/* Dokumen Coffee Table: panel tema GHLGp, paparan di atas dashboard */
+#geoparkDocModal{position:fixed;inset:0;z-index:100000;background:rgba(10,37,27,.72);padding:3vh 3vw;display:none;align-items:center;justify-content:center}
+#geoparkDocModal.is-open{display:flex}
+#geoparkDocCard{display:flex;flex-direction:column;width:min(1100px,100%);height:94vh;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 16px 55px #061f19aa}
+#geoparkDocHeader{background:linear-gradient(90deg,#11713b,#98bc40);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 16px;font-weight:800}
+#geoparkDocToolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#geoparkDocToolbar a,#geoparkDocToolbar button{border:1px solid #ffffff90;border-radius:8px;color:#fff;background:#ffffff20;padding:8px 12px;text-decoration:none;font-weight:700;cursor:pointer}
+#geoparkDocFrame{width:100%;flex:1;border:0;background:#f3f7f1}
+#geoparkDocNotice{font-size:12px;padding:8px 16px;color:#53705b;background:#f3f8f0}
+@media(max-width:600px){#geoparkDocModal{padding:0}#geoparkDocCard{width:100%;height:100dvh;border-radius:0}#geoparkDocHeader{align-items:flex-start;flex-direction:column}}
 </style>
 <style id="sidebar-nav-consistent">.sidebar .navbtn{min-height:49px;display:flex;align-items:center;justify-content:flex-start;text-align:left;font-size:12px;line-height:1.3;font-weight:600;gap:11px;padding:12px 14px}.sidebar .navbtn .navicon{width:18px;min-width:18px;flex:0 0 18px}.sidebar .navbtn>span:last-child{width:auto;flex:1;text-align:left}.sidebar #aboutGeoparkBtn{justify-content:flex-start;text-align:left}.sidebar #aboutGeoparkBtn span{width:auto}.sidebar #aboutGeoparkBtn>span:last-child{flex:1;width:auto}</style></head>
 <body><div class="topline"></div>
@@ -355,6 +366,8 @@ main{
  <button class="navbtn" id="aboutGeoparkBtn" type="button"><span>Apa Itu Geopark?</span></button>
  <button class="navbtn" id="geologyInfoBtn"><span class="navicon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4L4 8l8 4 8-4-8-4Z"></path><path d="M4 12l8 4 8-4"></path><path d="M4 16l8 4 8-4"></path></svg></span><span>Kepelbagaian Geologi</span></button>
  <button class="navbtn" id="geoTrailBtn" type="button" onclick="openGeoTrail()"><span class="navicon geo-trail-foot-icon" aria-hidden="true"></span><span>Jejak GHLGp</span></button>
+ <button class="navbtn" id="geoparkDocumentBtn" type="button" onclick="openGeoparkDocument()" aria-label="Buka dokumen Coffee Table GHLGp 2024">
+ <span class="navicon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8"/></svg></span><span>Dokumen</span></button>
 </aside>
 <main id="utama">
 <section class="kpis">
@@ -1097,5 +1110,40 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  const nav=document.getElementById('geoTrailBtn');
  if(nav)nav.addEventListener('click',reset);
 })();
+</script>
+
+<div id="geoparkDocModal" role="dialog" aria-modal="true" aria-label="Dokumen Coffee Table GHLGp 2024" aria-hidden="true">
+  <div id="geoparkDocCard">
+    <div id="geoparkDocHeader">
+      <span>Dokumen | Coffee Table Gombak–Hulu Langat Geopark 2024</span>
+      <div id="geoparkDocToolbar">
+        <a href="Coffee_Table_GHLGp_2024.pdf" target="_blank" rel="noopener">Buka PDF <span aria-hidden="true">↗</span></a>
+        <a href="Coffee_Table_GHLGp_2024.pdf" download>Muat Turun</a>
+        <button type="button" id="geoparkDocClose" onclick="closeGeoparkDocument()" aria-label="Tutup dokumen">✕ Tutup</button>
+      </div>
+    </div>
+    <div id="geoparkDocNotice">Buku coffee table | Gunakan kawalan pembaca PDF untuk zum, carian dan navigasi muka surat.</div>
+    <iframe id="geoparkDocFrame" title="Pembaca PDF Coffee Table GHLGp 2024" loading="lazy"></iframe>
+  </div>
+</div>
+<script id="geopark-document-script">
+function openGeoparkDocument(){
+  var modal=document.getElementById('geoparkDocModal'),frame=document.getElementById('geoparkDocFrame');
+  if(!modal||!frame)return;
+  document.querySelectorAll('.navbtn').forEach(function(x){x.classList.remove('active')});
+  document.getElementById('geoparkDocumentBtn')?.classList.add('active');
+  frame.src='Coffee_Table_GHLGp_2024.pdf#view=FitH';
+  modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');
+  document.getElementById('geoparkDocClose')?.focus();
+}
+function closeGeoparkDocument(){
+  var modal=document.getElementById('geoparkDocModal'),frame=document.getElementById('geoparkDocFrame');
+  if(!modal)return;
+  modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');
+  if(frame)frame.removeAttribute('src');
+  document.getElementById('geoparkDocumentBtn')?.focus();
+}
+document.getElementById('geoparkDocModal')?.addEventListener('click',function(e){if(e.target===this)closeGeoparkDocument()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('geoparkDocModal')?.classList.contains('is-open'))closeGeoparkDocument()});
 </script>
 </body></html>
