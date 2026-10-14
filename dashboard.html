@@ -331,7 +331,7 @@ main{
 #geoTrailModal #jejakGeologiList .jejak-entry{min-height:106px}
 #geoTrailModal #jejakGeologiDetail::after{content:"";display:block;clear:both}
 @media(max-width:650px){#geoTrailModal .jejak-geology-photo{width:68px;height:76px}#geoTrailModal .jejak-geology-detail-photo{width:130px;height:143px}}
-</style>
+.popup-footer .popup-actions{display:flex;align-items:center;gap:5px}.popup-info-btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;border:1px solid #27824b;border-radius:7px;background:#f0f8ed;color:#176b36;font-size:8px;font-weight:800;padding:5px 6px;white-space:nowrap;cursor:pointer}.popup-info-btn:hover{background:#deefda}.popup-info-btn .info-circle{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:#176b36;color:white;width:12px;height:12px;font-size:9px;font-weight:900;font-family:Georgia,serif}.geotapak-more-overlay{position:fixed;inset:0;z-index:5100;background:#061b12aa;display:flex;align-items:center;justify-content:center;padding:16px}.geotapak-more-card{background:#fff;border-radius:14px;box-shadow:0 16px 55px #0005;width:min(510px,95vw);max-height:85vh;overflow-y:auto}.geotapak-more-head{background:linear-gradient(90deg,#11713b,#98bc40);color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}.geotapak-more-head button{border:0;background:#ffffff29;color:#fff;border-radius:50%;font-size:18px;width:28px;height:28px;cursor:pointer}.geotapak-more-content{padding:16px;font-size:13px;line-height:1.7}.geotapak-more-content img{max-height:230px;object-fit:cover;width:100%;border-radius:9px;margin-bottom:10px}</style>
 <style id="sidebar-nav-consistent">.sidebar .navbtn{min-height:49px;display:flex;align-items:center;justify-content:flex-start;text-align:left;font-size:12px;line-height:1.3;font-weight:600;gap:11px;padding:12px 14px}.sidebar .navbtn .navicon{width:18px;min-width:18px;flex:0 0 18px}.sidebar .navbtn>span:last-child{width:auto;flex:1;text-align:left}.sidebar #aboutGeoparkBtn{justify-content:flex-start;text-align:left}.sidebar #aboutGeoparkBtn span{width:auto}.sidebar #aboutGeoparkBtn>span:last-child{flex:1;width:auto}</style></head>
 <body><div class="topline"></div>
 <header class="header">
@@ -524,7 +524,7 @@ let markerMap=new Map(),visibleMarkers=[];
   window.GEOTAPAK_GALLERY.G30 = [...new Set([mainPhoto, originalPhoto, ...previous].filter(Boolean))];
   IMG.G30 = mainPhoto;
 })();
-function popup(s){let agencies=AG[s.code]||[];return `<img class="popup-img${s.code==="G30"?" popup-img-g30":""}" src="${IMG[s.code]||""}" alt="${s.code}"><div class="popup-title">${s.code} — ${s.name}</div><div class="popup-grid"><b>Era Geologi:</b> ${s.era}<br><b>Tahap Kepentingan Geologi:</b> ${s.importance}<br><b>Koordinat:</b><br>X: ${Number(s.lat).toFixed(6)}<br>Y: ${Number(s.lng).toFixed(6)}<br><b>Guna Tanah Semasa:</b> ${s.landuse}<br><b>Agensi Kawal Selia:</b>${agencies.length?`<ol class="popup-agency">${agencies.map(a=>`<li>${a}</li>`).join("")}</ol>`:"<br>Tiada maklumat dinyatakan dalam PDF"}<br><b>Kawasan Pentadbiran:</b> ${s.pbt}<br><b>Kepelbagaian:</b> ${s.cat}</div><div class="popup-footer"><span class="popup-tag">Geotapak GHLGp</span><button class="popup-gallery-btn" type="button" onclick="openGallery(\'${s.code}\')">▣ Galeri</button></div>`}
+function popup(s){let agencies=AG[s.code]||[];return `<img class="popup-img${s.code==="G30"?" popup-img-g30":""}" src="${IMG[s.code]||""}" alt="${s.code}"><div class="popup-title">${s.code} — ${s.name}</div><div class="popup-grid"><b>Era Geologi:</b> ${s.era}<br><b>Tahap Kepentingan Geologi:</b> ${s.importance}<br><b>Koordinat:</b><br>X: ${Number(s.lat).toFixed(6)}<br>Y: ${Number(s.lng).toFixed(6)}<br><b>Guna Tanah Semasa:</b> ${s.landuse}<br><b>Agensi Kawal Selia:</b>${agencies.length?`<ol class="popup-agency">${agencies.map(a=>`<li>${a}</li>`).join("")}</ol>`:"<br>Tiada maklumat dinyatakan dalam PDF"}<br><b>Kawasan Pentadbiran:</b> ${s.pbt}<br><b>Kepelbagaian:</b> ${s.cat}</div><div class="popup-footer"><span class="popup-tag">Geotapak GHLGp</span><span class="popup-actions"><button class="popup-info-btn" type="button" onclick="openGeotapakInfo(\'${s.code}\')" aria-label="Info lanjut ${s.code}"><span class="info-circle">i</span> Info Lanjut</button><button class="popup-gallery-btn" type="button" onclick="openGallery(\'${s.code}\')">▣ Galeri</button></span></div>`}
 function drawMarkers(data){visibleMarkers.forEach(m=>map.removeLayer(m));visibleMarkers=[];markerMap=new Map();data.forEach(s=>{let col=s.district==="Gombak"?C.lime:C.orange;let icon=L.divIcon({className:"geo-point-icon",html:`<div class="geo-point-inner" style="background:${col}">${s.code}</div>`,iconSize:[24,24],iconAnchor:[12,12]});let m=L.marker([s.lat,s.lng],{icon}).addTo(map).bindPopup(popup(s),{maxWidth:300});visibleMarkers.push(m);markerMap.set(s.code,m)})}
 let areaChart;
 const baseOpts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{display:false},ticks:{font:{size:9}}}}};
@@ -1098,4 +1098,26 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  if(nav)nav.addEventListener('click',reset);
 })();
 </script>
-</body></html>
+<script>
+function openGeotapakInfo(code){
+ const site=(typeof S!=="undefined"&&Array.isArray(S)?S:[]).find(x=>x.code===code);
+ const groups=(typeof jejakData!=="undefined"?[...jejakData.gombak,...jejakData.hululangat]:[]);
+ const more=groups.find(x=>x.code===code);
+ const overlay=document.createElement("div");overlay.className="geotapak-more-overlay";overlay.setAttribute("role","dialog");overlay.setAttribute("aria-modal","true");
+ const card=document.createElement("section");card.className="geotapak-more-card";
+ const header=document.createElement("div");header.className="geotapak-more-head";
+ const heading=document.createElement("strong");heading.textContent="ⓘ Info Lanjut · "+code;
+ const close=document.createElement("button");close.textContent="×";close.setAttribute("aria-label","Tutup");
+ header.append(heading,close);
+ const body=document.createElement("div");body.className="geotapak-more-content";
+ if(site&&typeof IMG!=="undefined"&&IMG[code]){const img=document.createElement("img");img.src=IMG[code];img.alt=site.name;body.append(img)}
+ const title=document.createElement("h3");title.textContent=site?.name||more?.name||code;body.append(title);
+ if(more?.desc){const p=document.createElement("p");p.textContent=more.desc;body.append(p)}
+ if(site){for(const [label,value] of [["Era Geologi",site.era],["Tahap Kepentingan Geologi",site.importance],["Guna Tanah Semasa",site.landuse],["Kawasan Pentadbiran",site.pbt],["Kepelbagaian",site.cat]]){if(value){const p=document.createElement("p");const b=document.createElement("b");b.textContent=label+": ";p.append(b,document.createTextNode(String(value)));body.append(p)}}}
+ if(!site&&!more){const p=document.createElement("p");p.textContent="Maklumat lanjut lokasi ini belum tersedia.";body.append(p)}
+ card.append(header,body);overlay.append(card);document.body.append(overlay);
+ const dismiss=()=>{overlay.remove();document.removeEventListener("keydown",onKey)};
+ const onKey=e=>{if(e.key==="Escape")dismiss()};
+ close.addEventListener("click",dismiss);overlay.addEventListener("click",e=>{if(e.target===overlay)dismiss()});document.addEventListener("keydown",onKey);close.focus();
+}
+</script></body></html>
