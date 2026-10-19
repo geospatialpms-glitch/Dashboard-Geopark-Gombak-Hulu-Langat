@@ -203,7 +203,7 @@ main{
   min-height:0;
 }
 .dashboard-main-grid .map-panel{
-  height:650px;
+  height:max(650px, calc(100vh - 175px));
   min-height:650px;
   display:flex;
   flex-direction:column;
@@ -218,10 +218,10 @@ main{
   width:100%;
 }
 .right-analysis{
-  height:650px;
+  height:max(650px, calc(100vh - 175px));
   min-height:650px;
   display:grid;
-  grid-template-rows:300px 340px;
+  grid-template-rows: minmax(260px, 43%) minmax(0, 1fr);
   gap:10px;
 }
 .right-analysis>.panel{
