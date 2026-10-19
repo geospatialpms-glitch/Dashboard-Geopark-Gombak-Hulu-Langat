@@ -603,14 +603,7 @@ var downloadBtn=document.getElementById("downloadBtn");if(downloadBtn)downloadBt
 const geoTrailBtn=document.getElementById("geoTrailBtn");
 const geoTrailModal=document.getElementById("geoTrailModal");
 const geoTrailClose=document.getElementById("geoTrailClose");
-if(geoTrailBtn&&geoTrailModal){
- geoTrailBtn.addEventListener("click",()=>{
-  document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));
-  geoTrailBtn.classList.add("active");
-  geoTrailModal.classList.add("open");
-  geoTrailModal.setAttribute("aria-hidden","false");
- });
-}
+/* Jejak GHLGp parent button does not open a modal; category buttons open their respective detail views. */
 if(geoTrailClose&&geoTrailModal){
  geoTrailClose.addEventListener("click",()=>{
   geoTrailModal.classList.remove("open");
@@ -936,6 +929,8 @@ function openGeoTrailCategory(category){
   const allowed=["geologi","makanan","warisan"];
   if(!modal||!allowed.includes(category))return;
   openGeoTrail();
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
   const tab=modal.querySelector(".jejak-tab[data-jejak="+category+"]");
   if(tab)tab.click();
   modal.classList.add("jejak-detail-view");
@@ -944,12 +939,7 @@ function openGeoTrailCategory(category){
 }
 function openGeoTrail(){
   var btn=document.getElementById("geoTrailBtn");
-  var modal=document.getElementById("geoTrailModal");
   setSidebarActive(btn);
-  if(modal){
-    modal.classList.add("open");
-    modal.setAttribute("aria-hidden","false");
-  }
 }
 (function(){
   var modal=document.getElementById("geoTrailModal");
