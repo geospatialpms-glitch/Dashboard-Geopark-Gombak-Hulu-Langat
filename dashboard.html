@@ -343,7 +343,13 @@ main{
 #geoTrailModal #jejakGeologiList .jejak-entry{min-height:106px}
 #geoTrailModal #jejakGeologiDetail::after{content:"";display:block;clear:both}
 @media(max-width:650px){#geoTrailModal .jejak-geology-photo{width:68px;height:76px}#geoTrailModal .jejak-geology-detail-photo{width:130px;height:143px}}
-.popup-footer .popup-actions{display:flex;align-items:center;gap:5px}.popup-info-btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;border:1px solid #27824b;border-radius:7px;background:#f0f8ed;color:#176b36;font-size:8px;font-weight:800;padding:5px 6px;white-space:nowrap;cursor:pointer}.popup-info-btn:hover{background:#deefda}.popup-info-btn .info-circle{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:#176b36;color:white;width:12px;height:12px;font-size:9px;font-weight:900;font-family:Georgia,serif}.geotapak-more-overlay{position:fixed;inset:0;z-index:5100;background:#061b12aa;display:flex;align-items:center;justify-content:center;padding:16px}.geotapak-more-card{background:#fff;border-radius:14px;box-shadow:0 16px 55px #0005;width:min(510px,95vw);max-height:85vh;overflow-y:auto}.geotapak-more-head{background:linear-gradient(90deg,#11713b,#98bc40);color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}.geotapak-more-head button{border:0;background:#ffffff29;color:#fff;border-radius:50%;font-size:18px;width:28px;height:28px;cursor:pointer}.geotapak-more-content{padding:16px;font-size:13px;line-height:1.7}.geotapak-more-content img{max-height:230px;object-fit:cover;width:100%;border-radius:9px;margin-bottom:10px}</style>
+.popup-footer .popup-actions{display:flex;align-items:center;gap:5px}.popup-info-btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;border:1px solid #27824b;border-radius:7px;background:#f0f8ed;color:#176b36;font-size:8px;font-weight:800;padding:5px 6px;white-space:nowrap;cursor:pointer}.popup-info-btn:hover{background:#deefda}.popup-info-btn .info-circle{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:#176b36;color:white;width:12px;height:12px;font-size:9px;font-weight:900;font-family:Georgia,serif}.geotapak-more-overlay{position:fixed;inset:0;z-index:5100;background:#061b12aa;display:flex;align-items:center;justify-content:center;padding:16px}.geotapak-more-card{background:#fff;border-radius:14px;box-shadow:0 16px 55px #0005;width:min(510px,95vw);max-height:85vh;overflow-y:auto}.geotapak-more-head{background:linear-gradient(90deg,#11713b,#98bc40);color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}.geotapak-more-head button{border:0;background:#ffffff29;color:#fff;border-radius:50%;font-size:18px;width:28px;height:28px;cursor:pointer}.geotapak-more-content{padding:16px;font-size:13px;line-height:1.7}.geotapak-more-content img{max-height:230px;object-fit:cover;width:100%;border-radius:9px;margin-bottom:10px}
+/* Halaman khusus jejak: paparkan kandungan jejak sahaja, tanpa dashboard */
+body.jejak-page .topline,body.jejak-page .header,body.jejak-page .shell{display:none!important}
+body.jejak-page #geoTrailModal{display:flex!important;position:fixed;inset:0;padding:0;background:#f3f8f1;z-index:9999}
+body.jejak-page #geoTrailModal .geo-modal-card{width:100vw!important;max-width:none!important;height:100dvh!important;max-height:100dvh!important;border:0;border-radius:0;box-shadow:none}
+body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
+</style>
 <style id="sidebar-nav-consistent">.sidebar .navbtn{min-height:49px;display:flex;align-items:center;justify-content:flex-start;text-align:left;font-size:12px;line-height:1.3;font-weight:600;gap:11px;padding:12px 14px}.sidebar .navbtn .navicon{width:18px;min-width:18px;flex:0 0 18px}.sidebar .navbtn>span:last-child{width:auto;flex:1;text-align:left}.sidebar #aboutGeoparkBtn{justify-content:flex-start;text-align:left}.sidebar #aboutGeoparkBtn span{width:auto}.sidebar #aboutGeoparkBtn>span:last-child{flex:1;width:auto}</style></head>
 <body><div class="topline"></div>
 <header class="header">
@@ -368,9 +374,9 @@ main{
  <button class="navbtn" id="geologyInfoBtn"><span class="navicon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4L4 8l8 4 8-4-8-4Z"></path><path d="M4 12l8 4 8-4"></path><path d="M4 16l8 4 8-4"></path></svg></span><span>Kepelbagaian Geologi</span></button>
  <button class="navbtn" id="geoTrailBtn" type="button" onclick="openGeoTrail()"><span class="navicon geo-trail-foot-icon" aria-hidden="true"></span><span>Jejak GHLGp</span></button>
  <div class="jejak-sidebar-submenu" aria-label="Kategori Jejak GHLGp">
-  <button class="jejak-sidebar-link" type="button" onclick="openGeoTrailCategory('geologi')">Jejak Geologi</button>
-  <button class="jejak-sidebar-link" type="button" onclick="openGeoTrailCategory('makanan')">Jejak Makanan</button>
-  <button class="jejak-sidebar-link" type="button" onclick="openGeoTrailCategory('warisan')">Jejak Warisan</button>
+  <button class="jejak-sidebar-link" type="button" onclick="window.location.href='jejak-geologi.html'">Jejak Geologi</button>
+  <button class="jejak-sidebar-link" type="button" onclick="window.location.href='jejak-makanan.html'">Jejak Makanan</button>
+  <button class="jejak-sidebar-link" type="button" onclick="window.location.href='jejak-warisan.html'">Jejak Warisan</button>
  </div>
  <div class="sidebar-slogan">Warisan<br>Suatu Legasi</div>
 </aside>
@@ -1152,4 +1158,19 @@ function openGeotapakInfo(code){
  const onKey=e=>{if(e.key==="Escape")dismiss()};
  close.addEventListener("click",dismiss);overlay.addEventListener("click",e=>{if(e.target===overlay)dismiss()});document.addEventListener("keydown",onKey);close.focus();
 }
-</script></body></html>
+</script>
+<script>
+(function(){
+ const jejak=new URLSearchParams(location.search).get('jejak');
+ if(!['geologi','makanan','warisan'].includes(jejak))return;
+ document.body.classList.add('jejak-page');
+ window.addEventListener('load',function(){
+  if(typeof openGeoTrailCategory==='function')openGeoTrailCategory(jejak);
+  const close=document.getElementById('geoTrailClose');
+  if(close)close.addEventListener('click',function(e){e.stopImmediatePropagation();location.href='dashboard.html'},true);
+  const h=document.querySelector('#geoTrailModal .geo-modal-head h2');
+  if(h)h.textContent={'geologi':'Jejak Geologi','makanan':'Jejak Makanan','warisan':'Jejak Warisan'}[jejak];
+ });
+})();
+</script>
+</body></html>
