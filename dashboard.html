@@ -24,6 +24,8 @@
 .geo-ribbon:before,.geo-ribbon:after{content:"";position:absolute;border-radius:50%;border:2px solid #ffffff99;width:190px;height:80px;right:10px;top:-35px}.geo-ribbon:after{width:250px;height:110px;right:-40px;top:5px}
 .shell{display:grid;grid-template-columns:195px minmax(0,1fr);min-height:0;align-items:stretch}
 .sidebar{background:#086b3e url('sidebar-geopark.png') center center / 100% 100% no-repeat;border-right:1px solid #0d6031;padding:14px 10px;position:relative;top:auto;height:auto;min-height:0;align-self:stretch;margin-bottom:0}
+.jejak-sidebar-info{margin:2px 8px 12px 10px;padding:11px 10px;border-radius:9px;background:rgba(1,58,35,.65);color:#fff;font:500 11px/1.55 Inter,Arial,sans-serif}
+.jejak-sidebar-info[hidden]{display:none}
 .jejak-sidebar-submenu{display:flex;flex-direction:column;gap:3px;margin:-2px 0 10px 30px;padding:2px 0 2px 10px;border-left:1px solid rgba(255,255,255,.27)}
 .jejak-sidebar-link{display:block;width:100%;padding:9px 5px;border:0;border-radius:7px;background:transparent;text-align:left;color:#f8fff7;font:600 12px Inter,Arial,sans-serif;cursor:pointer;transition:background .2s ease}
 .jejak-sidebar-link:hover,.jejak-sidebar-link:focus-visible{background:rgba(255,255,255,.16);outline-offset:2px}
@@ -373,6 +375,7 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
  <button class="navbtn" id="aboutGeoparkBtn" type="button"><span>Apa Itu Geopark?</span></button>
  <button class="navbtn" id="geologyInfoBtn"><span class="navicon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4L4 8l8 4 8-4-8-4Z"></path><path d="M4 12l8 4 8-4"></path><path d="M4 16l8 4 8-4"></path></svg></span><span>Kepelbagaian Geologi</span></button>
  <button class="navbtn" id="geoTrailBtn" type="button" onclick="openGeoTrail()"><span class="navicon geo-trail-foot-icon" aria-hidden="true"></span><span>Jejak GHLGp</span></button>
+ <div class="jejak-sidebar-info" id="jejakSidebarInfo" hidden>Terokai Gombak–Hulu Langat Geopark melalui tiga pilihan: Jejak Geologi, Jejak Makanan dan Jejak Warisan. Pilih jejak di bawah untuk melihat maklumat lokasi dan penerangannya.</div>
  <div class="jejak-sidebar-submenu" aria-label="Kategori Jejak GHLGp">
   <button class="jejak-sidebar-link" type="button" onclick="openGeoTrailCategory('geologi')">Jejak Geologi</button>
   <button class="jejak-sidebar-link" type="button" onclick="openGeoTrailCategory('makanan')">Jejak Makanan</button>
@@ -938,8 +941,10 @@ function openGeoTrailCategory(category){
   if(body)body.scrollTop=0;
 }
 function openGeoTrail(){
-  // Parent navigation is a menu label, not a popup trigger.
+  // Paparkan penerangan Jejak GHLGp pada sidebar sahaja, bukan popup atau bawah dashboard.
   setSidebarActive(document.getElementById("geoTrailBtn"));
+  const info=document.getElementById("jejakSidebarInfo");
+  if(info){ info.hidden=!info.hidden; document.getElementById("geoTrailBtn")?.setAttribute("aria-expanded",String(!info.hidden)); }
 }
 (function(){
   var modal=document.getElementById("geoTrailModal");
