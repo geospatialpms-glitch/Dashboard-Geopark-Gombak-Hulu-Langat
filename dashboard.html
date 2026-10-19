@@ -939,7 +939,14 @@ function openGeoTrailCategory(category){
 }
 function openGeoTrail(){
   var btn=document.getElementById("geoTrailBtn");
+  var modal=document.getElementById("geoTrailModal");
   setSidebarActive(btn);
+  if(!modal)return;
+  modal.classList.remove("jejak-detail-view");
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
+  var body=modal.querySelector(".geo-modal-body");
+  if(body)body.scrollTop=0;
 }
 (function(){
   var modal=document.getElementById("geoTrailModal");
