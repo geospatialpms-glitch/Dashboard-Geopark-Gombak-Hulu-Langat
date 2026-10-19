@@ -928,25 +928,18 @@ function openGeoTrailCategory(category){
   const modal=document.getElementById("geoTrailModal");
   const allowed=["geologi","makanan","warisan"];
   if(!modal||!allowed.includes(category))return;
-  openGeoTrail();
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden","false");
+  setSidebarActive(document.getElementById("geoTrailBtn"));
+  modal.classList.remove("jejak-detail-view");
   const tab=modal.querySelector(".jejak-tab[data-jejak="+category+"]");
   if(tab)tab.click();
-  modal.classList.add("jejak-detail-view");
+  modal.classList.add("jejak-detail-view","open");
+  modal.setAttribute("aria-hidden","false");
   const body=modal.querySelector(".geo-modal-body");
   if(body)body.scrollTop=0;
 }
 function openGeoTrail(){
-  var btn=document.getElementById("geoTrailBtn");
-  var modal=document.getElementById("geoTrailModal");
-  setSidebarActive(btn);
-  if(!modal)return;
-  modal.classList.remove("jejak-detail-view");
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden","false");
-  var body=modal.querySelector(".geo-modal-body");
-  if(body)body.scrollTop=0;
+  // Parent navigation is a menu label, not a popup trigger.
+  setSidebarActive(document.getElementById("geoTrailBtn"));
 }
 (function(){
   var modal=document.getElementById("geoTrailModal");
