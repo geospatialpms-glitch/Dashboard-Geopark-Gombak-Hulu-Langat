@@ -941,10 +941,15 @@ function openGeoTrailCategory(category){
   if(body)body.scrollTop=0;
 }
 function openGeoTrail(){
-  // Paparkan penerangan Jejak GHLGp pada sidebar sahaja, bukan popup atau bawah dashboard.
+  // Butang utama memaparkan pilihan visual tiga jejak seperti asal.
+  const modal=document.getElementById("geoTrailModal");
+  if(!modal)return;
   setSidebarActive(document.getElementById("geoTrailBtn"));
-  const info=document.getElementById("jejakSidebarInfo");
-  if(info){ info.hidden=!info.hidden; document.getElementById("geoTrailBtn")?.setAttribute("aria-expanded",String(!info.hidden)); }
+  modal.classList.remove("jejak-detail-view");
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
+  const body=modal.querySelector(".geo-modal-body");
+  if(body)body.scrollTop=0;
 }
 (function(){
   var modal=document.getElementById("geoTrailModal");
