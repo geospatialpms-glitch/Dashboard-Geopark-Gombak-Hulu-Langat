@@ -359,6 +359,12 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
 
 /* Jejak GHLGp: frame in-dashboard; three category links retain their popup actions */
 #jejakFrame[hidden]{display:none!important}
+#jejakFrame.jejak-show-detail{width:100%;max-width:none;min-height:calc(100vh - 135px)}
+#jejakFrame.jejak-show-detail > p,#jejakFrame.jejak-show-detail > .jejak-frame-image{display:none!important}
+#jejakFrame.jejak-show-detail #geoTrailModal{display:block!important;position:relative!important;inset:auto!important;width:100%!important;height:auto!important;background:transparent!important;z-index:auto!important;padding:0!important}
+#jejakFrame.jejak-show-detail #geoTrailModal .geo-modal-card{width:100%!important;max-width:none!important;max-height:none!important;min-height:calc(100vh - 245px);box-shadow:none!important}
+#jejakFrame.jejak-show-detail #geoTrailModal .geo-modal-body{max-height:none!important;overflow:visible!important}
+
 #utama.jejak-frame-active > :not(#jejakFrame){display:none!important}
 #jejakFrame{background:#fff;border:1px solid #dce8da;border-radius:14px;padding:20px;margin:0 0 16px;box-shadow:0 5px 18px #103d1612}
 .jejak-frame-head{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(95deg,#087241,#92bb3a);color:white;margin:-20px -20px 16px;padding:16px 20px;border-radius:13px 13px 0 0}
@@ -1079,36 +1085,44 @@ document.querySelectorAll(".jejak-subtab").forEach(btn=>btn.addEventListener("cl
 renderJejakList("gombak","jejakGeologiList","jejakGeologiDetail");
 renderJejakList("makanan","jejakMakananList","jejakMakananDetail");
 renderJejakList("warisan","jejakWarisanList","jejakWarisanDetail");
+function setJejakFrameMode(detail){
+ const frame=document.getElementById("jejakFrame");
+ if(frame)frame.classList.toggle("jejak-show-detail",detail);
+}
 function openGeoTrailCategory(category){
  if(!["geologi","makanan","warisan"].includes(category))return;
- const modal=document.getElementById("geoTrailModal");
- if(!modal)return;
- if(modal.parentElement!==document.body)document.body.appendChild(modal);
- modal.classList.remove("jejak-embedded");
- modal.classList.add("open","jejak-detail-view");
+ const main=document.getElementById("utama"),frame=document.getElementById("jejakFrame"),modal=document.getElementById("geoTrailModal");
+ if(!main||!frame||!modal)return;
+ frame.hidden=false;
+ main.classList.remove("inline-page-mode");
+ main.classList.add("jejak-frame-active");
+ if(modal.parentElement!==frame)frame.appendChild(modal);
+ modal.classList.remove("open");
+ modal.classList.add("jejak-embedded","jejak-detail-view");
  modal.setAttribute("aria-hidden","false");
+ setJejakFrameMode(true);
  const tab=modal.querySelector('.jejak-tab[data-jejak="'+category+'"]');
  if(tab)tab.click();
  const body=modal.querySelector(".geo-modal-body");
  if(body)body.scrollTop=0;
+ window.scrollTo({top:0,behavior:"smooth"});
+ setSidebarActive(document.getElementById("geoTrailBtn"));
 }
 function openGeoTrail(){
- const main=document.getElementById("utama"),frame=document.getElementById("jejakFrame");
- const modal=document.getElementById("geoTrailModal");
+ const main=document.getElementById("utama"),frame=document.getElementById("jejakFrame"),modal=document.getElementById("geoTrailModal");
  if(!main||!frame)return;
- if(modal){
-   if(modal.parentElement!==document.body)document.body.appendChild(modal);
-   modal.classList.remove("jejak-embedded","open","jejak-detail-view");
-   modal.setAttribute("aria-hidden","true");
- }
  frame.hidden=false;
  main.classList.remove("inline-page-mode");
  main.classList.add("jejak-frame-active");
+ if(modal){modal.classList.remove("open","jejak-detail-view");modal.setAttribute("aria-hidden","true")}
+ setJejakFrameMode(false);
  window.scrollTo({top:0,behavior:"smooth"});
  setSidebarActive(document.getElementById("geoTrailBtn"));
 }
 function closeJejakFrame(){
- const main=document.getElementById("utama"),frame=document.getElementById("jejakFrame");
+ const main=document.getElementById("utama"),frame=document.getElementById("jejakFrame"),modal=document.getElementById("geoTrailModal");
+ if(modal){modal.classList.remove("open","jejak-detail-view");modal.setAttribute("aria-hidden","true")}
+ setJejakFrameMode(false);
  if(main)main.classList.remove("jejak-frame-active");
  if(frame)frame.hidden=true;
  setSidebarActive(document.querySelector('.navbtn[data-target="utama"]'));
