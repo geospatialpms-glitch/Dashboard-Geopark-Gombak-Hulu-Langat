@@ -972,6 +972,9 @@ function openGeoTrail(){
   const modal=document.getElementById("geoTrailModal");
   if(!main||!frame)return;
   if(modal){modal.classList.remove("open");modal.setAttribute("aria-hidden","true");}
+  // Nyahaktifkan mod halaman maklumat supaya bingkai Jejak tidak tersembunyi.
+  main.classList.remove("inline-page-mode");
+  document.querySelectorAll("#utama .inline-info-section").forEach(panel=>{panel.classList.remove("open");panel.setAttribute("aria-hidden","true");});
   frame.hidden=false;
   main.classList.add("jejak-frame-active");
   setSidebarActive(document.getElementById("geoTrailBtn"));
@@ -1105,6 +1108,10 @@ document.querySelector('.navbtn[data-target="utama"]')?.addEventListener("click"
   });
   function activate(button,panel){
     const isHome=!panel;
+    // Jangan biarkan mod Jejak menyembunyikan halaman maklumat.
+    main.classList.remove('jejak-frame-active');
+    const trailFrame=document.getElementById('jejakFrame');
+    if(trailFrame)trailFrame.hidden=true;
     main.classList.toggle('inline-page-mode',!isHome);
     entries.forEach(x=>{
       if(!x.panel)return;
