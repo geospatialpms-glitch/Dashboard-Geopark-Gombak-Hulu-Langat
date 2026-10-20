@@ -975,19 +975,19 @@ function openGeoTrailCategory(category){
   if(body)body.scrollTop=0;
 }
 function openGeoTrail(){
-  // Paparkan pilihan Jejak GHLGp dalam frame kandungan utama, bukan popup.
+  // Versi asal: paparkan pilihan tiga Jejak GHLGp dalam popup.
+  const modal=document.getElementById("geoTrailModal");
   const main=document.getElementById("utama");
   const frame=document.getElementById("jejakFrame");
-  const modal=document.getElementById("geoTrailModal");
-  if(!main||!frame)return;
-  if(modal){modal.classList.remove("open");modal.setAttribute("aria-hidden","true");}
-  // Nyahaktifkan mod halaman maklumat supaya bingkai Jejak tidak tersembunyi.
-  main.classList.remove("inline-page-mode");
-  document.querySelectorAll("#utama .inline-info-section").forEach(panel=>{panel.classList.remove("open");panel.setAttribute("aria-hidden","true");});
-  frame.hidden=false;
-  main.classList.add("jejak-frame-active");
+  if(!modal)return;
+  if(frame)frame.hidden=true;
+  if(main)main.classList.remove("jejak-frame-active");
+  modal.classList.remove("jejak-detail-view");
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
+  const body=modal.querySelector(".geo-modal-body");
+  if(body)body.scrollTop=0;
   setSidebarActive(document.getElementById("geoTrailBtn"));
-  frame.scrollIntoView({block:"start",behavior:"smooth"});
 }
 function closeJejakFrame(){
  const main=document.getElementById("utama"),frame=document.getElementById("jejakFrame");
