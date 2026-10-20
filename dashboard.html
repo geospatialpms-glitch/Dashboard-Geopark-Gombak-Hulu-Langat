@@ -1125,21 +1125,17 @@ function setJejakFrameMode(detail){
 }
 function openGeoTrailCategory(category){
  if(!["geologi","makanan","warisan"].includes(category))return;
- const main=document.getElementById("utama"),frame=document.getElementById("jejakFrame"),modal=document.getElementById("geoTrailModal");
- if(!main||!frame||!modal)return;
- frame.hidden=false;
- main.classList.remove("inline-page-mode");
- main.classList.add("jejak-frame-active");
- if(modal.parentElement!==frame)frame.appendChild(modal);
- modal.classList.remove("open");
- modal.classList.add("jejak-embedded","jejak-detail-view");
+ const modal=document.getElementById("geoTrailModal");
+ if(!modal)return;
+ // Restore the original popup behavior: never embed the Jejak modal under the dashboard.
+ if(modal.parentElement!==document.body)document.body.appendChild(modal);
+ modal.classList.remove("jejak-embedded","jejak-detail-view");
+ modal.classList.add("open");
  modal.setAttribute("aria-hidden","false");
- setJejakFrameMode(true);
  const tab=modal.querySelector('.jejak-tab[data-jejak="'+category+'"]');
  if(tab)tab.click();
  const body=modal.querySelector(".geo-modal-body");
  if(body)body.scrollTop=0;
- window.scrollTo({top:0,behavior:"smooth"});
  setSidebarActive(document.getElementById("geoTrailBtn"));
 }
 function openGeoTrail(){
