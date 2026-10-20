@@ -735,6 +735,17 @@ window.addEventListener("resize",()=>setTimeout(()=>map.invalidateSize(false),80
 .geopark-narrative-frame h3{font-size:clamp(20px,2.2vw,27px);color:#136638;margin:0 0 22px;padding-bottom:12px;border-bottom:2px solid #8ebd52}
 .geopark-narrative-frame p{font-size:14px;line-height:1.85;color:#263b30;text-align:justify;margin:0 0 18px}
 .geopark-narrative-frame p:last-child{margin-bottom:0}
+
+/* Three-phase visual chronology, matching the supplied olive-and-yellow diagram */
+.chronology-roadmap{max-width:920px;margin:25px auto 15px;padding:22px;border-radius:17px;background:linear-gradient(135deg,#f8faf5,#eef2e5);border:1px solid #dce5cb}
+.chronology-roadmap h3{text-align:center;margin:0 0 22px;color:#36542d;font-size:19px}
+.chrono-phases{display:grid;gap:19px;padding-left:7px}
+.chrono-phase{display:grid;grid-template-columns:88px 1fr;position:relative;align-items:stretch;filter:drop-shadow(0 4px 5px rgba(28,53,28,.12))}
+.chrono-year{display:flex;align-items:center;justify-content:center;background:#78895b;border-radius:55px 0 0 55px;color:#fff;font-size:22px;line-height:1.1;font-weight:900;writing-mode:vertical-rl;transform:none;min-height:125px}
+.chrono-detail{background:#415635;color:#fff;border-radius:0 60px 60px 0;padding:16px 34px 16px 18px;min-height:126px}
+.chrono-detail ul{margin:0;padding-left:18px;display:grid;gap:7px}.chrono-detail li{font-size:12.5px;line-height:1.5;font-weight:600}
+.chrono-plan{grid-column:2;justify-self:start;background:#f5eb08;color:#132311;border-radius:30px;margin:8px 8px 0 0;padding:9px 20px;font-size:12px;font-weight:900;text-align:center;max-width:95%;box-shadow:0 3px 7px rgba(40,55,8,.18)}
+@media(max-width:650px){.chronology-roadmap{padding:13px}.chrono-phase{grid-template-columns:55px 1fr}.chrono-year{font-size:16px}.chrono-detail{padding:12px 18px 12px 12px;border-radius:0 24px 24px 0}.chrono-detail li{font-size:11px}.chrono-plan{font-size:10px;padding:8px 12px}}
 </style>
 <div class="geo-modal" id="chronologyModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="chronologyTitle">
  <div class="geo-modal-card">
@@ -750,6 +761,41 @@ window.addEventListener("resize",()=>setTimeout(()=>map.invalidateSize(false),80
     <p>Dengan memperoleh pengiktirafan di peringkat kebangsaan mahupun dunia secara tidak langsung mewujudkan sumber-sumber baharu untuk manfaat penyelidikan saintifik dan ekonomi kepada Negeri Selangor secara keseluruhannya.</p>
     <p>Kajian Gombak–Hulu Langat Geopark ini juga adalah lanjutan daripada Kajian Dossier Permatang Kuarza Gombak Selangor (PKGS) yang telah disediakan pada tahun 2018 bagi tujuan pencalonan PKGS sebagai Tapak Warisan Dunia UNESCO. Walau bagaimanapun, hasil kajian tersebut mendapati PKGS belum bersedia untuk dicalonkan sebagai Tapak Warisan Dunia UNESCO kerana kekurangan kajian saintifik dan penyelidikan serta tahap integriti PKGS yang masih lemah.</p>
     <p>Berdasarkan hasil kajian Dossier PKGS tersebut, Pasukan Pakar yang dilantik mendapati tapak PKGS sangat berpotensi sebagai salah satu geotapak bagi pembangunan Geopark di Negeri Selangor yang mana tapak geopark ini akan dicadangkan sebagai Tapak Geopark Kebangsaan terlebih dahulu sebelum diangkat sebagai Tapak Geopark Global UNESCO. Selain tapak PKGS, terdapat beberapa tapak lain dalam Daerah Gombak dan Hulu Langat telah dikenal pasti mempunyai nilai warisan yang tinggi untuk digabungkan bagi membentuk Gombak–Hulu Langat Geopark seterusnya bakal menjadi tapak Geopark pertama di Negeri Selangor yang diiktiraf di peringkat kebangsaan dan dunia (UNESCO).</p>
+   </section>
+   <section class="chronology-roadmap" aria-label="Carta Kronologi dan Pelan Tindakan Geopark">
+    <h3>Kronologi Pelaksanaan Gombak–Hulu Langat Geopark</h3>
+    <div class="chrono-phases">
+     <article class="chrono-phase">
+      <div class="chrono-year">2019</div>
+      <div class="chrono-detail"><ul>
+       <li>Pengenalan Geopark di Selangor, mengenal pasti 20 kawasan warisan geologi dalam Daerah Gombak dan Hulu Langat.</li>
+       <li>Dokumentasi profil asas kawasan geotapak yang telah dikenal pasti.</li>
+       <li>Mengenal pasti sempadan awalan dan juga tindakan kawalan pembangunan yang perlu diambil bagi memelihara dan mengekalkan keaslian kawasan geotapak yang berpotensi.</li>
+      </ul></div>
+      <div class="chrono-plan">PELAN TINDAKAN PEMBANGUNAN GEOPARK</div>
+     </article>
+     <article class="chrono-phase">
+      <div class="chrono-year">2020</div>
+      <div class="chrono-detail"><ul>
+       <li>Dokumen yang menyelaraskan pengurusan geopark serta mengukuhkan kerjasama sedia ada bagi memastikan kualiti geologi kawasan geotapak dipelihara dan dipromosikan untuk generasi akan datang.</li>
+       <li>Kerangka badan pengurusan geopark.</li>
+       <li>Mengambil kira keperluan persediaan pencalonan Geopark GHL ke arah pengiktirafan Geopark Kebangsaan.</li>
+      </ul></div>
+      <div class="chrono-plan">PELAN PENGURUSAN GEOPARK GOMBAK–HULU LANGAT FASA 1</div>
+     </article>
+     <article class="chrono-phase">
+      <div class="chrono-year">2021–2025</div>
+      <div class="chrono-detail"><ul>
+       <li>Penyediaan Dossier GHL Geopark ke arah Geopark Kebangsaan.</li>
+       <li>Menggerakkan JK ProTem.</li>
+       <li>Dokumen yang menyelaraskan program bersama pihak berkepentingan melalui sesi buy-in atau FGD.</li>
+       <li>Memanfaatkan bekas kuarters pekerja lombong batu arang sebagai Galeri Batu Arang GHLGp.</li>
+       <li>Mendapat pengiktirafan GHLGp sebagai tapak Geopark Kebangsaan.</li>
+      </ul></div>
+      <div class="chrono-plan">PROJEK PELAKSANAAN GEOPARK GOMBAK–HULU LANGAT FASA 2</div>
+     </article>
+    </div>
+    <p class="chrono-source">Carta kronologi disusun semula berdasarkan grafik yang dibekalkan.</p>
    </section>
    <p class="chrono-source">Sumber: Maklumat Penubuhan Gombak–Hulu Langat Geopark yang dibekalkan.</p>
   </div>
