@@ -440,6 +440,7 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
 <aside class="sidebar">
  <button class="navbtn active" data-target="utama"><span class="navicon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5"></path><path d="M5 9.5V20h14V9.5"></path><path d="M10 20v-6h4v6"></path></svg></span><span>Utama</span></button>
  <button class="navbtn" id="aboutGeoparkBtn" type="button"><span>Apa Itu Geopark?</span></button>
+ <button class="navbtn" id="chronologyBtn" type="button"><span class="navicon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3.5 2"></path></svg></span><span>Kronologi</span></button>
  <button class="navbtn" id="geologyInfoBtn"><span class="navicon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4L4 8l8 4 8-4-8-4Z"></path><path d="M4 12l8 4 8-4"></path><path d="M4 16l8 4 8-4"></path></svg></span><span>Kepelbagaian Geologi</span></button>
  <button class="navbtn" id="geoTrailBtn" type="button" onclick="openGeoTrail()"><span class="navicon geo-trail-foot-icon" aria-hidden="true"></span><span>Jejak GHLGp</span></button>
  <div class="jejak-sidebar-info" id="jejakSidebarInfo" hidden>Terokai Gombak–Hulu Langat Geopark melalui tiga pilihan: Jejak Geologi, Jejak Makanan dan Jejak Warisan. Pilih jejak di bawah untuk melihat maklumat lokasi dan penerangannya.</div>
@@ -493,6 +494,9 @@ if(typeof Chart!=="undefined"){
   Chart.defaults.font.size=11;
 }
 document.addEventListener("DOMContentLoaded",()=>{
+ const chronologyBtn=document.getElementById("chronologyBtn");
+ const chronologyModal=document.getElementById("chronologyModal");
+ const chronologyClose=document.getElementById("chronologyClose");
  const aboutBtn=document.getElementById("aboutGeoparkBtn");
  const aboutModal=document.getElementById("aboutGeoparkModal");
  const aboutClose=document.getElementById("aboutGeoparkClose");
@@ -514,6 +518,11 @@ document.addEventListener("DOMContentLoaded",()=>{
   modal.setAttribute("aria-hidden","true");
  }
 
+ if(chronologyBtn&&chronologyModal&&chronologyClose){
+  chronologyBtn.addEventListener("click",()=>openInfo(chronologyBtn,chronologyModal));
+  chronologyClose.addEventListener("click",()=>closeInfo(chronologyModal));
+  chronologyModal.addEventListener("click",e=>{if(e.target===chronologyModal)closeInfo(chronologyModal)});
+ }
  if(aboutBtn&&aboutModal){
   aboutBtn.addEventListener("click",()=>openInfo(aboutBtn,aboutModal));
   aboutClose.addEventListener("click",()=>closeInfo(aboutModal));
@@ -1308,4 +1317,88 @@ function openGeotapakInfo(code){
  });
 })();
 </script>
+<style id="chronology-styles">
+#chronologyModal .geo-modal-card{width:min(1300px,calc(100vw - 44px));height:calc(100dvh - 44px);max-height:calc(100dvh - 44px);display:flex;flex-direction:column;overflow:hidden}
+#chronologyModal .geo-modal-body{overflow-y:auto;flex:1;padding:24px;background:#fbfdf9}
+.chrono-intro{margin:0 0 18px;color:#526352;font-size:13px;line-height:1.7}
+.chrono-timeline{display:grid;gap:18px;position:relative;padding-left:26px}
+.chrono-timeline:before{content:"";position:absolute;top:7px;bottom:7px;left:10px;width:3px;border-radius:6px;background:linear-gradient(#207a40,#9fbd3e)}
+.chrono-step{position:relative;background:#fff;border:1px solid #dce8d5;border-radius:14px;padding:17px 20px;box-shadow:0 4px 12px rgba(12,74,33,.06)}
+.chrono-step:before{content:"";position:absolute;top:23px;left:-24px;width:15px;height:15px;border:3px solid #f9ffef;border-radius:50%;background:#197741;box-shadow:0 0 0 2px #b1cba6}
+.chrono-year{display:inline-block;background:#e4f2d7;color:#165b34;border-radius:999px;padding:5px 12px;font-weight:800;font-size:13px;margin-bottom:9px}
+.chrono-step h3{margin:0 0 10px;font-size:17px;color:#145c36}
+.chrono-step p,.chrono-step li{font-size:13px;line-height:1.7;color:#32483a}
+.chrono-step ul{padding-left:18px;margin:8px 0 0}
+.chrono-source{margin-top:18px;font-size:12px;color:#677568;border-top:1px solid #dae7d8;padding-top:12px}
+.geopark-narrative-frame{max-width:1100px;margin:10px auto 18px;padding:clamp(20px,3vw,40px);border:1px solid #d6e5d4;border-radius:20px;background:linear-gradient(150deg,rgba(255,255,255,.97),rgba(243,250,242,.96));box-shadow:0 12px 32px rgba(15,87,42,.12)}
+.geopark-narrative-frame h3{font-size:clamp(20px,2.2vw,27px);color:#136638;margin:0 0 22px;padding-bottom:12px;border-bottom:2px solid #8ebd52}
+.geopark-narrative-frame p{font-size:14px;line-height:1.85;color:#263b30;text-align:justify;margin:0 0 18px}
+.geopark-narrative-frame p:last-child{margin-bottom:0}
+
+/* Three-phase visual chronology, matching the supplied olive-and-yellow diagram */
+.chronology-roadmap{max-width:920px;margin:25px auto 15px;padding:22px;border-radius:17px;background:linear-gradient(135deg,#f8faf5,#eef2e5);border:1px solid #dce5cb}
+.chronology-roadmap h3{text-align:center;margin:0 0 22px;color:#36542d;font-size:19px}
+.chrono-phases{display:grid;gap:19px;padding-left:7px}
+.chrono-phase{display:grid;grid-template-columns:88px 1fr;position:relative;align-items:stretch;filter:drop-shadow(0 4px 5px rgba(28,53,28,.12))}
+.chrono-year{display:flex;align-items:center;justify-content:center;background:#78895b;border-radius:55px 0 0 55px;color:#fff;font-size:22px;line-height:1.1;font-weight:900;writing-mode:vertical-rl;transform:none;min-height:125px}
+.chrono-detail{background:#415635;color:#fff;border-radius:0 60px 60px 0;padding:16px 34px 16px 18px;min-height:126px}
+.chrono-detail ul{margin:0;padding-left:18px;display:grid;gap:7px}.chrono-detail li{font-size:12.5px;line-height:1.5;font-weight:600}
+.chrono-plan{grid-column:2;justify-self:start;background:#f5eb08;color:#132311;border-radius:30px;margin:8px 8px 0 0;padding:9px 20px;font-size:12px;font-weight:900;text-align:center;max-width:95%;box-shadow:0 3px 7px rgba(40,55,8,.18)}
+@media(max-width:650px){.chronology-roadmap{padding:13px}.chrono-phase{grid-template-columns:55px 1fr}.chrono-year{font-size:16px}.chrono-detail{padding:12px 18px 12px 12px;border-radius:0 24px 24px 0}.chrono-detail li{font-size:11px}.chrono-plan{font-size:10px;padding:8px 12px}}
+</style>
+<div class="geo-modal" id="chronologyModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="chronologyTitle">
+ <div class="geo-modal-card">
+  <div class="geo-modal-head"><div><h2 id="chronologyTitle">Penubuhan Geopark Gombak–Hulu Langat</h2></div><button class="geo-modal-close" id="chronologyClose" aria-label="Tutup">×</button></div>
+  <div class="geo-modal-body">
+   <section class="geopark-narrative-frame" aria-label="Penubuhan Geopark">
+    <h3>Penubuhan Geopark</h3>
+    <p>Pada tahun 2019, Jabatan Perancangan Bandar dan Desa Negeri Selangor (PLANMalaysia Selangor) telah menjalankan kajian Gombak–Hulu Langat Geopark Selangor bagi mengenal pasti geotapak-geotapak lain yang berpotensi di dalam daerah Gombak dan Hulu Langat. Pada 15 Oktober 2020, cadangan pelaksanaan Projek Gombak–Hulu Langat Geopark Selangor telah dibentangkan dan dipersetujui dalam Mesyuarat Majlis Tindakan Ekonomi Selangor (MTES). Langkah ini amat penting bagi mendapatkan sokongan yang lebih komprehensif daripada setiap PBT dan agensi teknikal dalam usaha melaksanakan penubuhan Gombak–Hulu Langat Geopark.</p>
+    <p>Kawasan Kajian Gombak–Hulu Langat Geopark (GHLGp) melibatkan dua (2) daerah di bahagian timur Negeri Selangor iaitu Daerah Gombak dan Daerah Hulu Langat, yang meliputi kawasan seluas 112,955 hektar. Persempadanan geopark ini ditentukan berdasarkan peletakan geotapak-geotapak yang telah dikenal pasti.</p>
+    <p>Pentadbiran Daerah Gombak berpusat di Pejabat Daerah dan Tanah Gombak dan melibatkan dua (2) PBT iaitu Majlis Perbandaran Selayang dan Majlis Perbandaran Ampang Jaya. Pentadbiran Daerah Hulu Langat pula berpusat di Pejabat Daerah dan Tanah Hulu Langat dan Pihak Berkuasa Tempatan yang terlibat dalam geopark di dalam Daerah Hulu Langat ialah Majlis Perbandaran Kajang.</p>
+    <p>Secara keseluruhannya, terdapat 20 geotapak yang berpotensi telah dikenal pasti di Daerah Gombak dan Daerah Hulu Langat. Ia merangkumi 13 geotapak di Daerah Gombak dan 7 geotapak di Daerah Hulu Langat. Terdapat 12 geotapak di bawah kawasan pentadbiran Majlis Perbandaran Selayang (MPS), 1 geotapak di bawah kawasan pentadbiran Majlis Perbandaran Ampang Jaya (MPAJ) serta 7 geotapak di bawah kawasan pentadbiran Majlis Perbandaran Kajang (MPKj).</p>
+    <p>Penubuhan geopark menyumbang dan menyokong pencapaian lapan (8) daripada 17 Matlamat Pembangunan Lestari (SDGs). Gagasan Geopark menganjur inisiatif unik dalam penghasilan produk tempatan yang boleh dijadikan identiti sesuatu wilayah sebagai produk Geopark. Selain itu, ia mewujudkan jalinan kerjasama antara masyarakat setempat dalam memelihara dan melindungi warisan alam, memartabatkan sejarah dan budaya di samping mengukuhkan kecintaan terhadap keunikan tempatan. Di samping itu juga, rantaian aktiviti ekonomi dapat diwujudkan dan mengukuhkan pengurusan sumber asli sebagai aset Negeri Selangor dalam menyokong inisiatif <em>Central Forest Spine</em> (CFS) dan keberkesanan rangkaian koridor ekologi hutan terutamanya di B-SL1 (Hutan Simpan Raja Musa – Hutan Simpan Bukit Tarek – Hutan Simpan Bukit Gading).</p>
+    <p>Dengan memperoleh pengiktirafan di peringkat kebangsaan mahupun dunia secara tidak langsung mewujudkan sumber-sumber baharu untuk manfaat penyelidikan saintifik dan ekonomi kepada Negeri Selangor secara keseluruhannya.</p>
+    <p>Kajian Gombak–Hulu Langat Geopark ini juga adalah lanjutan daripada Kajian Dossier Permatang Kuarza Gombak Selangor (PKGS) yang telah disediakan pada tahun 2018 bagi tujuan pencalonan PKGS sebagai Tapak Warisan Dunia UNESCO. Walau bagaimanapun, hasil kajian tersebut mendapati PKGS belum bersedia untuk dicalonkan sebagai Tapak Warisan Dunia UNESCO kerana kekurangan kajian saintifik dan penyelidikan serta tahap integriti PKGS yang masih lemah.</p>
+    <p>Berdasarkan hasil kajian Dossier PKGS tersebut, Pasukan Pakar yang dilantik mendapati tapak PKGS sangat berpotensi sebagai salah satu geotapak bagi pembangunan Geopark di Negeri Selangor yang mana tapak geopark ini akan dicadangkan sebagai Tapak Geopark Kebangsaan terlebih dahulu sebelum diangkat sebagai Tapak Geopark Global UNESCO. Selain tapak PKGS, terdapat beberapa tapak lain dalam Daerah Gombak dan Hulu Langat telah dikenal pasti mempunyai nilai warisan yang tinggi untuk digabungkan bagi membentuk Gombak–Hulu Langat Geopark seterusnya bakal menjadi tapak Geopark pertama di Negeri Selangor yang diiktiraf di peringkat kebangsaan dan dunia (UNESCO).</p>
+   </section>
+   <section class="chronology-roadmap" aria-label="Carta Kronologi dan Pelan Tindakan Geopark">
+    <h3>Kronologi Pelaksanaan Gombak–Hulu Langat Geopark</h3>
+    <div class="chrono-phases">
+     <article class="chrono-phase">
+      <div class="chrono-year">2019</div>
+      <div class="chrono-detail"><ul>
+       <li>Pengenalan Geopark di Selangor, mengenal pasti 20 kawasan warisan geologi dalam Daerah Gombak dan Hulu Langat.</li>
+       <li>Dokumentasi profil asas kawasan geotapak yang telah dikenal pasti.</li>
+       <li>Mengenal pasti sempadan awalan dan juga tindakan kawalan pembangunan yang perlu diambil bagi memelihara dan mengekalkan keaslian kawasan geotapak yang berpotensi.</li>
+      </ul></div>
+      <div class="chrono-plan">PELAN TINDAKAN PEMBANGUNAN GEOPARK</div>
+     </article>
+     <article class="chrono-phase">
+      <div class="chrono-year">2020</div>
+      <div class="chrono-detail"><ul>
+       <li>Dokumen yang menyelaraskan pengurusan geopark serta mengukuhkan kerjasama sedia ada bagi memastikan kualiti geologi kawasan geotapak dipelihara dan dipromosikan untuk generasi akan datang.</li>
+       <li>Kerangka badan pengurusan geopark.</li>
+       <li>Mengambil kira keperluan persediaan pencalonan Geopark GHL ke arah pengiktirafan Geopark Kebangsaan.</li>
+      </ul></div>
+      <div class="chrono-plan">PELAN PENGURUSAN GEOPARK GOMBAK–HULU LANGAT FASA 1</div>
+     </article>
+     <article class="chrono-phase">
+      <div class="chrono-year">2021–2025</div>
+      <div class="chrono-detail"><ul>
+       <li>Penyediaan Dossier GHL Geopark ke arah Geopark Kebangsaan.</li>
+       <li>Menggerakkan JK ProTem.</li>
+       <li>Dokumen yang menyelaraskan program bersama pihak berkepentingan melalui sesi buy-in atau FGD.</li>
+       <li>Memanfaatkan bekas kuarters pekerja lombong batu arang sebagai Galeri Batu Arang GHLGp.</li>
+       <li>Mendapat pengiktirafan GHLGp sebagai tapak Geopark Kebangsaan.</li>
+      </ul></div>
+      <div class="chrono-plan">PROJEK PELAKSANAAN GEOPARK GOMBAK–HULU LANGAT FASA 2</div>
+     </article>
+    </div>
+    <p class="chrono-source">Carta kronologi disusun semula berdasarkan grafik yang dibekalkan.</p>
+   </section>
+   <p class="chrono-source">Sumber: Maklumat Penubuhan Gombak–Hulu Langat Geopark yang dibekalkan.</p>
+  </div>
+ </div>
+</div>
+
 </body></html>
