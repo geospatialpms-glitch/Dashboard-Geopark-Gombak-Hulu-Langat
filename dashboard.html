@@ -418,6 +418,12 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
 #geoTrailModal.jejak-detail-view .jejak-background-intro{display:none!important}
 @media(max-width:900px){#geoTrailModal .jejak-background-intro{grid-template-columns:1fr}}
 @media(max-width:550px){#geoTrailModal .jejak-background-text{padding:14px}#geoTrailModal .jejak-development{padding:10px}#geoTrailModal .jejak-background-text p{font-size:12px}}
+
+/* Penerangan sejarah Jejak GHLGp pada paparan pilihan sahaja */
+#geoTrailModal .jejak-sejarah-intro{background:linear-gradient(135deg,#f7faf4,#fff);border:1px solid #d8e8d4;border-radius:12px;padding:16px 20px;margin:12px 0 18px;max-height:310px;overflow:auto}
+#geoTrailModal .jejak-sejarah-intro p{font:500 13px/1.7 Arial,sans-serif;color:#283c30;text-align:justify;margin:0 0 12px}
+#geoTrailModal .jejak-sejarah-intro p:last-child{margin-bottom:0}
+#geoTrailModal.jejak-detail-view .jejak-sejarah-intro{display:none!important}
 </style>
 <style id="sidebar-nav-consistent">.sidebar .navbtn{min-height:49px;display:flex;align-items:center;justify-content:flex-start;text-align:left;font-size:12px;line-height:1.3;font-weight:600;gap:11px;padding:12px 14px}.sidebar .navbtn .navicon{width:18px;min-width:18px;flex:0 0 18px}.sidebar .navbtn>span:last-child{width:auto;flex:1;text-align:left}.sidebar #aboutGeoparkBtn{justify-content:flex-start;text-align:left}.sidebar #aboutGeoparkBtn span{width:auto}.sidebar #aboutGeoparkBtn>span:last-child{flex:1;width:auto}</style></head>
 <body><div class="topline"></div>
@@ -793,6 +799,13 @@ window.addEventListener("resize",()=>setTimeout(()=>map.invalidateSize(false),80
     <div class="geo-modal-body">
       
       <p class="geo-intro">Terokai rangkaian geopelancongan Gombak–Hulu Langat melalui tiga jenis jejak. Pilih kategori, kemudian tekan mana-mana lokasi untuk membaca penerangannya.</p>
+      <div class="jejak-sejarah-intro" aria-label="Pengenalan Gombak–Hulu Langat Geopark">
+        <p>Pada tahun 2019, Jabatan Perancangan Bandar dan Desa Negeri Selangor (PLANMalaysia Selangor) telah menjalankan kajian Gombak–Hulu Langat Geopark Selangor bagi mengenal pasti geotapak-geotapak lain yang berpotensi di dalam daerah Gombak dan Hulu Langat. Pada 15 Oktober 2020, cadangan pelaksanaan Projek Gombak–Hulu Langat Geopark Selangor telah dibentangkan dan dipersetujui dalam Mesyuarat Majlis Tindakan Ekonomi Selangor (MTES). Langkah ini amat penting bagi mendapatkan sokongan yang lebih komprehensif daripada setiap PBT dan agensi teknikal dalam usaha melaksanakan penubuhan Gombak–Hulu Langat Geopark.</p>
+        <p>Kawasan Kajian Gombak–Hulu Langat Geopark (GHL Gp) melibatkan dua (2) daerah di bahagian timur Negeri Selangor iaitu Daerah Gombak dan Daerah Hulu Langat, yang meliputi kawasan seluas 112,955 hektar. Persempadanan geopark ini ditentukan berdasarkan peletakan geotapak-geotapak yang telah dikenal pasti.</p>
+        <p>Pentadbiran Daerah Gombak berpusat di Pejabat Daerah dan Tanah Gombak dan melibatkan dua (2) PBT iaitu Majlis Perbandaran Selayang dan Majlis Perbandaran Ampang Jaya. Pentadbiran Daerah Hulu Langat pula berpusat di Pejabat Daerah dan Tanah Hulu Langat dan Pihak Berkuasa Tempatan yang terlibat dalam geopark di dalam Daerah Hulu Langat ialah Majlis Perbandaran Kajang.</p>
+        <p>Secara keseluruhannya, terdapat 20 geotapak yang berpotensi telah dikenal pasti di Daerah Gombak dan Daerah Hulu Langat. Ia merangkumi 13 geotapak di Daerah Gombak dan 7 geotapak di Daerah Hulu Langat. Terdapat 12 geotapak di bawah kawasan pentadbiran Majlis Perbandaran Selayang (MPS), 1 geotapak di bawah pentadbiran Majlis Perbandaran Ampang Jaya (MPAJ) serta tujuh (7) geotapak di bawah kawasan pentadbiran Majlis Perbandaran Kajang (MPKj).</p>
+        <p>Buku Coffee Table GHL Geopark ini akan memandu pihak berkepentingan untuk mengenali 20 geotapak yang terpilih ini dan memahami secara ringkas kronologi dan latar belakang Kajian Gombak–Hulu Langat Geopark.</p>
+      </div>
       <button type="button" id="jejakBackToMenu" class="jejak-back-button" hidden>← Kembali ke Pilihan Jejak</button>
       <div class="jejak-visual-frame" aria-label="Pilih Jejak GHLGp">
         <button type="button" class="jejak-hotspot jejak-hotspot-geologi" aria-label="Buka Jejak Geologi" onclick="document.querySelector('#geoTrailModal .jejak-tab[data-jejak=geologi]').click()"></button>
