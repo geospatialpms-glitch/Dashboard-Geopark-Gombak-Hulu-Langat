@@ -1140,6 +1140,10 @@ function openGeoTrailCategory(category){
  modal.setAttribute("aria-hidden","false");
  const tab=modal.querySelector('.jejak-tab[data-jejak="'+category+'"]');
  if(tab)tab.click();
+ // Direct sidebar buttons skip the three-trail selection and show the selected information.
+ modal.classList.add("jejak-detail-view");
+ const title=modal.querySelector(".geo-modal-head h2");
+ if(title)title.textContent={geologi:"Jejak Geologi",makanan:"Jejak Makanan",warisan:"Jejak Warisan"}[category];
  const body=modal.querySelector(".geo-modal-body");
  if(body)body.scrollTop=0;
  setSidebarActive(document.getElementById("geoTrailBtn"));
