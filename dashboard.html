@@ -1131,21 +1131,27 @@ function setJejakFrameMode(detail){
 }
 function openGeoTrailCategory(category){
  if(!["geologi","makanan","warisan"].includes(category))return;
+ const main=document.getElementById("utama");
+ const frame=document.getElementById("jejakFrame");
  const modal=document.getElementById("geoTrailModal");
- if(!modal)return;
- // Restore the original popup behavior: never embed the Jejak modal under the dashboard.
- if(modal.parentElement!==document.body)document.body.appendChild(modal);
- modal.classList.remove("jejak-embedded","jejak-detail-view");
- modal.classList.add("open");
+ if(!main||!frame||!modal)return;
+ document.getElementById("chronologyModal")?.classList.remove("open");
+ main.classList.remove("inline-page-mode","chronology-mode");
+ main.classList.add("jejak-frame-active");
+ frame.hidden=false;
+ // Place the existing trail information inside the dashboard frame, not a popup.
+ if(modal.parentElement!==frame)frame.appendChild(modal);
+ modal.classList.add("jejak-embedded","jejak-detail-view","open");
  modal.setAttribute("aria-hidden","false");
  const tab=modal.querySelector('.jejak-tab[data-jejak="'+category+'"]');
  if(tab)tab.click();
- // Direct sidebar buttons skip the three-trail selection and show the selected information.
  modal.classList.add("jejak-detail-view");
+ setJejakFrameMode(true);
  const title=modal.querySelector(".geo-modal-head h2");
  if(title)title.textContent={geologi:"Jejak Geologi",makanan:"Jejak Makanan",warisan:"Jejak Warisan"}[category];
  const body=modal.querySelector(".geo-modal-body");
  if(body)body.scrollTop=0;
+ window.scrollTo({top:0,behavior:"smooth"});
  setSidebarActive(document.getElementById("geoTrailBtn"));
 }
 function openGeoTrail(){
@@ -1155,14 +1161,14 @@ function openGeoTrail(){
  main.classList.remove("inline-page-mode","chronology-mode");
  frame.hidden=false;
  main.classList.add("jejak-frame-active");
- if(modal){modal.classList.remove("open","jejak-detail-view");modal.setAttribute("aria-hidden","true")}
+ if(modal){modal.classList.remove("open","jejak-detail-view","jejak-embedded");modal.setAttribute("aria-hidden","true")}
  setJejakFrameMode(false);
  window.scrollTo({top:0,behavior:"smooth"});
  setSidebarActive(document.getElementById("geoTrailBtn"));
 }
 function closeJejakFrame(){
  const main=document.getElementById("utama"),frame=document.getElementById("jejakFrame"),modal=document.getElementById("geoTrailModal");
- if(modal){modal.classList.remove("open","jejak-detail-view");modal.setAttribute("aria-hidden","true")}
+ if(modal){modal.classList.remove("open","jejak-detail-view","jejak-embedded");modal.setAttribute("aria-hidden","true")}
  setJejakFrameMode(false);
  if(main)main.classList.remove("jejak-frame-active");
  if(frame)frame.hidden=true;
