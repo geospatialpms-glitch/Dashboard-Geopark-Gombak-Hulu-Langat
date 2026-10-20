@@ -383,10 +383,10 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
 .about-grid .about-card p,.about-grid .component-item .component-label,.about-grid .benefit b,.about-grid .benefit small{font-size:12px!important;line-height:1.6!important}
 
 /* Jejak GHLGp dan kategorinya kini dipaparkan dalam frame kandungan dashboard. */
-#jejakFrame:has(#geoTrailModal) > .jejak-frame-head,
-#jejakFrame:has(#geoTrailModal) > .jejak-frame-image,
-#jejakFrame:has(#geoTrailModal) > p{display:none!important}
-#jejakFrame:has(#geoTrailModal){padding:0;border:0;box-shadow:none;overflow:visible}
+#jejakFrame.jejak-show-detail > .jejak-frame-head,
+#jejakFrame.jejak-show-detail > .jejak-frame-image,
+#jejakFrame.jejak-show-detail > p{display:none!important}
+#jejakFrame.jejak-show-detail{padding:0;border:0;box-shadow:none;overflow:visible}
 #geoTrailModal.jejak-embedded,
 #geoTrailModal.jejak-embedded.open{position:relative!important;inset:auto!important;z-index:auto!important;display:block!important;background:transparent!important;padding:0!important;overflow:visible!important}
 #geoTrailModal.jejak-embedded .geo-modal-card{width:100%!important;height:auto!important;min-height:calc(100vh - 175px);max-height:none!important;display:flex!important;overflow:visible!important;margin:0!important}
