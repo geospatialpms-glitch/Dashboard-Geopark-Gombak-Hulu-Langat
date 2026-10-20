@@ -599,7 +599,9 @@ document.addEventListener("DOMContentLoaded",()=>{
    chronologyModal.setAttribute("aria-hidden","true");
   };
   chronologyBtn.addEventListener("click",()=>{
-   if(main)main.classList.remove("chronology-mode");
+   if(main){main.classList.remove("chronology-mode","jejak-frame-active","inline-page-mode");}
+   const trailFrame=document.getElementById("jejakFrame");
+   if(trailFrame)trailFrame.hidden=true;
    if(chronologyModal.parentElement!==document.body)document.body.appendChild(chronologyModal);
    chronologyModal.classList.add("open");
    chronologyModal.setAttribute("aria-hidden","false");
@@ -1419,12 +1421,13 @@ function openGeotapakInfo(code){
 @media(max-width:650px){.chronology-roadmap{padding:13px}.chrono-phase{grid-template-columns:55px 1fr}.chrono-year{font-size:16px}.chrono-detail{padding:12px 18px 12px 12px;border-radius:0 24px 24px 0}.chrono-detail li{font-size:11px}.chrono-plan{font-size:10px;padding:8px 12px}}
 .geopark-narrative-frame .geopark-combined-subheading{margin-top:28px;padding-top:18px;border-top:1px solid rgba(92,146,58,.24)}
 
-/* Kronologi ialah paparan berbingkai dalam dashboard, bukan popup terapung. */
-#utama.chronology-mode > :not(#chronologyModal){display:none!important}
-#chronologyModal{display:none;position:relative;inset:auto;z-index:auto;padding:0;background:transparent;align-items:stretch;justify-content:stretch;min-height:0}
-#chronologyModal.open{display:block}
-#chronologyModal .geo-modal-card{width:100%;max-height:none;overflow:visible;border-radius:14px;box-shadow:0 3px 16px rgba(20,60,30,.12)}
-#chronologyModal .geo-modal-body{max-height:none;overflow:visible}
+/* Kronologi: paparan popup penuh, selaras dengan fungsi butang. */
+#chronologyModal{position:fixed;inset:0;z-index:100000;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(7,32,21,.68);overflow:auto}
+#chronologyModal.open{display:flex}
+#chronologyModal .geo-modal-card{width:min(1400px,calc(100vw - 44px));height:min(92dvh,950px);max-height:92dvh;overflow:hidden;display:flex;flex-direction:column;border-radius:14px;box-shadow:0 20px 55px rgba(0,0,0,.24)}
+#chronologyModal .geo-modal-body{flex:1 1 auto;min-height:0;overflow-y:auto}
+#jejakFrame:not([hidden]){display:block!important}
+#jejakFrame:not(.jejak-show-detail) .jejak-frame-image{display:block!important}
 .chronology-approval{max-width:920px;margin:24px auto;padding:25px 28px;border-radius:15px;border:1px solid #dce7d9;background:linear-gradient(135deg,#f7faf6,#edf4eb)}
 .chronology-approval h3{font-size:22px;font-weight:800;color:#176338;margin:0 0 15px;padding-bottom:10px;border-bottom:2px solid #8dbb76}
 .chronology-approval p,.chronology-approval li{color:#283c31;font-size:14px;line-height:1.7}
