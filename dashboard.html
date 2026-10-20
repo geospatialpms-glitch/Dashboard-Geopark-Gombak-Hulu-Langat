@@ -594,17 +594,21 @@ document.addEventListener("DOMContentLoaded",()=>{
 
  if(chronologyBtn&&chronologyModal&&chronologyClose){
   const main=document.getElementById("utama");
-  chronologyBtn.addEventListener("click",()=>{
-   main.classList.add("chronology-mode");
-   chronologyModal.classList.add("open");
-   chronologyModal.setAttribute("aria-hidden","false");
-   chronologyModal.scrollIntoView({behavior:"smooth",block:"start"});
-  });
-  chronologyClose.addEventListener("click",()=>{
-   main.classList.remove("chronology-mode");
+  const closeChronology=()=>{
    chronologyModal.classList.remove("open");
    chronologyModal.setAttribute("aria-hidden","true");
+  };
+  chronologyBtn.addEventListener("click",()=>{
+   if(main)main.classList.remove("chronology-mode");
+   if(chronologyModal.parentElement!==document.body)document.body.appendChild(chronologyModal);
+   chronologyModal.classList.add("open");
+   chronologyModal.setAttribute("aria-hidden","false");
+   const body=chronologyModal.querySelector(".geo-modal-body");
+   if(body)body.scrollTop=0;
+   setSidebarActive(chronologyBtn);
   });
+  chronologyClose.addEventListener("click",closeChronology);
+  chronologyModal.addEventListener("click",e=>{if(e.target===chronologyModal)closeChronology()});
  }
  if(aboutBtn&&aboutModal){
   aboutBtn.addEventListener("click",()=>openInfo(aboutBtn,aboutModal));
@@ -1141,8 +1145,9 @@ function openGeoTrailCategory(category){
 function openGeoTrail(){
  const main=document.getElementById("utama"),frame=document.getElementById("jejakFrame"),modal=document.getElementById("geoTrailModal");
  if(!main||!frame)return;
+ document.getElementById("chronologyModal")?.classList.remove("open");
+ main.classList.remove("inline-page-mode","chronology-mode");
  frame.hidden=false;
- main.classList.remove("inline-page-mode");
  main.classList.add("jejak-frame-active");
  if(modal){modal.classList.remove("open","jejak-detail-view");modal.setAttribute("aria-hidden","true")}
  setJejakFrameMode(false);
