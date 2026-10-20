@@ -375,6 +375,17 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
 /* Apa Itu Geopark: heading matches KPI value (24px); descriptions match KPI label (12px) */
 .about-grid .about-card > h3,.about-grid .about-intro-map-text > h3{font-size:24px!important;font-weight:800!important;line-height:1.2!important}
 .about-grid .about-card p,.about-grid .component-item .component-label,.about-grid .benefit b,.about-grid .benefit small{font-size:12px!important;line-height:1.6!important}
+
+/* Jejak GHLGp dan kategorinya kini dipaparkan dalam frame kandungan dashboard. */
+#jejakFrame:has(#geoTrailModal) > .jejak-frame-head,
+#jejakFrame:has(#geoTrailModal) > .jejak-frame-image,
+#jejakFrame:has(#geoTrailModal) > p{display:none!important}
+#jejakFrame:has(#geoTrailModal){padding:0;border:0;box-shadow:none;overflow:visible}
+#geoTrailModal.jejak-embedded,
+#geoTrailModal.jejak-embedded.open{position:relative!important;inset:auto!important;z-index:auto!important;display:block!important;background:transparent!important;padding:0!important;overflow:visible!important}
+#geoTrailModal.jejak-embedded .geo-modal-card{width:100%!important;height:auto!important;min-height:calc(100vh - 175px);max-height:none!important;display:flex!important;overflow:visible!important;margin:0!important}
+#geoTrailModal.jejak-embedded .geo-modal-body{height:auto!important;max-height:none!important;overflow:visible!important;flex:1!important}
+#geoTrailModal.jejak-embedded .geo-modal-close{display:none!important}
 </style>
 <style id="sidebar-nav-consistent">.sidebar .navbtn{min-height:49px;display:flex;align-items:center;justify-content:flex-start;text-align:left;font-size:12px;line-height:1.3;font-weight:600;gap:11px;padding:12px 14px}.sidebar .navbtn .navicon{width:18px;min-width:18px;flex:0 0 18px}.sidebar .navbtn>span:last-child{width:auto;flex:1;text-align:left}.sidebar #aboutGeoparkBtn{justify-content:flex-start;text-align:left}.sidebar #aboutGeoparkBtn span{width:auto}.sidebar #aboutGeoparkBtn>span:last-child{flex:1;width:auto}</style></head>
 <body><div class="topline"></div>
@@ -961,33 +972,34 @@ document.querySelectorAll(".jejak-subtab").forEach(btn=>btn.addEventListener("cl
 renderJejakList("gombak","jejakGeologiList","jejakGeologiDetail");
 renderJejakList("makanan","jejakMakananList","jejakMakananDetail");
 renderJejakList("warisan","jejakWarisanList","jejakWarisanDetail");
+function displayJejakInFrame(category){
+ const modal=document.getElementById("geoTrailModal");
+ const main=document.getElementById("utama");
+ const frame=document.getElementById("jejakFrame");
+ if(!modal||!main||!frame)return;
+ if(modal.parentElement!==frame)frame.appendChild(modal);
+ frame.hidden=false;
+ main.classList.remove("inline-page-mode");
+ main.classList.add("jejak-frame-active");
+ modal.classList.add("jejak-embedded","open");
+ modal.setAttribute("aria-hidden","false");
+ modal.classList.remove("jejak-detail-view");
+ if(category){
+   const tab=modal.querySelector('.jejak-tab[data-jejak="'+category+'"]');
+   if(tab)tab.click();
+   modal.classList.add("jejak-detail-view");
+ }
+ const body=modal.querySelector(".geo-modal-body");
+ if(body)body.scrollTop=0;
+ window.scrollTo({top:0,behavior:"smooth"});
+ setSidebarActive(document.getElementById("geoTrailBtn"));
+}
 function openGeoTrailCategory(category){
-  const modal=document.getElementById("geoTrailModal");
-  const allowed=["geologi","makanan","warisan"];
-  if(!modal||!allowed.includes(category))return;
-  setSidebarActive(document.getElementById("geoTrailBtn"));
-  modal.classList.remove("jejak-detail-view");
-  const tab=modal.querySelector(".jejak-tab[data-jejak="+category+"]");
-  if(tab)tab.click();
-  modal.classList.add("jejak-detail-view","open");
-  modal.setAttribute("aria-hidden","false");
-  const body=modal.querySelector(".geo-modal-body");
-  if(body)body.scrollTop=0;
+ if(!["geologi","makanan","warisan"].includes(category))return;
+ displayJejakInFrame(category);
 }
 function openGeoTrail(){
-  // Versi asal: paparkan pilihan tiga Jejak GHLGp dalam popup.
-  const modal=document.getElementById("geoTrailModal");
-  const main=document.getElementById("utama");
-  const frame=document.getElementById("jejakFrame");
-  if(!modal)return;
-  if(frame)frame.hidden=true;
-  if(main)main.classList.remove("jejak-frame-active");
-  modal.classList.remove("jejak-detail-view");
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden","false");
-  const body=modal.querySelector(".geo-modal-body");
-  if(body)body.scrollTop=0;
-  setSidebarActive(document.getElementById("geoTrailBtn"));
+ displayJejakInFrame(null);
 }
 function closeJejakFrame(){
  const main=document.getElementById("utama"),frame=document.getElementById("jejakFrame");
