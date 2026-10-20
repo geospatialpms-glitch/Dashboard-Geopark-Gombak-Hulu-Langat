@@ -1079,34 +1079,33 @@ document.querySelectorAll(".jejak-subtab").forEach(btn=>btn.addEventListener("cl
 renderJejakList("gombak","jejakGeologiList","jejakGeologiDetail");
 renderJejakList("makanan","jejakMakananList","jejakMakananDetail");
 renderJejakList("warisan","jejakWarisanList","jejakWarisanDetail");
-function displayJejakInFrame(category){
+function openGeoTrailCategory(category){
+ if(!["geologi","makanan","warisan"].includes(category))return;
  const modal=document.getElementById("geoTrailModal");
- const main=document.getElementById("utama");
- const frame=document.getElementById("jejakFrame");
- if(!modal||!main||!frame)return;
- if(modal.parentElement!==frame)frame.appendChild(modal);
+ if(!modal)return;
+ if(modal.parentElement!==document.body)document.body.appendChild(modal);
+ modal.classList.remove("jejak-embedded");
+ modal.classList.add("open","jejak-detail-view");
+ modal.setAttribute("aria-hidden","false");
+ const tab=modal.querySelector('.jejak-tab[data-jejak="'+category+'"]');
+ if(tab)tab.click();
+ const body=modal.querySelector(".geo-modal-body");
+ if(body)body.scrollTop=0;
+}
+function openGeoTrail(){
+ const main=document.getElementById("utama"),frame=document.getElementById("jejakFrame");
+ const modal=document.getElementById("geoTrailModal");
+ if(!main||!frame)return;
+ if(modal){
+   if(modal.parentElement!==document.body)document.body.appendChild(modal);
+   modal.classList.remove("jejak-embedded","open","jejak-detail-view");
+   modal.setAttribute("aria-hidden","true");
+ }
  frame.hidden=false;
  main.classList.remove("inline-page-mode");
  main.classList.add("jejak-frame-active");
- modal.classList.add("jejak-embedded","open");
- modal.setAttribute("aria-hidden","false");
- modal.classList.remove("jejak-detail-view");
- if(category){
-   const tab=modal.querySelector('.jejak-tab[data-jejak="'+category+'"]');
-   if(tab)tab.click();
-   modal.classList.add("jejak-detail-view");
- }
- const body=modal.querySelector(".geo-modal-body");
- if(body)body.scrollTop=0;
  window.scrollTo({top:0,behavior:"smooth"});
  setSidebarActive(document.getElementById("geoTrailBtn"));
-}
-function openGeoTrailCategory(category){
- if(!["geologi","makanan","warisan"].includes(category))return;
- displayJejakInFrame(category);
-}
-function openGeoTrail(){
- displayJejakInFrame(null);
 }
 function closeJejakFrame(){
  const main=document.getElementById("utama"),frame=document.getElementById("jejakFrame");
