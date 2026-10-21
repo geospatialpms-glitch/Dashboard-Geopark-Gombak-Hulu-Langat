@@ -593,6 +593,14 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
 /* Paparan imej pengenalan — ganti kad atlas lama tanpa menjejaskan komponen lain */
 #aboutGeoparkModal .about-intro-image-card{display:block;padding:0;overflow:hidden;border:0;border-radius:20px;background:transparent;box-shadow:none}
 #aboutGeoparkModal .about-intro-image-card img{display:block;width:100%;height:auto;object-fit:contain;border-radius:20px}
+
+/* About Geopark modal: remove unnecessary top and side gutters */
+#aboutGeoparkModal{padding:8px}
+#aboutGeoparkModal .geo-modal-card{width:calc(100vw - 16px);height:calc(100dvh - 16px);max-height:calc(100dvh - 16px)}
+#aboutGeoparkModal .geo-modal-body{padding:8px 10px 14px}
+#aboutGeoparkModal .about-grid{width:100%;max-width:none;margin:0;gap:12px}
+#aboutGeoparkModal .about-intro-image-card{margin:0}
+@media(max-width:760px){#aboutGeoparkModal{padding:4px}#aboutGeoparkModal .geo-modal-card{width:calc(100vw - 8px);height:calc(100dvh - 8px);max-height:calc(100dvh - 8px)}#aboutGeoparkModal .geo-modal-body{padding:6px}}
 </style>
 <style id="sidebar-nav-consistent">.sidebar .navbtn{min-height:49px;display:flex;align-items:center;justify-content:flex-start;text-align:left;font-size:12px;line-height:1.3;font-weight:600;gap:11px;padding:12px 14px}.sidebar .navbtn .navicon{width:18px;min-width:18px;flex:0 0 18px}.sidebar .navbtn>span:last-child{width:auto;flex:1;text-align:left}.sidebar #aboutGeoparkBtn{justify-content:flex-start;text-align:left}.sidebar #aboutGeoparkBtn span{width:auto}.sidebar #aboutGeoparkBtn>span:last-child{flex:1;width:auto}</style></head>
 <body><div class="topline"></div>
