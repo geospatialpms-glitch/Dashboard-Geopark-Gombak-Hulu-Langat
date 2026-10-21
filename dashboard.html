@@ -1564,12 +1564,35 @@ function openGeotapakInfo(code){
  else if(more?.desc){const p=document.createElement("p");p.textContent=more.desc;body.append(p)}
 
 
+ const infra=document.createElement("section");infra.className="geotapak-infra";
+ const infraTitle=document.createElement("h4");infraTitle.textContent="INFRASTRUKTUR ASAS";infra.append(infraTitle);
+ const infraNote=document.createElement("p");infraNote.className="geotapak-infra-note";infraNote.textContent="Status kemudahan bagi geotapak ini belum disahkan. Simbol di bawah ialah kategori semakan infrastruktur asas.";infra.append(infraNote);
+ const facilities=[["▦","Pusat Maklumat"],["⚑","Panel Maklumat"],["♙","Laluan Pejalan Kaki/Trail"],["⌁","Akses ke Geotapak"],["▲","Mercu Tanda Geopark"],["▤","Wakaf/Tempat Duduk/Tandas Awam"]];
+ const infraGrid=document.createElement("div");infraGrid.className="geotapak-infra-grid";
+ facilities.forEach(([symbol,label])=>{const item=document.createElement("div");item.className="geotapak-infra-item";const icon=document.createElement("span");icon.className="geotapak-infra-icon";icon.textContent=symbol;const name=document.createElement("span");name.textContent=label;const status=document.createElement("span");status.className="geotapak-infra-status";status.textContent="Belum disahkan";item.append(icon,name,status);infraGrid.append(item)});
+ infra.append(infraGrid);
+ const legend=document.createElement("div");legend.className="geotapak-infra-legend";legend.innerHTML="<strong>Petunjuk status:</strong> <span>🟢 Telah disediakan</span><span>🟡 Perlu ditambah baik</span><span>🔴 Perlu disediakan</span><span>🟣 Tidak berkenaan</span>";infra.append(legend);
+ body.append(infra);
+
  card.append(header,body);overlay.append(card);document.body.append(overlay);
  const dismiss=()=>{overlay.remove();document.removeEventListener("keydown",onKey)};
  const onKey=e=>{if(e.key==="Escape")dismiss()};
  close.addEventListener("click",dismiss);overlay.addEventListener("click",e=>{if(e.target===overlay)dismiss()});document.addEventListener("keydown",onKey);close.focus();
 }
 </script>
+
+<style id="geotapak-infra-styles">
+.geotapak-infra{margin:22px 0 10px;padding:18px;border-radius:14px;background:linear-gradient(135deg,#e8f1e6,#f8f8f2);border:1px solid #d2e1d0}
+.geotapak-infra h4{margin:0 0 10px;font-size:19px;font-weight:800;font-style:italic;letter-spacing:.03em;color:#155b39}
+.geotapak-infra-note{margin:0 0 14px!important;font-size:12px;color:#516356;line-height:1.55}
+.geotapak-infra-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;background:#3d2c43;border-radius:13px;padding:15px}
+.geotapak-infra-item{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;gap:6px;padding:7px 5px;color:white;font-size:12px;line-height:1.3}
+.geotapak-infra-icon{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;background:#fff;color:#273b36;box-shadow:0 2px 5px #0003;font-size:27px}
+.geotapak-infra-status{color:#e4dfeb;font-size:10px}
+.geotapak-infra-legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:14px;color:#566357;font-size:11px}
+.geotapak-infra-legend strong{flex-basis:100%}
+@media(max-width:520px){.geotapak-infra-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
 <script>
 (function(){
  const jejak=new URLSearchParams(location.search).get('jejak');
