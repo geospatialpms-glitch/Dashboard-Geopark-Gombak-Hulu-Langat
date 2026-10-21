@@ -673,6 +673,7 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
 .right-analysis .compact-table .table-wrap{scrollbar-color:#a8c49a #f1f6ed;scrollbar-width:thin}
 @media(max-width:1100px){.right-analysis .chartbox{padding:12px}}
 
+#areaPanel .panel-title .accent:before,#senarai .panel-title .accent:before{display:none!important}#areaPanel .analysis-heading-icon,#senarai .analysis-heading-icon{width:19px;height:19px;display:inline-block;flex:none;margin-right:2px}
 </style>
 <style id="sidebar-nav-consistent">.sidebar .navbtn{min-height:49px;display:flex;align-items:center;justify-content:flex-start;text-align:left;font-size:12px;line-height:1.3;font-weight:600;gap:11px;padding:12px 14px}.sidebar .navbtn .navicon{width:18px;min-width:18px;flex:0 0 18px}.sidebar .navbtn>span:last-child{width:auto;flex:1;text-align:left}.sidebar #aboutGeoparkBtn{justify-content:flex-start;text-align:left}.sidebar #aboutGeoparkBtn span{width:auto}.sidebar #aboutGeoparkBtn>span:last-child{flex:1;width:auto}</style>
 <style id="geotapak-infrastruktur-style">
@@ -817,8 +818,8 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
  <div class="dashboard-main-grid" id="analisis">
    <div class="panel map-panel"><div class="panel-title"><div class="accent">Taburan Geotapak Gombak - Hulu Langat Geopark</div><span class="panel-sub" style="color:#fff">Satelit • sempadan daerah • popup geotapak</span></div><div style="position:relative"><input id="mapSearch" class="map-search" placeholder="Cari nama atau kod geotapak..."><div id="map"></div></div></div>
    <div class="right-analysis">
-     <div class="panel area-panel-click" id="areaPanel"><div class="panel-title"><div class="accent">Keluasan Mengikut Daerah</div></div><div class="chartbox"><canvas id="areaChart"></canvas></div></div>
-     <div class="panel table-panel compact-table" id="senarai"><div class="panel-title"><div class="accent">Senarai Geotapak GHL Geopark</div><span class="panel-sub" id="tableCount">20 rekod</span></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Bil</th><th>Kod</th><th>Nama Geotapak</th><th>Daerah</th><th>PBT</th><th>Status</th></tr></thead><tbody id="tableBody"></tbody></table></div></div>
+     <div class="panel area-panel-click" id="areaPanel"><div class="panel-title"><div class="accent"><svg class="analysis-heading-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9v9z" fill="#ffae35"/><path d="M13 3a9 9 0 1 1-9 10h9z" fill="#f36c18"/></svg>Keluasan Mengikut Daerah</div></div><div class="chartbox"><canvas id="areaChart"></canvas></div></div>
+     <div class="panel table-panel compact-table" id="senarai"><div class="panel-title"><div class="accent"><svg class="analysis-heading-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 5l5-2 7 3 6-3v16l-6 3-7-3-5 2z" fill="#ff8e20"/><path d="M8 3v16M15 6v16" stroke="#fff" stroke-width="1.8"/><path d="M3 5v16" stroke="#f26c13" stroke-width="1.3"/></svg>Senarai Geotapak GHL Geopark</div><span class="panel-sub" id="tableCount">20 rekod</span></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Bil</th><th>Kod</th><th>Nama Geotapak</th><th>Daerah</th><th>PBT</th><th>Status</th></tr></thead><tbody id="tableBody"></tbody></table></div></div>
    </div>
  </div>
 </section>
