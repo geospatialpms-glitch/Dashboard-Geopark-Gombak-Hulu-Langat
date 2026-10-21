@@ -437,6 +437,15 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
 #geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo{order:2;width:100%;height:220px;max-width:100%;margin:12px 0 0}
 }
 
+/* Jejak Makanan dan Warisan: kad maklumat sepadan dengan contoh popup geologi G4. */
+#geoTrailModal .jejak-card-dialog:has(.jejak-food-detail-photo),
+#geoTrailModal .jejak-card-dialog:has(.jejak-heritage-detail-photo){width:min(1120px,calc(100vw - 48px));background:#fffdfa;border-radius:28px;padding:38px 42px;min-height:390px}
+#geoTrailModal .jejak-card-dialog:has(.jejak-food-detail-photo) .jejak-card-popup-body,
+#geoTrailModal .jejak-card-dialog:has(.jejak-heritage-detail-photo) .jejak-card-popup-body{display:grid!important;grid-template-columns:minmax(0,1.55fr) minmax(235px,.85fr);column-gap:36px;align-content:center;min-height:310px!important;border-left:6px solid #ed7048!important;border-radius:22px!important;background:linear-gradient(135deg,#fffdf8,#f7f9f0)!important}
+#geoTrailModal .jejak-card-popup-body .jejak-food-detail-photo,
+#geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo{grid-column:2;grid-row:1 / span 12;align-self:center;width:100%;height:270px;max-width:none;margin:0;float:none;border:6px solid #fff;border-radius:23px;box-shadow:0 10px 26px rgba(11,68,47,.17);background-repeat:no-repeat}
+@media(max-width:700px){#geoTrailModal .jejak-card-dialog:has(.jejak-food-detail-photo),#geoTrailModal .jejak-card-dialog:has(.jejak-heritage-detail-photo){width:calc(100vw - 24px);min-height:0;padding:56px 12px 12px;border-radius:20px}#geoTrailModal .jejak-card-dialog:has(.jejak-food-detail-photo) .jejak-card-popup-body,#geoTrailModal .jejak-card-dialog:has(.jejak-heritage-detail-photo) .jejak-card-popup-body{display:flex!important;flex-direction:column;min-height:0!important}#geoTrailModal .jejak-card-popup-body .jejak-food-detail-photo,#geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo{order:2;width:100%;height:220px;margin:12px 0 0}}
+
 /* Maklumat dan infografik pembangunan untuk paparan utama Jejak GHLGp sahaja */
 #geoTrailModal .jejak-background-intro{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.9fr);gap:20px;margin:8px 0 22px;align-items:start}
 #geoTrailModal .jejak-background-text{padding:20px 22px;border-radius:14px;background:linear-gradient(135deg,rgba(255,255,255,.94),rgba(242,249,240,.94)),url('sidebar-geopark.png') center/cover;box-shadow:0 3px 16px rgba(18,89,48,.09);border:1px solid #d3e5d2}
