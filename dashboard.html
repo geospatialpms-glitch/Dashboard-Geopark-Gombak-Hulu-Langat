@@ -1636,6 +1636,27 @@ function openGeotapakInfo(code){
 #chronologyModal .chrono-plan{grid-column:2;justify-self:stretch;max-width:none;margin:0;border-radius:0;padding:11px 18px;font-size:12px;line-height:1.5;text-align:left;background:#dcebba;color:#214f30;box-shadow:none}
 #chronologyModal .chrono-source{font-size:12px;line-height:1.6;color:#61756a;margin:13px 0 0}
 @media(max-width:650px){#chronologyModal{padding:8px}#chronologyModal .geo-modal-card{width:calc(100vw - 16px);height:95dvh;max-height:95dvh}#chronologyModal .geo-modal-head{padding:14px 16px}#chronologyModal .geo-modal-body{padding:12px}#chronologyModal .geopark-narrative-frame,#chronologyModal .chronology-approval,#chronologyModal .chronology-roadmap{padding:16px;margin-bottom:12px}#chronologyModal .geopark-narrative-frame p{text-align:left}#chronologyModal .chrono-phase{grid-template-columns:1fr}#chronologyModal .chrono-year{min-height:0;padding:10px 14px;justify-content:flex-start;font-size:17px}#chronologyModal .chrono-detail{min-height:0;padding:14px 17px}#chronologyModal .chrono-detail li{font-size:13px}#chronologyModal .chrono-plan{grid-column:1;padding:10px 14px}}
+
+/* Harmonized Apa Itu Geopark modal: scoped to avoid changing other panels */
+#aboutGeoparkModal .geo-modal-body{background:#f6f9f4;padding:20px 22px 26px}
+#aboutGeoparkModal .about-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;max-width:1280px;margin:0 auto}
+#aboutGeoparkModal .about-card{min-width:0;background:#fff;border:1px solid #dce9d7;border-radius:16px;padding:20px 22px;box-shadow:0 3px 14px rgba(15,80,42,.055)}
+#aboutGeoparkModal .about-card.full{grid-column:1/-1}
+#aboutGeoparkModal .about-intro-image-card{padding:0;overflow:hidden;background:transparent;border:0;box-shadow:none}
+#aboutGeoparkModal .about-intro-image-card img{display:block;width:100%;height:auto;object-fit:contain;border-radius:16px}
+#aboutGeoparkModal .about-grid .about-card>h3,#aboutGeoparkModal .about-grid .about-intro-map-text>h3{font-size:20px!important;line-height:1.3!important;font-weight:800!important;color:#176339;margin:0 0 14px}
+#aboutGeoparkModal .about-grid .about-card p{font-size:13px!important;line-height:1.75!important;color:#405449}
+#aboutGeoparkModal .component-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+#aboutGeoparkModal .component-item{display:flex;align-items:center;gap:12px;min-height:86px;padding:14px;background:#f1f8eb;border:1px solid #d6e7cb;border-radius:12px}
+#aboutGeoparkModal .component-no{width:30px;height:30px;min-width:30px;font-size:13px;background:#398348}
+#aboutGeoparkModal .component-item .component-label{font-size:12.5px!important;line-height:1.55!important;color:#304b39}
+#aboutGeoparkModal .component-icon{width:32px;height:32px;min-width:32px;margin-left:auto;color:#277244}
+#aboutGeoparkModal .component-icon svg{width:27px;height:27px}
+#aboutGeoparkModal .benefit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#aboutGeoparkModal .benefit{min-width:0;border-radius:12px}
+#aboutGeoparkModal .benefit b{font-size:13px!important;line-height:1.5!important}
+#aboutGeoparkModal .benefit small{font-size:12px!important;line-height:1.7!important}
+@media(max-width:760px){#aboutGeoparkModal .geo-modal-body{padding:12px}#aboutGeoparkModal .about-card{padding:15px}#aboutGeoparkModal .component-grid,#aboutGeoparkModal .benefit-grid{grid-template-columns:minmax(0,1fr)}#aboutGeoparkModal .component-item{min-height:0}}
 </style>
 
 </body></html>
