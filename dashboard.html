@@ -1597,15 +1597,15 @@ function createGeotapakInfra(code){
  const grid=document.createElement("div");grid.className="geotapak-infra-grid";
  GEOTAPAK_INFRA_CATEGORIES.forEach(([name,symbol],i)=>{
   const item=document.createElement("div");item.className="geotapak-infra-item";
-  const circle=document.createElement("span");circle.className="geotapak-infra-icon";circle.textContent=symbol;
+  
   const dot=document.createElement("span");dot.className="geotapak-infra-dot";dot.style.backgroundColor=GEOTAPAK_INFRA_COLORS[status[i]];
   const title=document.createElement("span");title.textContent=name;
   const state=document.createElement("small");state.className="geotapak-infra-status";state.textContent=GEOTAPAK_INFRA_LABELS[status[i]];
-  circle.append(dot);item.append(circle,title,state);grid.append(item);
+  item.append(dot,title,state);grid.append(item);
  });
  section.append(grid);
  const legend=document.createElement("div");legend.className="geotapak-infra-legend";
- const label=document.createElement("strong");label.textContent="Petunjuk Status";legend.append(label);
+ const label=document.createElement("strong");label.textContent="Nota:";legend.append(label);
  [["g","Telah Disediakan"],["y","Perlu Ditambahbaik"],["r","Perlu Disediakan"],["pu","Tidak Berkenaan"]].forEach(([key,name])=>{
   const span=document.createElement("span");span.className="geotapak-infra-legend-item";
   const dot=document.createElement("i");dot.style.backgroundColor=GEOTAPAK_INFRA_COLORS[key];span.append(dot,document.createTextNode(name));legend.append(span);
@@ -1630,10 +1630,13 @@ function openGeotapakInfo(code){
  const close=document.createElement("button");close.type="button";close.textContent="×";close.setAttribute("aria-label","Tutup");
  header.append(heading,close);
  const body=document.createElement("div");body.className="geotapak-more-content";
- const title=document.createElement("h3");title.textContent=name;body.append(title);
- const subtitle=document.createElement("h4");subtitle.textContent="Maklumat Geotapak";subtitle.style.cssText="margin:16px 0 8px;color:#155c35";body.append(subtitle);
- const para=document.createElement("p");para.textContent=pdfText||more?.desc||"Maklumat terperinci bagi geotapak ini belum tersedia dalam rekod rujukan.";para.style.lineHeight="1.65";para.style.whiteSpace="pre-line";body.append(para);
- body.append(createGeotapakInfra(key));
+ const left=document.createElement("div");left.className="geotapak-info-left";
+ const right=document.createElement("div");right.className="geotapak-info-right";
+ const title=document.createElement("h3");title.textContent=name;left.append(title);
+ const subtitle=document.createElement("h4");subtitle.textContent="Maklumat Geotapak";left.append(subtitle);
+ const para=document.createElement("p");para.textContent=pdfText||more?.desc||"Maklumat terperinci bagi geotapak ini belum tersedia dalam rekod rujukan.";para.style.whiteSpace="pre-line";left.append(para);
+ right.append(createGeotapakInfra(key));
+ body.append(left,right);
  card.append(header,body);overlay.append(card);document.body.append(overlay);
  const dismiss=()=>{overlay.remove();document.removeEventListener("keydown",onKey)};
  const onKey=e=>{if(e.key==="Escape")dismiss()};
@@ -1759,4 +1762,32 @@ function openGeotapakInfo(code){
 @media(max-width:760px){#aboutGeoparkModal .geo-modal-body{padding:4px 6px 10px}#aboutGeoparkModal .about-card{padding:15px}#aboutGeoparkModal .component-grid,#aboutGeoparkModal .benefit-grid{grid-template-columns:minmax(0,1fr)}#aboutGeoparkModal .component-item{min-height:0}}
 </style>
 
+<style id="geotapak-info-unified-layout">
+/* Paparan Info Lanjut diseragamkan; jenis font diwarisi daripada dashboard semasa. */
+.geotapak-more-card{width:min(1200px,96vw);max-height:92vh;overflow:hidden;border-radius:18px;display:flex;flex-direction:column}
+.geotapak-more-head{flex:0 0 auto;min-height:64px;padding:16px 22px;background:linear-gradient(105deg,#07593b,#2d9239 57%,#99bc31);font-size:20px}
+.geotapak-more-head strong{font-weight:800;color:white}
+.geotapak-more-head button{border:0;border-radius:50%;background:#ffffff33;color:#fff;width:42px;height:42px;font-size:30px;cursor:pointer;line-height:1}
+.geotapak-more-content{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:24px;padding:24px 28px;overflow-y:auto;align-items:start;font-size:14px;line-height:1.7}
+.geotapak-info-left{min-width:0}
+.geotapak-info-left h3{margin:0 0 18px;color:#111827;font-size:clamp(22px,2.3vw,32px);line-height:1.25;font-weight:800}
+.geotapak-info-left h3::after{content:"";display:block;width:74px;height:5px;border-radius:6px;margin-top:16px;background:linear-gradient(90deg,#008643,#98cf20)}
+.geotapak-info-left h4{font-size:21px;color:#064d36;margin:16px 0 12px;font-weight:800}
+.geotapak-info-left p{color:#36445c;font-size:14px;line-height:1.75;margin:0}
+.geotapak-info-right{min-width:0}
+.geotapak-info-right .geotapak-infra{margin:0;padding:18px;border:1px solid #d5e6d2;background:linear-gradient(135deg,#f1f8ef,#e8f3e7);border-radius:16px;color:#124c38}
+.geotapak-info-right .geotapak-infra h4{margin:0 0 14px;color:#064d36;font-weight:800;font-style:normal;font-size:21px}
+.geotapak-info-right .geotapak-infra h4::after{content:"";display:block;height:5px;width:65px;border-radius:5px;margin-top:8px;background:linear-gradient(90deg,#008943,#9bcc20)}
+.geotapak-info-right .geotapak-infra-grid{display:flex;flex-direction:column;gap:6px;background:linear-gradient(145deg,#03432f,#006044);padding:12px;border-radius:14px}
+.geotapak-info-right .geotapak-infra-item{position:relative;display:grid;grid-template-columns:19px minmax(0,1fr) auto;gap:9px;align-items:center;text-align:left;padding:10px 12px;border-radius:10px;color:#fff;background:#ffffff0d;border:1px solid #ffffff1a;line-height:1.4}
+.geotapak-info-right .geotapak-infra-dot{position:static;width:14px;height:14px;border:0;box-shadow:none}
+.geotapak-info-right .geotapak-infra-item>span:not(.geotapak-infra-dot){font-size:12px;font-weight:750}
+.geotapak-info-right .geotapak-infra-status,.geotapak-info-right .geotapak-infra-item .geotapak-infra-status{font-size:12px;color:#eef7ef;font-weight:500;text-align:right}
+.geotapak-info-right .geotapak-infra-legend{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;background:#f7fbf5;border-radius:12px;padding:12px;color:#425468}
+.geotapak-info-right .geotapak-infra-legend strong{flex-basis:100%;font-size:16px;color:#064d36}
+.geotapak-info-right .geotapak-infra-legend-item{font-size:11px}
+.geotapak-info-right .geotapak-infra-legend-item i{width:13px;height:13px}
+@media(max-width:760px){.geotapak-more-content{grid-template-columns:1fr;gap:14px;padding:18px}.geotapak-more-card{max-height:94vh}.geotapak-more-head{font-size:16px;min-height:56px}.geotapak-info-left h3{font-size:24px}}
+@media(max-width:440px){.geotapak-info-right .geotapak-infra-item{grid-template-columns:16px minmax(0,1fr);gap:6px}.geotapak-info-right .geotapak-infra-status{grid-column:2;text-align:left!important}}
+</style>
 </body></html>
