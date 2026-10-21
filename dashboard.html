@@ -939,7 +939,7 @@ function selectGeoSite(code){
   else marker.setZIndexOffset(0);
  });
 }
-function drawMarkers(data){visibleMarkers.forEach(m=>map.removeLayer(m));visibleMarkers=[];markerMap=new Map();data.forEach(s=>{let col=s.district==="Gombak"?C.lime:C.orange;let icon=L.divIcon({className:"geo-point-icon",html:`<div class="geo-point-inner" style="background:${col};--site-glow:${s.district==="Gombak"?"rgba(180,238,72,.72)":"rgba(255,121,65,.74)"}">${s.code}</div>`,iconSize:[24,24],iconAnchor:[12,12]});let m=L.marker([s.lat,s.lng],{icon}).addTo(map).bindPopup(popup(s),{maxWidth:300});m.on("click",()=>selectGeoSite(s.code));visibleMarkers.push(m);markerMap.set(s.code,m)});if(selectedGeoSiteCode)selectGeoSite(selectedGeoSiteCode)}
+function drawMarkers(data){visibleMarkers.forEach(m=>map.removeLayer(m));visibleMarkers=[];markerMap=new Map();data.forEach(s=>{let col=s.district==="Gombak"?C.lime:C.orange;let icon=L.divIcon({className:"geo-point-icon",html:`<div class="geo-point-inner" style="background:${col};--site-glow:${s.district==="Gombak"?"rgba(180,238,72,.72)":"rgba(255,121,65,.74)"}">${s.code}</div>`,iconSize:[24,24],iconAnchor:[12,12]});let m=L.marker([s.lat,s.lng],{icon}).addTo(map).bindPopup(popup(s),{maxWidth:300});m.on("click",()=>selectGeoSite(s.code));m.on("popupclose",()=>{if(selectedGeoSiteCode===s.code)selectGeoSite(null)});visibleMarkers.push(m);markerMap.set(s.code,m)});if(selectedGeoSiteCode)selectGeoSite(selectedGeoSiteCode)}
 let areaChart;
 const baseOpts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{display:false},ticks:{font:{size:9}}}}};
 function makeCharts(data){
