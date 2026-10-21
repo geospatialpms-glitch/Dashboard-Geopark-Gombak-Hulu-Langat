@@ -589,6 +589,10 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
 #aboutGeoparkModal .about-intro-region{width:91%;max-width:310px;height:345px}
 #aboutGeoparkModal .about-intro-brand{top:0;right:0;width:148px;max-height:126px;border-radius:20px}
 @media(max-width:800px){#aboutGeoparkModal .about-intro-map-card{grid-template-columns:1fr;padding:25px 22px;gap:12px}#aboutGeoparkModal .about-intro-map-text h3{font-size:32px}#aboutGeoparkModal .about-intro-art{min-height:215px}#aboutGeoparkModal .about-intro-region{height:220px;max-width:230px}}
+
+/* Paparan imej pengenalan — ganti kad atlas lama tanpa menjejaskan komponen lain */
+#aboutGeoparkModal .about-intro-image-card{display:block;padding:0;overflow:hidden;border:0;border-radius:20px;background:transparent;box-shadow:none}
+#aboutGeoparkModal .about-intro-image-card img{display:block;width:100%;height:auto;object-fit:contain;border-radius:20px}
 </style>
 <style id="sidebar-nav-consistent">.sidebar .navbtn{min-height:49px;display:flex;align-items:center;justify-content:flex-start;text-align:left;font-size:12px;line-height:1.3;font-weight:600;gap:11px;padding:12px 14px}.sidebar .navbtn .navicon{width:18px;min-width:18px;flex:0 0 18px}.sidebar .navbtn>span:last-child{width:auto;flex:1;text-align:left}.sidebar #aboutGeoparkBtn{justify-content:flex-start;text-align:left}.sidebar #aboutGeoparkBtn span{width:auto}.sidebar #aboutGeoparkBtn>span:last-child{flex:1;width:auto}</style></head>
 <body><div class="topline"></div>
@@ -977,21 +981,8 @@ window.addEventListener("resize",()=>setTimeout(()=>map.invalidateSize(false),80
     </div>
     <div class="geo-modal-body">
       <div class="about-grid">
-        <div class="about-card full about-intro-map-card">
-          <div class="about-intro-map-text">
-          <h3>Apa Itu Geopark?</h3>
-          <p>Geopark adalah satu kawasan dengan keluasan bersesuaian, mempunyai sempadan yang jelas dan mengandungi beberapa tapak warisan geologi yang dikenali sebagai geotapak berkepentingan kebangsaan, serantau atau antarabangsa yang dibangunkan secara lestari bagi meningkatkan apresiasi, tahap ekonomi dan nilai budaya penduduknya terhadap warisan geologi tersebut, terutamanya melalui penglibatan komuniti dalam aktiviti berteraskan pelancongan.</p>
-          <p style="margin-top:8px">Geopark mempunyai unsur-unsur ekologi, arkeologi, geologi, sejarah dan budaya, dan memastikan hubungan di antara unsur-unsur tersebut diperkukuhkan melalui pengurusan dan kawal selia secara mampan dan menyeluruh.</p>
-          </div>
-          <div class="about-intro-art" aria-hidden="true">
-            <img class="about-intro-brand" src="logo-ghlgp-transparent.png" alt="">
-            <svg class="about-intro-region" viewBox="0 0 320 390" focusable="false" aria-hidden="true">
-              <path d="M143 13l39 23-3 32 26 27-5 25 34 19-4 35 29 32-17 24 26 25-19 24 9 34-37 23-12 49-35-9-16-32-33 5-21-32-36-8-2-42-19-25 15-36-8-29 21-30-3-35 28-14 7-37 36-13z" fill="#a7b982" stroke="#f9fff2" stroke-width="6" stroke-linejoin="round"/>
-              <path d="M143 13l39 23-3 32 26 27-5 25 34 19-4 35 29 32-17 24 26 25-19 24 9 34-37 23-12 49-35-9-16-32-33 5-21-32-36-8-2-42-19-25 15-36-8-29 21-30-3-35 28-14 7-37 36-13z" fill="none" stroke="#6f914a" stroke-width="2"/>
-              <path d="M144 18l4 75-28 38 42 47-17 57 24 43-10 62M181 37l-26 76 50 37-43 28 75 28-68 72 51 57M84 146l82 34-75 45 78 53 64-20" fill="none" stroke="#f4f8e6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="155" cy="226" r="12" fill="#ffda24" stroke="#fff1a1" stroke-width="4"/>
-            </svg>
-          </div>
+        <div class="about-card full about-intro-image-card">
+          <img src="apa-itu-geopark.png" alt="Apa Itu Geopark?" loading="lazy">
         </div>
 
         <div class="about-card full">
