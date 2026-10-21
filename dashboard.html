@@ -679,6 +679,11 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
 .sidebar-welcome-art{animation:geoMascotFloat 6s ease-in-out infinite;will-change:transform;transform-origin:center center}
 @keyframes geoMascotFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-9px,0)}}
 @media(prefers-reduced-motion:reduce){.sidebar-welcome-art{animation:none;will-change:auto}}
+
+/* Bingkai Jejak GHLGp sepadan dengan keluasan paparan dashboard */
+#jejakFrame:not(.jejak-show-detail){width:100%;max-width:100%;box-sizing:border-box;padding:14px 18px 18px}
+#jejakFrame:not(.jejak-show-detail) .jejak-frame-image{width:100%;height:clamp(340px,calc(100dvh - 275px),650px);aspect-ratio:auto;margin:10px 0 0;background-size:100% 100%;border-radius:12px}
+@media(max-width:700px){#jejakFrame:not(.jejak-show-detail){padding:12px}#jejakFrame:not(.jejak-show-detail) .jejak-frame-image{height:clamp(260px,55dvh,440px)}}
 </style>
 <style id="sidebar-nav-consistent">.sidebar .navbtn{min-height:49px;display:flex;align-items:center;justify-content:flex-start;text-align:left;font-size:12px;line-height:1.3;font-weight:600;gap:11px;padding:12px 14px}.sidebar .navbtn .navicon{width:18px;min-width:18px;flex:0 0 18px}.sidebar .navbtn>span:last-child{width:auto;flex:1;text-align:left}.sidebar #aboutGeoparkBtn{justify-content:flex-start;text-align:left}.sidebar #aboutGeoparkBtn span{width:auto}.sidebar #aboutGeoparkBtn>span:last-child{flex:1;width:auto}</style>
 <style id="geotapak-infrastruktur-style">
@@ -804,7 +809,6 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
   <button type="button" class="jejak-frame-hotspot warisan" aria-label="Buka Jejak Warisan" onclick="openGeoTrailCategory('warisan')"></button>
   <button type="button" class="jejak-frame-hotspot makanan" aria-label="Buka Jejak Makanan" onclick="openGeoTrailCategory('makanan')"></button>
  </div>
- <p class="jejak-frame-source">Sumber: Dokumen Jejak GHLGp, halaman 201–210.</p>
 </section>
 <section class="kpis">
  <div class="kpi kpi-red"><div class="kpi-icon">◆</div><div><div class="kpi-label">Jumlah Geotapak</div><div class="kpi-value red" id="kTotal">20 <small>Tapak</small></div></div></div>
