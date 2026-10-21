@@ -684,6 +684,53 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
 #jejakFrame:not(.jejak-show-detail){width:100%;max-width:100%;box-sizing:border-box;padding:14px 18px 18px}
 #jejakFrame:not(.jejak-show-detail) .jejak-frame-image{width:100%;height:auto;aspect-ratio:1136/546;margin:10px 0 0;background-size:contain;background-position:center;background-repeat:no-repeat;border-radius:12px}
 @media(max-width:700px){#jejakFrame:not(.jejak-show-detail){padding:12px}#jejakFrame:not(.jejak-show-detail) .jejak-frame-image{height:auto;aspect-ratio:1136/546}}
+
+/* Paparan adaptif dashboard: tablet dan telefon, kekalkan reka bentuk desktop */
+@media (max-width:1100px){
+ html,body{max-width:100%;overflow-x:hidden}
+ .shell{grid-template-columns:minmax(0,1fr)}
+ .sidebar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:9px 12px;min-height:0;background:#086b3e;border-right:0;border-bottom:1px solid #155f37}
+ .sidebar .navbtn{width:auto;flex:1 1 auto;min-height:42px!important;margin:0;padding:9px 12px!important;justify-content:center!important}
+ .sidebar .navbtn>span:last-child{flex:0 1 auto}
+ .sidebar .jejak-sidebar-info,.sidebar .jejak-sidebar-submenu{flex:1 1 100%;margin:4px 0}
+ .sidebar-welcome-art,.sidebar-slogan{display:none}
+ main#utama{width:100%;min-width:0;padding:12px;box-sizing:border-box}
+ .dashboard-main-grid{grid-template-columns:minmax(0,1fr)!important}
+ .dashboard-main-grid .map-panel{height:460px!important;min-height:460px!important}
+ .right-analysis{height:auto!important;min-height:0!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(300px,auto)!important;align-items:stretch}
+ .right-analysis>.panel{min-width:0;min-height:300px}
+ .right-analysis .table-wrap{overflow:auto}
+ .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #jejakFrame:not(.jejak-show-detail){max-width:100%;box-sizing:border-box}
+ #jejakFrame:not(.jejak-show-detail) .jejak-frame-image{aspect-ratio:1136/546;height:auto;background-size:contain}
+}
+@media (max-width:700px){
+ header{height:auto;min-height:76px;padding:10px;gap:8px;box-sizing:border-box;background-size:cover}
+ header h1{font-size:clamp(17px,4.5vw,24px)!important;line-height:1.15}
+ .sidebar{gap:5px;padding:8px}
+ .sidebar .navbtn{flex:1 1 calc(50% - 6px);min-width:0;font-size:11px!important;min-height:42px!important;padding:9px 8px!important}
+ .sidebar .navbtn .navicon{width:16px;min-width:16px;flex-basis:16px}
+ main#utama{padding:9px}
+ .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .kpi{padding:9px;gap:7px;min-width:0;min-height:66px}
+ .kpi .kpi-value{font-size:clamp(16px,4.5vw,22px)!important}
+ .dashboard-main-grid{gap:9px}
+ .dashboard-main-grid .map-panel{height:390px!important;min-height:390px!important}
+ .map-search{right:9px;top:9px;width:min(205px,calc(100% - 85px));box-sizing:border-box}
+ .right-analysis{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:290px minmax(280px,auto)!important;gap:9px}
+ .right-analysis>.panel{min-height:0}
+ .right-analysis .table-panel{height:330px;min-height:0}
+ .right-analysis .table-wrap{overflow:auto;max-width:100%}
+ .right-analysis .data-table{min-width:510px}
+ .right-analysis .panel-title{padding:0 10px}
+ #jejakFrame:not(.jejak-show-detail){padding:10px}
+ #jejakFrame:not(.jejak-show-detail) .jejak-frame-image{width:100%;height:auto;aspect-ratio:1136/546;background-size:contain}
+ #jejakFrame .jejak-frame-head{flex-wrap:wrap;gap:8px}
+ .geo-modal{padding:6px!important;box-sizing:border-box}
+ .geo-modal-card,#aboutGeoparkModal .geo-modal-card,#geologyInfoModal .geo-modal-card,#geoTrailModal .geo-modal-card{width:calc(100vw - 12px)!important;max-width:calc(100vw - 12px)!important;height:calc(100dvh - 12px)!important;max-height:calc(100dvh - 12px)!important}
+ .geo-modal-body{overflow-x:auto}
+}
+@media(max-width:390px){.sidebar .navbtn{font-size:10px!important}.dashboard-main-grid .map-panel{height:350px!important;min-height:350px!important}}
 </style>
 <style id="sidebar-nav-consistent">.sidebar .navbtn{min-height:49px;display:flex;align-items:center;justify-content:flex-start;text-align:left;font-size:12px;line-height:1.3;font-weight:600;gap:11px;padding:12px 14px}.sidebar .navbtn .navicon{width:18px;min-width:18px;flex:0 0 18px}.sidebar .navbtn>span:last-child{width:auto;flex:1;text-align:left}.sidebar #aboutGeoparkBtn{justify-content:flex-start;text-align:left}.sidebar #aboutGeoparkBtn span{width:auto}.sidebar #aboutGeoparkBtn>span:last-child{flex:1;width:auto}</style>
 <style id="geotapak-infrastruktur-style">
