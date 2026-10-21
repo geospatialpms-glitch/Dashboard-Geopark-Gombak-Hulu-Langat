@@ -1611,7 +1611,6 @@ function createGeotapakInfra(code){
   const dot=document.createElement("i");dot.style.backgroundColor=GEOTAPAK_INFRA_COLORS[key];span.append(dot,document.createTextNode(name));legend.append(span);
  });
  section.append(legend);
- const source=document.createElement("p");source.className="geotapak-infra-source";source.textContent="Sumber: Dokumen Geotapak Gombak–Hulu Langat Geopark, panel Infrastruktur Asas.";section.append(source);
  return section;
 }
 
