@@ -437,6 +437,10 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
 #geoTrailModal .jejak-card-popup-body .jejak-heritage-detail-photo{order:2;width:100%;height:220px;max-width:100%;margin:12px 0 0}
 }
 
+/* Selaraskan saiz imej popup ketiga-tiga jejak dan keterbacaan butiran. */
+#geoTrailModal .jejak-card-popup-body p{font-size:clamp(16px,1.4vw,19px)!important;line-height:1.7!important}
+#geoTrailModal .jejak-card-popup-body .detail-label{font-size:1em;font-weight:800}
+@media(max-width:700px){#geoTrailModal .jejak-card-popup-body p{font-size:16px!important}}
 /* Jejak Makanan dan Warisan: kad maklumat sepadan dengan contoh popup geologi G4. */
 #geoTrailModal .jejak-card-dialog:has(.jejak-food-detail-photo),
 #geoTrailModal .jejak-card-dialog:has(.jejak-heritage-detail-photo){width:min(1120px,calc(100vw - 48px));background:#fffdfa;border-radius:28px;padding:38px 42px;min-height:390px}
@@ -1160,9 +1164,7 @@ function showJejakCardPopup(detail){
   photo.style.backgroundPosition=style.backgroundPosition;
   photo.style.backgroundSize=style.backgroundSize;
   photo.style.backgroundRepeat="no-repeat";
-  photo.style.width="180px";
-  photo.style.height="180px";
-  photo.style.aspectRatio="1 / 1";
+  // Photo dimensions follow the shared geology popup CSS (responsive).
  }
  panel.append(close,body);overlay.append(panel);host.append(overlay);
  overlay.addEventListener("click",e=>{if(e.target===overlay)closeJejakCardPopup()});
