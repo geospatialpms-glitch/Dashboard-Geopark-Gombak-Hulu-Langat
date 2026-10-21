@@ -1455,6 +1455,24 @@ function openGeotapakInfo(code){
 .chronology-approval p,.chronology-approval li{color:#283c31;font-size:14px;line-height:1.7}
 .chronology-approval ol{padding-left:24px;margin:15px 0 0}.chronology-approval li{margin-bottom:9px}
 @media(max-width:700px){.chronology-approval{padding:16px}.chronology-approval h3{font-size:18px}}
+
+/* Harmonisasi visual khusus popup Kronologi */
+#chronologyModal .geo-modal-head{padding:18px 26px;background:linear-gradient(100deg,#09623b,#268347 65%,#83af3b)}
+#chronologyModal .geo-modal-head h2{font-size:clamp(17px,1.65vw,23px);line-height:1.35}
+#chronologyModal .geo-modal-body{padding:clamp(16px,2.3vw,30px);background:#f5f8f3}
+#chronologyModal .geopark-narrative-frame,#chronologyModal .chronology-approval,#chronologyModal .chronology-roadmap{box-sizing:border-box;width:100%;max-width:1080px;margin:0 auto 20px;padding:clamp(18px,2.3vw,30px);border:1px solid #d9e6d8;border-radius:16px;background:#fff;box-shadow:0 5px 18px rgba(18,76,43,.06)}
+#chronologyModal .geopark-narrative-frame h3,#chronologyModal .chronology-approval h3,#chronologyModal .chronology-roadmap h3{font-size:clamp(18px,1.9vw,23px);line-height:1.35;text-align:left;color:#12663c;border:0;border-bottom:2px solid #a7c978;padding:0 0 12px;margin:0 0 18px}
+#chronologyModal .geopark-narrative-frame p,#chronologyModal .chronology-approval p,#chronologyModal .chronology-approval li{font-size:14px;line-height:1.85;color:#273d32}
+#chronologyModal .chronology-approval ol{padding-left:24px;margin:14px 0 0}
+#chronologyModal .chronology-approval li{margin-bottom:9px}
+#chronologyModal .chrono-phases{display:grid;gap:14px;padding:0}
+#chronologyModal .chrono-phase{display:grid;grid-template-columns:100px minmax(0,1fr);gap:0;filter:none;box-shadow:0 3px 12px rgba(24,67,41,.10);border-radius:13px;overflow:hidden;background:#edf5e9}
+#chronologyModal .chrono-year{writing-mode:horizontal-tb;min-height:116px;padding:15px 8px;border-radius:0;background:linear-gradient(160deg,#157643,#3a9154);font-size:21px}
+#chronologyModal .chrono-detail{min-width:0;min-height:116px;border-radius:0;background:#edf5e9;color:#254434;padding:17px 22px}
+#chronologyModal .chrono-detail li{font-size:13.5px;line-height:1.65;font-weight:500;color:#254434}
+#chronologyModal .chrono-plan{grid-column:2;justify-self:stretch;max-width:none;margin:0;border-radius:0;padding:11px 18px;font-size:12px;line-height:1.5;text-align:left;background:#dcebba;color:#214f30;box-shadow:none}
+#chronologyModal .chrono-source{font-size:12px;line-height:1.6;color:#61756a;margin:13px 0 0}
+@media(max-width:650px){#chronologyModal{padding:8px}#chronologyModal .geo-modal-card{width:calc(100vw - 16px);height:95dvh;max-height:95dvh}#chronologyModal .geo-modal-head{padding:14px 16px}#chronologyModal .geo-modal-body{padding:12px}#chronologyModal .geopark-narrative-frame,#chronologyModal .chronology-approval,#chronologyModal .chronology-roadmap{padding:16px;margin-bottom:12px}#chronologyModal .geopark-narrative-frame p{text-align:left}#chronologyModal .chrono-phase{grid-template-columns:1fr}#chronologyModal .chrono-year{min-height:0;padding:10px 14px;justify-content:flex-start;font-size:17px}#chronologyModal .chrono-detail{min-height:0;padding:14px 17px}#chronologyModal .chrono-detail li{font-size:13px}#chronologyModal .chrono-plan{grid-column:1;padding:10px 14px}}
 </style>
 
 </body></html>
