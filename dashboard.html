@@ -825,6 +825,13 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
   border-radius:0!important;
   box-shadow:none!important;
 }
+
+/* Kronologi: penerangan kiri dan infografik kanan */
+#chronologyModal .kronologi-intro-layout{display:grid;grid-template-columns:minmax(0,55fr) minmax(0,45fr);gap:24px;align-items:start;width:100%;margin-bottom:24px}
+#chronologyModal .kronologi-intro-layout>.geopark-narrative-frame{min-width:0;margin-bottom:0;text-align:left}
+#chronologyModal .kronologi-infografik{min-width:0;margin:0;position:sticky;top:12px}
+#chronologyModal .kronologi-infografik img{display:block;width:100%;height:auto;max-height:78vh;object-fit:contain;border-radius:10px}
+@media(max-width:900px){#chronologyModal .kronologi-intro-layout{grid-template-columns:1fr;gap:16px}#chronologyModal .kronologi-infografik{position:static}#chronologyModal .kronologi-infografik img{max-height:none}}
 </style>
 <style id="sidebar-nav-consistent">.sidebar .navbtn{min-height:49px;display:flex;align-items:center;justify-content:flex-start;text-align:left;font-size:12px;line-height:1.3;font-weight:600;gap:11px;padding:12px 14px}.sidebar .navbtn .navicon{width:18px;min-width:18px;flex:0 0 18px}.sidebar .navbtn>span:last-child{width:auto;flex:1;text-align:left}.sidebar #aboutGeoparkBtn{justify-content:flex-start;text-align:left}.sidebar #aboutGeoparkBtn span{width:auto}.sidebar #aboutGeoparkBtn>span:last-child{flex:1;width:auto}</style>
 <style id="geotapak-infrastruktur-style">
@@ -909,6 +916,7 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
  <div class="geo-modal-card">
   <div class="geo-modal-head"><div><h2 id="chronologyTitle">Kronologi Geopark Gombak–Hulu Langat</h2></div><button class="geo-modal-close" id="chronologyClose" aria-label="Tutup">×</button></div>
   <div class="geo-modal-body">
+   <div class="kronologi-intro-layout">
    <section class="geopark-narrative-frame" aria-label="Penubuhan Geopark">
     <p>Penubuhan geopark menyumbang dan menyokong pencapaian lapan (8) daripada 17 Matlamat Pembangunan Lestari (SDGs). Gagasan Geopark menganjur inisiatif unik dalam penghasilan produk tempatan yang boleh dijadikan identiti sesuatu wilayah sebagai produk Geopark. Selain itu, ia mewujudkan jalinan kerjasama antara masyarakat setempat dalam memelihara dan melindungi warisan alam, memartabatkan sejarah dan budaya di samping mengukuhkan kecintaan terhadap keunikan tempatan. Di samping itu juga, rantaian aktiviti ekonomi dapat diwujudkan dan mengukuhkan pengurusan sumber asli sebagai aset Negeri Selangor dalam menyokong inisiatif <em>Central Forest Spine</em> (CFS) dan keberkesanan rangkaian koridor ekologi hutan terutamanya di B-SL1 (Hutan Simpan Raja Musa – Hutan Simpan Bukit Tarek – Hutan Simpan Bukit Gading).</p>
     <p>Dengan memperoleh pengiktirafan di peringkat kebangsaan mahupun dunia secara tidak langsung mewujudkan sumber-sumber baharu untuk manfaat penyelidikan saintifik dan ekonomi kepada Negeri Selangor secara keseluruhannya.</p>
@@ -920,6 +928,8 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
     <p>Secara keseluruhannya, terdapat 20 geotapak yang berpotensi telah dikenal pasti di Daerah Gombak dan Daerah Hulu Langat. Ia merangkumi 13 geotapak di Daerah Gombak dan 7 geotapak di Daerah Hulu Langat. Terdapat 12 geotapak di bawah kawasan pentadbiran Majlis Perbandaran Selayang (MPS), 1 geotapak di bawah pentadbiran Majlis Perbandaran Ampang Jaya (MPAJ) serta tujuh (7) geotapak di bawah kawasan pentadbiran Majlis Perbandaran Kajang (MPKj).</p>
     <p>Buku Coffee Table GHL Geopark ini akan memandu pihak berkepentingan untuk mengenali 20 geotapak yang terpilih ini dan memahami secara ringkas kronologi dan latar belakang Kajian Gombak–Hulu Langat Geopark.</p>
    </section>
+   <figure class="kronologi-infografik"><img src="persetujuan-pihak-berkuasa-negeri.png" alt="Infografik Persetujuan Pihak Berkuasa Negeri" loading="lazy" onerror="this.parentElement.style.display='none'"></figure>
+   </div>
    <section class="chronology-approval" aria-label="Persetujuan Pihak Berkuasa Negeri">
   <h3>Persetujuan Pihak Berkuasa Negeri</h3>
   <p>PLANMalaysia Selangor telah mendapat persetujuan Kerajaan Negeri Selangor ke atas cadangan <strong>Pembangunan Geopark Negeri Selangor sebagai Geopark Kebangsaan</strong> melalui keputusan <strong>Mesyuarat Exco MTES Bil. 24/2020 pada 15 Oktober 2020</strong> berkenaan perkara-perkara berikut:</p>
