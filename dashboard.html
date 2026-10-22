@@ -1950,4 +1950,14 @@ function openGeotapakInfo(code){
 @media(max-width:760px){.geotapak-more-content{grid-template-columns:1fr;gap:14px;padding:18px}.geotapak-more-card{max-height:94vh}.geotapak-more-head{font-size:16px;min-height:56px}.geotapak-info-left h3{font-size:24px}}
 @media(max-width:440px){.geotapak-info-right .geotapak-infra-item{grid-template-columns:16px minmax(0,1fr);gap:6px}.geotapak-info-right .geotapak-infra-status{grid-column:2;text-align:left!important}}
 </style>
+
+<style id="chronology-plain-layout-fix">
+/* Kronologi tampil sebagai halaman biasa, tanpa kad luar atau kad kandungan. */
+#utama.inline-page-mode #chronologyModal.inline-info-section{display:block!important;min-height:0!important;background:transparent!important;padding:0!important}
+#utama #chronologyModal.inline-info-section .geo-modal-card{width:100%!important;min-height:0!important;height:auto!important;max-height:none!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;display:block!important}
+#utama #chronologyModal.inline-info-section .geo-modal-body{padding:18px 10px!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important}
+#utama #chronologyModal .geopark-narrative-frame,#utama #chronologyModal .chronology-approval,#utama #chronologyModal .chronology-roadmap{max-width:none!important;width:100%!important;margin:0 0 26px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+#utama #chronologyModal .chrono-phase{filter:none}
+@media(max-width:700px){#utama #chronologyModal.inline-info-section .geo-modal-body{padding:12px 2px!important}}
+</style>
 </body></html>
