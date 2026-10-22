@@ -737,6 +737,19 @@ body.jejak-page #geoTrailModal .geo-modal-body{height:auto;overflow-y:auto}
 
 /* Corak kontur topografi pada latar ruang dashboard sahaja; semua kad kekal asal */
 main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22360%22%20viewBox%3D%220%200%20420%20360%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b6c6b3%22%20stroke-width%3D%220.85%22%20opacity%3D%22.27%22%3E%3Cpath%20d%3D%22M-40%2036C16%20-18%2087%207%2097%2049s-50%2041-46%2080%20103%2036%20116%2083-12%2094-82%20100-95-36-133-7%22%2F%3E%3Cpath%20d%3D%22M-35%2055C17%204%2072%2022%2080%2053s-49%2042-43%2077%20106%2038%20116%2083-20%2078-72%2083-85-25-116-4%22%2F%3E%3Cpath%20d%3D%22M-32%2077C11%2026%2056%2038%2062%2059s-51%2042-41%2073%20108%2042%20115%2084-25%2064-65%2066-76-13-104-3%22%2F%3E%3Cpath%20d%3D%22M-25%2099C0%2056%2037%2051%2045%2068s-50%2039-40%2067%20104%2047%20113%2083-23%2051-56%2053-68-6-89%203%22%2F%3E%3Cpath%20d%3D%22M220-15C191%2021%20207%2049%20245%2063s83-6%2099%2033-14%2064-49%2072-48%2048-23%2081%2089%2027%20139%2013%22%2F%3E%3Cpath%20d%3D%22M241-19C210%2020%20231%2039%20258%2048s82-5%20101%2037-8%2080-52%2094-46%2040-21%2060%2085%2021%20130%208%22%2F%3E%3Cpath%20d%3D%22M259-25C237%208%20248%2029%20271%2034s85-9%20103%2044-10%2094-56%20111-36%2029-12%2039%2069%2012%20114%205%22%2F%3E%3Cpath%20d%3D%22M274-28C258%203%20266%2015%20283%2020s85-5%20105%2049-7%20107-57%20129-25%2015-8%2018%2052%206%20100%202%22%2F%3E%3Cpath%20d%3D%22M186%20350C198%20300%20221%20284%20248%20295s34%2046%2061%2044%2037-28%2068-22%2050%2033%2071%2021%22%2F%3E%3Cpath%20d%3D%22M198%20360C213%20324%20227%20302%20247%20310s28%2045%2059%2042%2039-23%2068-20%2042%2021%2064%2018%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");background-repeat:repeat;background-size:420px 360px}
+
+/* Kronologi: kandungan biasa tanpa kotak/kad berasingan, kekalkan rajah dan teks */
+#chronologyModal .geo-modal-body{background:#fff}
+#chronologyModal .geopark-narrative-frame,
+#chronologyModal .chronology-approval,
+#chronologyModal .chronology-roadmap{
+  width:100%;max-width:none;margin:0 0 25px;padding:0;
+  border:0;border-radius:0;background:transparent;box-shadow:none;
+}
+#chronologyModal .geopark-narrative-frame,
+#chronologyModal .chronology-approval{filter:none}
+#chronologyModal .chronology-roadmap{padding-top:4px}
+@media(max-width:700px){#chronologyModal .geopark-narrative-frame,#chronologyModal .chronology-approval,#chronologyModal .chronology-roadmap{padding:0;margin-bottom:22px}}
 </style>
 <style id="sidebar-nav-consistent">.sidebar .navbtn{min-height:49px;display:flex;align-items:center;justify-content:flex-start;text-align:left;font-size:12px;line-height:1.3;font-weight:600;gap:11px;padding:12px 14px}.sidebar .navbtn .navicon{width:18px;min-width:18px;flex:0 0 18px}.sidebar .navbtn>span:last-child{width:auto;flex:1;text-align:left}.sidebar #aboutGeoparkBtn{justify-content:flex-start;text-align:left}.sidebar #aboutGeoparkBtn span{width:auto}.sidebar #aboutGeoparkBtn>span:last-child{flex:1;width:auto}</style>
 <style id="geotapak-infrastruktur-style">
