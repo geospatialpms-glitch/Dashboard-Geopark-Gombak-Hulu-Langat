@@ -829,7 +829,7 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 /* Kronologi: penerangan kiri dan infografik kanan */
 #chronologyModal .kronologi-intro-layout{display:grid;grid-template-columns:minmax(0,55fr) minmax(0,45fr);gap:24px;align-items:start;width:100%;margin-bottom:24px}
 #chronologyModal .kronologi-intro-layout>.geopark-narrative-frame{min-width:0;margin-bottom:0;text-align:left}
-#chronologyModal .kronologi-infografik{min-width:0;margin:0;position:sticky;top:12px}
+#chronologyModal .kronologi-infografik{min-width:0;margin:0;position:static;top:auto}
 #chronologyModal .kronologi-infografik img{display:block;width:100%;height:auto;max-height:78vh;object-fit:contain;border-radius:10px}
 @media(max-width:900px){#chronologyModal .kronologi-intro-layout{grid-template-columns:1fr;gap:16px}#chronologyModal .kronologi-infografik{position:static}#chronologyModal .kronologi-infografik img{max-height:none}}
 </style>
@@ -2086,7 +2086,7 @@ function openGeotapakInfo(code){
 #utama #chronologyModal .kronologi-intro-layout>.geopark-narrative-frame{width:auto!important;min-width:0!important;margin:0!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
 #chronologyModal .kronologi-intro-layout>.geopark-narrative-frame p{line-height:1.75;margin:0 0 16px;text-align:left}
 #chronologyModal .kronologi-intro-layout>.geopark-narrative-frame p:last-child{margin-bottom:0}
-#chronologyModal .kronologi-intro-layout>.kronologi-infografik{width:100%;min-width:0;margin:0!important;top:12px;overflow:hidden;border-radius:12px;background:#f9fbf7 url('topographic-contour.png') center/cover no-repeat;box-shadow:0 5px 18px rgba(16,76,42,.10)}
+#chronologyModal .kronologi-intro-layout>.kronologi-infografik{width:100%;min-width:0;margin:0!important;position:static!important;top:auto!important;transform:none!important;animation:none!important;overflow:hidden;border-radius:12px;background:#f9fbf7 url('topographic-contour.png') center/cover no-repeat;box-shadow:0 5px 18px rgba(16,76,42,.10)}
 #chronologyModal .kronologi-intro-layout>.kronologi-infografik img{display:block;width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center top;border-radius:12px}
 @media(max-width:900px){#chronologyModal .kronologi-intro-layout{grid-template-columns:minmax(0,1fr)!important;gap:16px!important}#chronologyModal .kronologi-intro-layout>.kronologi-infografik{position:static;max-width:720px;margin-inline:auto!important}}
 </style>
