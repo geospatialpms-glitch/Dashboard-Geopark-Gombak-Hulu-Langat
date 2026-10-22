@@ -795,6 +795,11 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 #geoTrailModal .jejak-makanan-back-inline:hover{background:#fff;color:#0a6339}
 #geoTrailModal.jejak-detail-view:has(.jejak-panel[data-jejak-panel="makanan"]:not([hidden])) #jejakBackToMenu{display:none!important}
 @media(max-width:600px){#geoTrailModal .jejak-makanan-title-actions{gap:5px}#geoTrailModal .jejak-makanan-back-inline{font-size:10px;padding:7px 9px}}
+
+/* Semua jejak menggunakan navigasi kembali selari dalam bar tajuk */
+#geoTrailModal.jejak-detail-view #jejakBackToMenu{display:none!important}
+#geoTrailModal .jejak-section-title .jejak-makanan-title-actions{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+@media(max-width:600px){#geoTrailModal .jejak-section-title{flex-wrap:wrap}#geoTrailModal .jejak-section-title .jejak-makanan-title-actions{width:100%;justify-content:flex-end}}
 </style>
 <style id="sidebar-nav-consistent">.sidebar .navbtn{min-height:49px;display:flex;align-items:center;justify-content:flex-start;text-align:left;font-size:12px;line-height:1.3;font-weight:600;gap:11px;padding:12px 14px}.sidebar .navbtn .navicon{width:18px;min-width:18px;flex:0 0 18px}.sidebar .navbtn>span:last-child{width:auto;flex:1;text-align:left}.sidebar #aboutGeoparkBtn{justify-content:flex-start;text-align:left}.sidebar #aboutGeoparkBtn span{width:auto}.sidebar #aboutGeoparkBtn>span:last-child{flex:1;width:auto}</style>
 <style id="geotapak-infrastruktur-style">
@@ -1286,7 +1291,7 @@ window.addEventListener("resize",()=>setTimeout(()=>map.invalidateSize(false),80
         <button type="button" class="jejak-tab" data-jejak="warisan" role="tab" aria-selected="false"><strong>🏛 Jejak Warisan</strong><small>11 lokasi warisan &amp; rekreasi</small></button>
       </div>
       <section class="jejak-panel" data-jejak-panel="geologi" role="tabpanel">
-        <div class="jejak-section-title"><strong>Jejak Geologi</strong><span>2 Laluan</span></div>
+        <div class="jejak-section-title"><strong>Jejak Geologi</strong><div class="jejak-makanan-title-actions"><span>2 Laluan</span><button type="button" class="jejak-makanan-back-inline" onclick="document.getElementById('jejakBackToMenu').click()">← Kembali ke Pilihan Jejak</button></div></div>
         <div class="jejak-subtabs"><button type="button" class="jejak-subtab active" data-jejak-area="gombak">Jejak 1 · Gombak</button><button type="button" class="jejak-subtab" data-jejak-area="hululangat">Jejak 2 · Hulu Langat</button></div>
         <div class="jejak-list" id="jejakGeologiList"></div><div class="jejak-detail" id="jejakGeologiDetail" aria-live="polite"></div>
       </section>
@@ -1295,7 +1300,7 @@ window.addEventListener("resize",()=>setTimeout(()=>map.invalidateSize(false),80
         <div class="jejak-list" id="jejakMakananList"></div><div class="jejak-detail" id="jejakMakananDetail" aria-live="polite"></div>
       </section>
       <section class="jejak-panel" data-jejak-panel="warisan" role="tabpanel" hidden>
-        <div class="jejak-section-title"><strong>Jejak Warisan (Heritage Trail)</strong><span>11 Lokasi</span></div>
+        <div class="jejak-section-title"><strong>Jejak Warisan (Heritage Trail)</strong><div class="jejak-makanan-title-actions"><span>11 Lokasi</span><button type="button" class="jejak-makanan-back-inline" onclick="document.getElementById('jejakBackToMenu').click()">← Kembali ke Pilihan Jejak</button></div></div>
         <div class="jejak-list" id="jejakWarisanList"></div><div class="jejak-detail" id="jejakWarisanDetail" aria-live="polite"></div>
       </section>
       <div class="jejak-source">Sumber: Dokumen Jejak GHLGp, halaman 201–210. Waktu operasi restoran ialah maklumat dalam dokumen dan perlu disahkan semula sebelum lawatan.</div>
