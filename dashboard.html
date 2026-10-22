@@ -2036,4 +2036,18 @@ function openGeotapakInfo(code){
 #utama #chronologyModal .chrono-phase{filter:none}
 @media(max-width:700px){#utama #chronologyModal.inline-info-section .geo-modal-body{padding:12px 2px!important}}
 </style>
+
+<style id="jejak-topographic-background-20261022">
+/* Latar kontur seragam khusus untuk paparan tiga kategori Jejak GHLGp */
+#geoTrailModal.jejak-detail-view .geo-modal-body{
+ background:linear-gradient(rgba(250,252,248,.76),rgba(250,252,248,.76)),url('topographic-contour.png') center top/cover no-repeat!important;
+}
+#geoTrailModal.jejak-detail-view .jejak-panel:not([hidden]),
+#geoTrailModal .jejak-panel[data-jejak-panel="geologi"]:not([hidden]),
+#geoTrailModal .jejak-panel[data-jejak-panel="makanan"]:not([hidden]),
+#geoTrailModal .jejak-panel[data-jejak-panel="warisan"]:not([hidden]){
+ background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;
+}
+@media(max-width:650px){#geoTrailModal.jejak-detail-view .geo-modal-body{background-size:auto 100%!important;background-attachment:scroll!important}}
+</style>
 </body></html>
