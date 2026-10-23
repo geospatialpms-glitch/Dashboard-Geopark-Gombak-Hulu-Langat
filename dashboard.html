@@ -833,44 +833,26 @@ main#utama{background-color:#fafbf8;background-image:url("data:image/svg+xml,%3C
 #chronologyModal .kronologi-infografik img{display:block;width:100%;height:auto;max-height:78vh;object-fit:contain;border-radius:10px}
 @media(max-width:900px){#chronologyModal .kronologi-intro-layout{grid-template-columns:1fr;gap:16px}#chronologyModal .kronologi-infografik{position:static}#chronologyModal .kronologi-infografik img{max-height:none}}
 
-/* GHLGp: Saiz seragam bagi semua 13 foto Jejak Makanan sahaja */
-#geoTrailModal .jejak-panel[data-jejak-panel="makanan"] .jejak-food-photo {
-  width: 88px !important;
-  height: 88px !important;
-  min-width: 88px !important;
-  min-height: 88px !important;
-  flex: 0 0 88px !important;
-  aspect-ratio: 1 / 1 !important;
-  background-repeat: no-repeat !important;
-  border-radius: 11px;
+/* Jejak Makanan: bingkai sama saiz dengan Geologi; paparan sprite di-zoom untuk mengurangkan putih. */
+#geoTrailModal .jejak-panel[data-jejak-panel="makanan"] .jejak-food-photo{
+  width:86px!important;height:76px!important;min-width:86px!important;min-height:76px!important;
+  flex:0 0 86px!important;aspect-ratio:auto!important;
+  border:0!important;outline:0!important;box-shadow:none!important;
+  border-radius:11px!important;overflow:hidden;background-color:transparent!important;
+  background-size:360% 600%!important;background-repeat:no-repeat!important;
 }
-#geoTrailModal .jejak-panel[data-jejak-panel="makanan"] .jejak-entry {
-  min-height: 106px;
-  align-items: center;
+#geoTrailModal .jejak-panel[data-jejak-panel="makanan"] .jejak-entry{min-height:106px;align-items:center}
+#geoTrailModal .jejak-food-detail-photo,
+#geoTrailModal .jejak-card-popup-body .jejak-food-detail-photo{
+  background-size:360% 600%!important;
+  background-repeat:no-repeat!important;background-color:transparent!important;
+  border:0!important;outline:0!important;box-shadow:none!important;
 }
-#geoTrailModal .jejak-panel[data-jejak-panel="makanan"] .jejak-food-detail-photo,
-#geoTrailModal .jejak-card-popup-body .jejak-food-detail-photo {
-  width: 100% !important;
-  height: 270px !important;
-  min-height: 270px !important;
-  max-width: 100% !important;
-  float: none !important;
-  background-repeat: no-repeat !important;
-  margin: 0 !important;
-}
-@media (max-width: 650px) {
-  #geoTrailModal .jejak-panel[data-jejak-panel="makanan"] .jejak-food-photo {
-    width: 64px !important;
-    height: 64px !important;
-    min-width: 64px !important;
-    min-height: 64px !important;
-    flex-basis: 64px !important;
-  }
-  #geoTrailModal .jejak-panel[data-jejak-panel="makanan"] .jejak-food-detail-photo,
-  #geoTrailModal .jejak-card-popup-body .jejak-food-detail-photo {
-    height: 220px !important;
-    min-height: 220px !important;
-  }
+@media(max-width:650px){
+ #geoTrailModal .jejak-panel[data-jejak-panel="makanan"] .jejak-food-photo{
+   width:62px!important;height:64px!important;min-width:62px!important;min-height:64px!important;
+   flex-basis:62px!important;
+ }
 }
 </style>
 <style id="sidebar-nav-consistent">.sidebar .navbtn{min-height:49px;display:flex;align-items:center;justify-content:flex-start;text-align:left;font-size:12px;line-height:1.3;font-weight:600;gap:11px;padding:12px 14px}.sidebar .navbtn .navicon{width:18px;min-width:18px;flex:0 0 18px}.sidebar .navbtn>span:last-child{width:auto;flex:1;text-align:left}.sidebar #aboutGeoparkBtn{justify-content:flex-start;text-align:left}.sidebar #aboutGeoparkBtn span{width:auto}.sidebar #aboutGeoparkBtn>span:last-child{flex:1;width:auto}</style>
@@ -1570,7 +1552,7 @@ function renderJejakList(group,listId,detailId){
       photo.className="jejak-food-photo";
       photo.setAttribute("role","img");
       photo.setAttribute("aria-label","Gambar "+item.name);
-      photo.style.backgroundPosition=((number%3)*50)+"% "+(Math.floor(number/3)*25)+"%";
+      photo.style.backgroundPosition=(4.167+(number%3)*45.833)+"% "+(2.273+Math.floor(number/3)*23.864)+"%";
       btn.append(photo);
     }
   }
@@ -1604,7 +1586,7 @@ function renderJejakList(group,listId,detailId){
        photo.className="jejak-food-detail-photo";
        photo.setAttribute("role","img");
        photo.setAttribute("aria-label","Gambar "+item.name);
-       photo.style.backgroundPosition=((number%3)*50)+"% "+(Math.floor(number/3)*25)+"%";
+       photo.style.backgroundPosition=(4.167+(number%3)*45.833)+"% "+(2.273+Math.floor(number/3)*23.864)+"%";
        detail.append(photo);
      }
    }
